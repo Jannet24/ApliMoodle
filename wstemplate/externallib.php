@@ -220,9 +220,10 @@ public static function create_quiz_returns() {
                     'intro' => new external_value(PARAM_TEXT, 'intro'),
                     'duedate' => new external_value(PARAM_INT, ''),
                     'allowsubmissionsfromdate' => new external_value(PARAM_INT, ''),
-                    'grade' => new external_value(PARAM_INT, ''),
+                    'grade' => new external_value(PARAM_INT, '')
                     //'timemodified' => new external_value(PARAM_INT, ''),
-                    'maxattempts' => new external_value(PARAM_INT, ''))
+                    //'maxattempts' => new external_value(PARAM_INT, '')
+                    )
         );
     }
 
@@ -231,7 +232,7 @@ public static function create_quiz_returns() {
      * @return string welcome message
      */
 
-    public static function create_assign($text,$file,$section,$course,$name,$intro,$duedate,$allowsubmissionsfromdate,$grade,$maxattempts) {
+    public static function create_assign($text,$file,$section,$course,$name,$intro,$duedate,$allowsubmissionsfromdate,$grade) {
         global $USER;
         global $DB;
        
@@ -248,9 +249,9 @@ public static function create_quiz_returns() {
                     'intro' => $intro,
                     'duedate' => $duedate, 
                     'allowsubmissionsfromdate' => $allowsubmissionsfromdate,
-                    'grade' => $grade,
+                    'grade' => $grade
                     //'timemodified' => $timemodified,
-                    'maxattempts' => $maxattempts
+                    //'maxattempts' => $maxattempts
                     ));
        $time = time();
 
@@ -274,7 +275,7 @@ public static function create_quiz_returns() {
         $record -> allowsubmissionsfromdate =$allowsubmissionsfromdate;
         $record -> grade = $grade;
         $record -> timemodified = $time;
-        $record -> maxattempts = $maxattempts;
+        $record -> maxattempts = '-1';
         
         $idAssign = $DB->insert_record('assign',$record,true);
         
@@ -317,7 +318,7 @@ public static function create_quiz_returns() {
         $dataEvent -> instance = $idAssign; 
         $dataEvent -> eventtipy = 'due';
         $dataEvent -> timestart = $duedate;
-        $dataEvent -> timemodified = $timemodified;
+        $dataEvent -> timemodified = $time;
         $insertAssign = $DB->insert_record('event',$dataEvent,false);
 
         $newTimeCourse= new stdclass();
