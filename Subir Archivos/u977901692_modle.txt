@@ -4,7 +4,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-11-2015 a las 22:55:49
+-- Tiempo de generación: 06-11-2015 a las 23:08:03
 -- Versión del servidor: 10.0.20-MariaDB
 -- Versión de PHP: 5.2.17
 
@@ -1878,7 +1878,7 @@ INSERT INTO `mdl_external_tokens` (`id`, `token`, `tokentype`, `userid`, `extern
 (11, '6d4f7c7e2960fa91021fe210634376fc', 0, 3, 3, NULL, 1, 3, NULL, 1432746010, 1425488410, 1429896446),
 (30, '84ad87522c7f8ba7df29c2b50bca3951', 0, 12, 1, NULL, 1, 12, NULL, 1450725338, 1443467738, 1443469835),
 (31, 'b3f3118d41b0014ba334bb8c4b7a74c7', 0, 11, 1, NULL, 1, 11, NULL, 1450727210, 1443469610, 1443469964),
-(32, '98c2833a3c01483037ba40d5774b0bbe', 0, 3, 4, NULL, 1, 2, NULL, 0, 1443724792, 1446868320),
+(32, '98c2833a3c01483037ba40d5774b0bbe', 0, 3, 4, NULL, 1, 2, NULL, 0, 1443724792, 1446868847),
 (15, '70613bbcca63b9bd7765c13cfd8d3014', 0, 9, 1, NULL, 1, 9, NULL, 1436468382, 1429210782, 1429210782),
 (22, 'e8825c07d6e9bcca9a55c93cbfff040f', 0, 3, 4, NULL, 1, 3, NULL, 1448298567, 1441040967, 1446662964),
 (27, 'cbf328967e00b4e755a75c4f1e28fa5d', 0, 10, 4, NULL, 1, 10, NULL, 1450369713, 1443112113, 1446868253),
@@ -1889,180 +1889,6 @@ INSERT INTO `mdl_external_tokens` (`id`, `token`, `tokentype`, `userid`, `extern
 (25, 'b68e78d8ad713ce4e7f39d1348f56236', 0, 12, 4, NULL, 1, 12, NULL, 1449855973, 1442598373, 1443115325),
 (26, 'a79b678ba841146bf5d46453e31cff76', 0, 3, 1, NULL, 1, 3, NULL, 1449859482, 1442601882, 1443200449),
 (33, '03e8fd13cc0bd9c22c3be9da728d6805', 0, 14, 4, NULL, 1, 14, NULL, 1451522819, 1444265219, 1444785224);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_feedback`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_feedback` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `course` bigint(10) NOT NULL DEFAULT '0',
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `intro` longtext NOT NULL,
-  `introformat` smallint(4) NOT NULL DEFAULT '0',
-  `anonymous` tinyint(1) NOT NULL DEFAULT '1',
-  `email_notification` tinyint(1) NOT NULL DEFAULT '1',
-  `multiple_submit` tinyint(1) NOT NULL DEFAULT '1',
-  `autonumbering` tinyint(1) NOT NULL DEFAULT '1',
-  `site_after_submit` varchar(255) NOT NULL DEFAULT '',
-  `page_after_submit` longtext NOT NULL,
-  `page_after_submitformat` tinyint(2) NOT NULL DEFAULT '0',
-  `publish_stats` tinyint(1) NOT NULL DEFAULT '0',
-  `timeopen` bigint(10) NOT NULL DEFAULT '0',
-  `timeclose` bigint(10) NOT NULL DEFAULT '0',
-  `timemodified` bigint(10) NOT NULL DEFAULT '0',
-  `completionsubmit` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `mdl_feed_cou_ix` (`course`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='all feedbacks' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_feedback_completed`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_feedback_completed` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `feedback` bigint(10) NOT NULL DEFAULT '0',
-  `userid` bigint(10) NOT NULL DEFAULT '0',
-  `timemodified` bigint(10) NOT NULL DEFAULT '0',
-  `random_response` bigint(10) NOT NULL DEFAULT '0',
-  `anonymous_response` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `mdl_feedcomp_use_ix` (`userid`),
-  KEY `mdl_feedcomp_fee_ix` (`feedback`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='filled out feedback' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_feedback_completedtmp`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_feedback_completedtmp` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `feedback` bigint(10) NOT NULL DEFAULT '0',
-  `userid` bigint(10) NOT NULL DEFAULT '0',
-  `guestid` varchar(255) NOT NULL DEFAULT '',
-  `timemodified` bigint(10) NOT NULL DEFAULT '0',
-  `random_response` bigint(10) NOT NULL DEFAULT '0',
-  `anonymous_response` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `mdl_feedcomp_use2_ix` (`userid`),
-  KEY `mdl_feedcomp_fee2_ix` (`feedback`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='filled out feedback' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_feedback_item`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_feedback_item` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `feedback` bigint(10) NOT NULL DEFAULT '0',
-  `template` bigint(10) NOT NULL DEFAULT '0',
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `label` varchar(255) NOT NULL DEFAULT '',
-  `presentation` longtext NOT NULL,
-  `typ` varchar(255) NOT NULL DEFAULT '',
-  `hasvalue` tinyint(1) NOT NULL DEFAULT '0',
-  `position` smallint(3) NOT NULL DEFAULT '0',
-  `required` tinyint(1) NOT NULL DEFAULT '0',
-  `dependitem` bigint(10) NOT NULL DEFAULT '0',
-  `dependvalue` varchar(255) NOT NULL DEFAULT '',
-  `options` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `mdl_feeditem_fee_ix` (`feedback`),
-  KEY `mdl_feeditem_tem_ix` (`template`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='feedback_items' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_feedback_sitecourse_map`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_feedback_sitecourse_map` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `feedbackid` bigint(10) NOT NULL DEFAULT '0',
-  `courseid` bigint(10) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `mdl_feedsitemap_cou_ix` (`courseid`),
-  KEY `mdl_feedsitemap_fee_ix` (`feedbackid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='feedback sitecourse map' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_feedback_template`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_feedback_template` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `course` bigint(10) NOT NULL DEFAULT '0',
-  `ispublic` tinyint(1) NOT NULL DEFAULT '0',
-  `name` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `mdl_feedtemp_cou_ix` (`course`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='templates of feedbackstructures' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_feedback_tracking`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_feedback_tracking` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `userid` bigint(10) NOT NULL DEFAULT '0',
-  `feedback` bigint(10) NOT NULL DEFAULT '0',
-  `completed` bigint(10) NOT NULL DEFAULT '0',
-  `tmp_completed` bigint(10) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `mdl_feedtrac_use_ix` (`userid`),
-  KEY `mdl_feedtrac_fee_ix` (`feedback`),
-  KEY `mdl_feedtrac_com_ix` (`completed`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='feedback trackingdata' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_feedback_value`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_feedback_value` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `course_id` bigint(10) NOT NULL DEFAULT '0',
-  `item` bigint(10) NOT NULL DEFAULT '0',
-  `completed` bigint(10) NOT NULL DEFAULT '0',
-  `tmp_completed` bigint(10) NOT NULL DEFAULT '0',
-  `value` longtext NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `mdl_feedvalu_cou_ix` (`course_id`),
-  KEY `mdl_feedvalu_ite_ix` (`item`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='values of the completeds' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_feedback_valuetmp`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_feedback_valuetmp` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `course_id` bigint(10) NOT NULL DEFAULT '0',
-  `item` bigint(10) NOT NULL DEFAULT '0',
-  `completed` bigint(10) NOT NULL DEFAULT '0',
-  `tmp_completed` bigint(10) NOT NULL DEFAULT '0',
-  `value` longtext NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `mdl_feedvalu_cou2_ix` (`course_id`),
-  KEY `mdl_feedvalu_ite2_ix` (`item`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='values of the completedstmp' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2098,7 +1924,7 @@ CREATE TABLE IF NOT EXISTS `mdl_files` (
   KEY `mdl_file_con2_ix` (`contextid`),
   KEY `mdl_file_use_ix` (`userid`),
   KEY `mdl_file_ref_ix` (`referencefileid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='description of files, content is stored in sha1 file pool' AUTO_INCREMENT=136 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='description of files, content is stored in sha1 file pool' AUTO_INCREMENT=137 ;
 
 --
 -- Volcado de datos para la tabla `mdl_files`
@@ -2192,7 +2018,8 @@ INSERT INTO `mdl_files` (`id`, `contenthash`, `pathnamehash`, `contextid`, `comp
 (132, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '09dbb9b53a5febdc241852a208cd280226982918', 24, 'user', 'draft', 252836527, '/', '.', 3, 0, NULL, 0, NULL, NULL, NULL, 1446839215, 1446839215, 0, NULL),
 (133, 'a9df1c08d403b1ada2d49b459b380cd4bd462766', 'ffd00dfd9a17b6784352391f4a2ac64df9546e57', 24, 'user', 'draft', 252836527, '/', 'image_1446787315784.jpg', 3, 1156363, 'image/jpeg', 0, 'O:8:"stdClass":2:{s:6:"source";N;s:8:"original";s:228:"YTo2OntzOjk6ImNvbnRleHRpZCI7aToyNDtzOjk6ImNvbXBvbmVudCI7czo0OiJ1c2VyIjtzOjY6Iml0ZW1pZCI7aTowO3M6ODoiZmlsZWFyZWEiO3M6NzoicHJpdmF0ZSI7czo4OiJmaWxlcGF0aCI7czoxOiIvIjtzOjg6ImZpbGVuYW1lIjtzOjIzOiJpbWFnZV8xNDQ2Nzg3MzE1Nzg0LmpwZyI7fQ==";}', 'Nayn Ek', 'allrightsreserved', 1446787445, 1446787445, 0, NULL),
 (134, '3bd249f746a286edf8e86fcf4031b97537aa38a7', '1b0380a6cbb29c27878eab2c6fc286b6deb1268d', 24, 'user', 'draft', 252836527, '/', 'tag.html', 3, 65634, 'text/html', 0, 'O:8:"stdClass":2:{s:6:"source";N;s:8:"original";s:204:"YTo2OntzOjk6ImNvbnRleHRpZCI7aToyNDtzOjk6ImNvbXBvbmVudCI7czo0OiJ1c2VyIjtzOjY6Iml0ZW1pZCI7aTowO3M6ODoiZmlsZWFyZWEiO3M6NzoicHJpdmF0ZSI7czo4OiJmaWxlcGF0aCI7czoxOiIvIjtzOjg6ImZpbGVuYW1lIjtzOjg6InRhZy5odG1sIjt9";}', 'Nayn Ek', 'allrightsreserved', 1446662898, 1446662898, 0, NULL),
-(135, '4385b23d9096e1eaf8414ada27f38340fde7a8ab', '70de2830b5317f9723edf54253123f1487083bbc', 1, 'core', 'preview', 0, '/thumb/', 'a9df1c08d403b1ada2d49b459b380cd4bd462766', NULL, 16990, 'image/png', 0, NULL, NULL, NULL, 1446839217, 1446839217, 0, NULL);
+(135, '4385b23d9096e1eaf8414ada27f38340fde7a8ab', '70de2830b5317f9723edf54253123f1487083bbc', 1, 'core', 'preview', 0, '/thumb/', 'a9df1c08d403b1ada2d49b459b380cd4bd462766', NULL, 16990, 'image/png', 0, NULL, NULL, NULL, 1446839217, 1446839217, 0, NULL),
+(136, '5085eae0029e257dc05da7381680cd4dec02b386', '711d10fec7c01c71aae643c79c09fa7e88d80d81', 24, 'user', 'private', 0, '/', 'image_1446868718109.jpg', 3, 338971, 'image/jpeg', 0, NULL, 'Nayn Ek', 'allrightsreserved', 1446868840, 1446868840, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -2280,635 +2107,6 @@ CREATE TABLE IF NOT EXISTS `mdl_folder` (
 
 INSERT INTO `mdl_folder` (`id`, `course`, `name`, `intro`, `introformat`, `revision`, `timemodified`, `display`, `showexpanded`) VALUES
 (1, 8, 'Carpeta de imagenes', '<p>Imágenes de dispositivos de redes</p>', 1, 2, 1443855310, 0, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_grade_grades`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_grade_grades` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `itemid` bigint(10) NOT NULL,
-  `userid` bigint(10) NOT NULL,
-  `rawgrade` decimal(10,5) DEFAULT NULL,
-  `rawgrademax` decimal(10,5) NOT NULL DEFAULT '100.00000',
-  `rawgrademin` decimal(10,5) NOT NULL DEFAULT '0.00000',
-  `rawscaleid` bigint(10) DEFAULT NULL,
-  `usermodified` bigint(10) DEFAULT NULL,
-  `finalgrade` decimal(10,5) DEFAULT NULL,
-  `hidden` bigint(10) NOT NULL DEFAULT '0',
-  `locked` bigint(10) NOT NULL DEFAULT '0',
-  `locktime` bigint(10) NOT NULL DEFAULT '0',
-  `exported` bigint(10) NOT NULL DEFAULT '0',
-  `overridden` bigint(10) NOT NULL DEFAULT '0',
-  `excluded` bigint(10) NOT NULL DEFAULT '0',
-  `feedback` longtext,
-  `feedbackformat` bigint(10) NOT NULL DEFAULT '0',
-  `information` longtext,
-  `informationformat` bigint(10) NOT NULL DEFAULT '0',
-  `timecreated` bigint(10) DEFAULT NULL,
-  `timemodified` bigint(10) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `mdl_gradgrad_useite_uix` (`userid`,`itemid`),
-  KEY `mdl_gradgrad_locloc_ix` (`locked`,`locktime`),
-  KEY `mdl_gradgrad_ite_ix` (`itemid`),
-  KEY `mdl_gradgrad_use_ix` (`userid`),
-  KEY `mdl_gradgrad_raw_ix` (`rawscaleid`),
-  KEY `mdl_gradgrad_use2_ix` (`usermodified`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='grade_grades  This table keeps individual grades for each us' AUTO_INCREMENT=18 ;
-
---
--- Volcado de datos para la tabla `mdl_grade_grades`
---
-
-INSERT INTO `mdl_grade_grades` (`id`, `itemid`, `userid`, `rawgrade`, `rawgrademax`, `rawgrademin`, `rawscaleid`, `usermodified`, `finalgrade`, `hidden`, `locked`, `locktime`, `exported`, `overridden`, `excluded`, `feedback`, `feedbackformat`, `information`, `informationformat`, `timecreated`, `timemodified`) VALUES
-(1, 6, 3, '88.00000', '100.00000', '0.00000', NULL, 3, '88.00000', 0, 0, 0, 0, 0, 0, NULL, 1, NULL, 0, NULL, 1443469344),
-(2, 5, 3, NULL, '100.00000', '0.00000', NULL, NULL, '88.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, NULL),
-(3, 6, 9, '100.00000', '100.00000', '0.00000', NULL, 3, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 1, NULL, 0, NULL, 1443469175),
-(4, 5, 9, NULL, '100.00000', '0.00000', NULL, NULL, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, NULL),
-(5, 11, 9, '59.00000', '100.00000', '0.00000', NULL, 3, '59.00000', 0, 0, 0, 0, 0, 0, 'esta muy mal', 0, NULL, 0, NULL, 1443547220),
-(6, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '69.50000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, NULL),
-(11, 12, 11, '100.00000', '100.00000', '0.00000', NULL, 3, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 1443468718),
-(7, 12, 10, '90.00000', '100.00000', '0.00000', NULL, 3, '90.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 1444748227),
-(8, 7, 10, NULL, '100.00000', '0.00000', NULL, NULL, '90.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, NULL),
-(9, 12, 12, '0.00000', '100.00000', '0.00000', NULL, 3, '0.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 1444747963),
-(10, 7, 12, NULL, '100.00000', '0.00000', NULL, NULL, '0.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, NULL),
-(12, 7, 11, NULL, '100.00000', '0.00000', NULL, NULL, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, NULL),
-(13, 17, 3, '60.00000', '100.00000', '0.00000', NULL, 3, '60.00000', 0, 0, 0, 0, 0, 0, 'NO Se Envia', 0, NULL, 0, NULL, 1443800578),
-(14, 7, 3, NULL, '100.00000', '0.00000', NULL, NULL, '60.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, NULL),
-(15, 12, 9, '80.00000', '100.00000', '0.00000', NULL, 3, '80.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 1444747903),
-(16, 12, 14, '94.00000', '100.00000', '0.00000', NULL, 3, '94.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 1444322825),
-(17, 7, 14, NULL, '100.00000', '0.00000', NULL, NULL, '94.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_grade_grades_history`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_grade_grades_history` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `action` bigint(10) NOT NULL DEFAULT '0',
-  `oldid` bigint(10) NOT NULL,
-  `source` varchar(255) DEFAULT NULL,
-  `timemodified` bigint(10) DEFAULT NULL,
-  `loggeduser` bigint(10) DEFAULT NULL,
-  `itemid` bigint(10) NOT NULL,
-  `userid` bigint(10) NOT NULL,
-  `rawgrade` decimal(10,5) DEFAULT NULL,
-  `rawgrademax` decimal(10,5) NOT NULL DEFAULT '100.00000',
-  `rawgrademin` decimal(10,5) NOT NULL DEFAULT '0.00000',
-  `rawscaleid` bigint(10) DEFAULT NULL,
-  `usermodified` bigint(10) DEFAULT NULL,
-  `finalgrade` decimal(10,5) DEFAULT NULL,
-  `hidden` bigint(10) NOT NULL DEFAULT '0',
-  `locked` bigint(10) NOT NULL DEFAULT '0',
-  `locktime` bigint(10) NOT NULL DEFAULT '0',
-  `exported` bigint(10) NOT NULL DEFAULT '0',
-  `overridden` bigint(10) NOT NULL DEFAULT '0',
-  `excluded` bigint(10) NOT NULL DEFAULT '0',
-  `feedback` longtext,
-  `feedbackformat` bigint(10) NOT NULL DEFAULT '0',
-  `information` longtext,
-  `informationformat` bigint(10) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `mdl_gradgradhist_act_ix` (`action`),
-  KEY `mdl_gradgradhist_tim_ix` (`timemodified`),
-  KEY `mdl_gradgradhist_old_ix` (`oldid`),
-  KEY `mdl_gradgradhist_ite_ix` (`itemid`),
-  KEY `mdl_gradgradhist_use_ix` (`userid`),
-  KEY `mdl_gradgradhist_raw_ix` (`rawscaleid`),
-  KEY `mdl_gradgradhist_use2_ix` (`usermodified`),
-  KEY `mdl_gradgradhist_log_ix` (`loggeduser`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='History table' AUTO_INCREMENT=121 ;
-
---
--- Volcado de datos para la tabla `mdl_grade_grades_history`
---
-
-INSERT INTO `mdl_grade_grades_history` (`id`, `action`, `oldid`, `source`, `timemodified`, `loggeduser`, `itemid`, `userid`, `rawgrade`, `rawgrademax`, `rawgrademin`, `rawscaleid`, `usermodified`, `finalgrade`, `hidden`, `locked`, `locktime`, `exported`, `overridden`, `excluded`, `feedback`, `feedbackformat`, `information`, `informationformat`) VALUES
-(1, 1, 1, 'mod/assign', 1430848060, 3, 6, 3, NULL, '100.00000', '0.00000', NULL, 3, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(2, 1, 2, 'system', 1430848061, 3, 5, 3, NULL, '100.00000', '0.00000', NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(3, 1, 3, 'mod/assign', 1430848183, 9, 6, 9, NULL, '100.00000', '0.00000', NULL, 9, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(4, 1, 4, 'system', 1430848183, 9, 5, 9, NULL, '100.00000', '0.00000', NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(5, 2, 1, 'mod/assign', 1431014319, 3, 6, 3, '80.00000', '100.00000', '0.00000', NULL, 3, '80.00000', 0, 0, 0, 0, 0, 0, NULL, 1, NULL, 0),
-(6, 2, 2, 'aggregation', 1431014319, 3, 5, 3, NULL, '100.00000', '0.00000', NULL, NULL, '80.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(7, 2, 3, 'mod/assign', 1431014361, 3, 6, 9, '70.00000', '100.00000', '0.00000', NULL, 3, '70.00000', 0, 0, 0, 0, 0, 0, NULL, 1, NULL, 0),
-(8, 2, 4, 'aggregation', 1431014361, 3, 5, 9, NULL, '100.00000', '0.00000', NULL, NULL, '70.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(9, 1, 5, 'mod/assign', 1441043360, 9, 11, 9, NULL, '100.00000', '0.00000', NULL, 9, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(10, 1, 6, 'system', 1441043360, 9, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(11, 2, 5, 'mod/assign', 1443110537, 3, 11, 9, '95.00000', '100.00000', '0.00000', NULL, 3, '95.00000', 0, 0, 0, 0, 0, 0, '<p>Corregir las faltas de ortografía.</p>', 1, NULL, 0),
-(12, 2, 6, 'aggregation', 1443110537, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '95.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(13, 1, 7, 'mod/assign', 1443112088, 10, 12, 10, NULL, '100.00000', '0.00000', NULL, 10, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(14, 1, 8, 'system', 1443112088, 10, 7, 10, NULL, '100.00000', '0.00000', NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(15, 1, 9, 'mod/assign', 1443197417, 12, 12, 12, NULL, '100.00000', '0.00000', NULL, 12, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(16, 1, 10, 'system', 1443197417, 12, 7, 12, NULL, '100.00000', '0.00000', NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(17, 2, 5, 'mod/assign', 1443467371, 3, 11, 9, '90.00000', '100.00000', '0.00000', NULL, 3, '90.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(18, 2, 6, 'aggregation', 1443467371, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '90.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(19, 2, 5, 'mod/assign', 1443467451, 3, 11, 9, '80.00000', '100.00000', '0.00000', NULL, 3, '80.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(20, 2, 6, 'aggregation', 1443467451, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '80.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(21, 2, 9, 'mod/assign', 1443467507, 3, 12, 12, '98.00000', '100.00000', '0.00000', NULL, 3, '98.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(22, 2, 10, 'aggregation', 1443467507, 3, 7, 12, NULL, '100.00000', '0.00000', NULL, NULL, '98.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(23, 1, 11, 'mod/assign', 1443468718, 3, 12, 11, '100.00000', '100.00000', '0.00000', NULL, 3, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(24, 1, 12, 'system', 1443468718, 3, 7, 11, NULL, '100.00000', '0.00000', NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(25, 2, 12, 'aggregation', 1443468718, 3, 7, 11, NULL, '100.00000', '0.00000', NULL, NULL, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(26, 2, 5, 'mod/assign', 1443468893, 3, 11, 9, '100.00000', '100.00000', '0.00000', NULL, 3, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(27, 2, 6, 'aggregation', 1443468893, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(28, 2, 3, 'mod/assign', 1443469175, 3, 6, 9, '100.00000', '100.00000', '0.00000', NULL, 3, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 1, NULL, 0),
-(29, 2, 4, 'aggregation', 1443469175, 3, 5, 9, NULL, '100.00000', '0.00000', NULL, NULL, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(30, 2, 1, 'mod/assign', 1443469344, 3, 6, 3, '88.00000', '100.00000', '0.00000', NULL, 3, '88.00000', 0, 0, 0, 0, 0, 0, NULL, 1, NULL, 0),
-(31, 2, 2, 'aggregation', 1443469344, 3, 5, 3, NULL, '100.00000', '0.00000', NULL, NULL, '88.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(32, 2, 5, 'mod/assign', 1443540053, 3, 11, 9, '70.00000', '100.00000', '0.00000', NULL, 3, '70.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(33, 2, 6, 'aggregation', 1443540053, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '70.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(34, 2, 5, 'mod/assign', 1443541897, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(35, 2, 6, 'aggregation', 1443541897, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(36, 2, 5, 'mod/assign', 1443541915, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(37, 2, 5, 'mod/assign', 1443541917, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(38, 2, 5, 'mod/assign', 1443541919, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(39, 2, 5, 'mod/assign', 1443541921, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(40, 2, 5, 'mod/assign', 1443541922, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(41, 2, 5, 'mod/assign', 1443541923, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(42, 2, 5, 'mod/assign', 1443541924, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(43, 2, 5, 'mod/assign', 1443544997, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(44, 2, 5, 'mod/assign', 1443544998, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(45, 2, 5, 'mod/assign', 1443545219, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(46, 2, 5, 'mod/assign', 1443545228, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(47, 2, 5, 'mod/assign', 1443545292, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(48, 2, 5, 'mod/assign', 1443545370, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(49, 2, 5, 'mod/assign', 1443545448, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(50, 2, 5, 'mod/assign', 1443545453, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(51, 2, 5, 'mod/assign', 1443545455, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(52, 2, 5, 'mod/assign', 1443545971, 3, 11, 9, '75.00000', '100.00000', '0.00000', NULL, 3, '75.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(53, 2, 5, 'mod/assign', 1443546444, 3, 11, 9, '70.00000', '100.00000', '0.00000', NULL, 3, '70.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(54, 2, 6, 'aggregation', 1443546444, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '70.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(55, 2, 5, 'mod/assign', 1443546463, 3, 11, 9, '88.00000', '100.00000', '0.00000', NULL, 3, '88.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(56, 2, 6, 'aggregation', 1443546463, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '88.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(57, 2, 5, 'mod/assign', 1443546649, 3, 11, 9, '60.00000', '100.00000', '0.00000', NULL, 3, '60.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(58, 2, 6, 'aggregation', 1443546649, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '60.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(59, 2, 5, 'mod/assign', 1443546677, 3, 11, 9, '65.00000', '100.00000', '0.00000', NULL, 3, '65.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(60, 2, 6, 'aggregation', 1443546677, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '65.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(61, 2, 5, 'mod/assign', 1443546683, 3, 11, 9, '65.00000', '100.00000', '0.00000', NULL, 3, '65.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(62, 2, 5, 'mod/assign', 1443546707, 3, 11, 9, '70.00000', '100.00000', '0.00000', NULL, 3, '70.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(63, 2, 6, 'aggregation', 1443546707, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '70.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(64, 2, 5, 'mod/assign', 1443546757, 3, 11, 9, '80.00000', '100.00000', '0.00000', NULL, 3, '80.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(65, 2, 6, 'aggregation', 1443546757, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '80.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(66, 2, 5, 'mod/assign', 1443546788, 3, 11, 9, '80.00000', '100.00000', '0.00000', NULL, 3, '80.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(67, 2, 5, 'mod/assign', 1443546814, 3, 11, 9, '96.00000', '100.00000', '0.00000', NULL, 3, '96.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(68, 2, 6, 'aggregation', 1443546814, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '96.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(69, 2, 5, 'mod/assign', 1443547064, 3, 11, 9, '50.00000', '100.00000', '0.00000', NULL, 3, '50.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(70, 2, 6, 'aggregation', 1443547064, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '50.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(71, 2, 5, 'mod/assign', 1443547220, 3, 11, 9, '59.00000', '100.00000', '0.00000', NULL, 3, '59.00000', 0, 0, 0, 0, 0, 0, 'esta muy mal', 0, NULL, 0),
-(72, 2, 6, 'aggregation', 1443547220, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '59.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(73, 2, 7, 'mod/assign', 1443559742, 3, 12, 10, '66.00000', '100.00000', '0.00000', NULL, 3, '66.00000', 0, 0, 0, 0, 0, 0, 'mal', 0, NULL, 0),
-(74, 2, 8, 'aggregation', 1443559742, 3, 7, 10, NULL, '100.00000', '0.00000', NULL, NULL, '66.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(75, 2, 7, 'mod/assign', 1443559825, 3, 12, 10, '67.00000', '100.00000', '0.00000', NULL, 3, '67.00000', 0, 0, 0, 0, 0, 0, 'mal', 0, NULL, 0),
-(76, 2, 8, 'aggregation', 1443559825, 3, 7, 10, NULL, '100.00000', '0.00000', NULL, NULL, '67.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(77, 2, 9, 'mod/assign', 1443798170, 3, 12, 12, '100.00000', '100.00000', '0.00000', NULL, 3, '100.00000', 0, 0, 0, 0, 0, 0, 'Muy bien', 0, NULL, 0),
-(78, 2, 10, 'aggregation', 1443798170, 3, 7, 12, NULL, '100.00000', '0.00000', NULL, NULL, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(79, 2, 9, 'mod/assign', 1443798469, 3, 12, 12, '99.00000', '100.00000', '0.00000', NULL, 3, '99.00000', 0, 0, 0, 0, 0, 0, 'Muy bien', 0, NULL, 0),
-(80, 2, 10, 'aggregation', 1443798469, 3, 7, 12, NULL, '100.00000', '0.00000', NULL, NULL, '99.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(81, 2, 9, 'mod/assign', 1443799655, 3, 12, 12, '99.00000', '100.00000', '0.00000', NULL, 3, '99.00000', 0, 0, 0, 0, 0, 0, 'Muy bien', 0, NULL, 0),
-(82, 2, 9, 'mod/assign', 1443799665, 3, 12, 12, '99.00000', '100.00000', '0.00000', NULL, 3, '99.00000', 0, 0, 0, 0, 0, 0, 'Muy bien', 0, NULL, 0),
-(83, 2, 7, 'mod/assign', 1443799937, 3, 12, 10, '88.00000', '100.00000', '0.00000', NULL, 3, '88.00000', 0, 0, 0, 0, 0, 0, 'bien', 0, NULL, 0),
-(84, 2, 8, 'aggregation', 1443799937, 3, 7, 10, NULL, '100.00000', '0.00000', NULL, NULL, '88.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(85, 1, 13, 'mod/assign', 1443800411, 3, 17, 3, NULL, '100.00000', '0.00000', NULL, 3, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(86, 1, 14, 'system', 1443800411, 3, 7, 3, NULL, '100.00000', '0.00000', NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(87, 2, 13, 'mod/assign', 1443800528, 3, 17, 3, '60.00000', '100.00000', '0.00000', NULL, 3, '60.00000', 0, 0, 0, 0, 0, 0, 'NO Se Envia', 0, NULL, 0),
-(88, 2, 14, 'aggregation', 1443800528, 3, 7, 3, NULL, '100.00000', '0.00000', NULL, NULL, '60.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(89, 2, 13, 'mod/assign', 1443800578, 3, 17, 3, '60.00000', '100.00000', '0.00000', NULL, 3, '60.00000', 0, 0, 0, 0, 0, 0, 'NO Se Envia', 0, NULL, 0),
-(90, 1, 15, 'mod/assign', 1444141380, 9, 12, 9, NULL, '100.00000', '0.00000', NULL, 9, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(91, 2, 7, 'mod/assign', 1444148218, 3, 12, 10, '100.00000', '100.00000', '0.00000', NULL, 3, '100.00000', 0, 0, 0, 0, 0, 0, 'Muy bien', 0, NULL, 0),
-(92, 2, 8, 'aggregation', 1444148219, 3, 7, 10, NULL, '100.00000', '0.00000', NULL, NULL, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(93, 2, 7, 'mod/assign', 1444148241, 3, 12, 10, '100.00000', '100.00000', '0.00000', NULL, 3, '100.00000', 0, 0, 0, 0, 0, 0, 'Muy bien', 0, NULL, 0),
-(94, 2, 15, 'mod/assign', 1444242065, 3, 12, 9, '87.00000', '100.00000', '0.00000', NULL, 3, '87.00000', 0, 0, 0, 0, 0, 0, 'Falto informacion', 0, NULL, 0),
-(95, 2, 6, 'aggregation', 1444242065, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '73.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(96, 1, 16, 'mod/assign', 1444243575, 14, 12, 14, NULL, '100.00000', '0.00000', NULL, 14, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(97, 1, 17, 'system', 1444243575, 14, 7, 14, NULL, '100.00000', '0.00000', NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(98, 2, 9, 'mod/assign', 1444318745, 3, 12, 12, '95.00000', '100.00000', '0.00000', NULL, 3, '95.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(99, 2, 10, 'aggregation', 1444318745, 3, 7, 12, NULL, '100.00000', '0.00000', NULL, NULL, '95.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(100, 2, 9, 'mod/assign', 1444318752, 3, 12, 12, '95.00000', '100.00000', '0.00000', NULL, 3, '95.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(101, 2, 16, 'mod/assign', 1444319459, 3, 12, 14, '94.00000', '100.00000', '0.00000', NULL, 3, '94.00000', 0, 0, 0, 0, 0, 0, '<p>este es mi comentario 08/10/15</p>', 1, NULL, 0),
-(102, 2, 17, 'aggregation', 1444319459, 3, 7, 14, NULL, '100.00000', '0.00000', NULL, NULL, '94.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(103, 2, 9, 'mod/assign', 1444319470, 3, 12, 12, '95.00000', '100.00000', '0.00000', NULL, 3, '95.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(104, 2, 16, 'mod/assign', 1444322825, 3, 12, 14, '94.00000', '100.00000', '0.00000', NULL, 3, '94.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(105, 2, 15, 'mod/assign', 1444669271, 3, 12, 9, '87.00000', '100.00000', '0.00000', NULL, 3, '87.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(106, 2, 9, 'mod/assign', 1444670429, 3, 12, 12, '85.00000', '100.00000', '0.00000', NULL, 3, '85.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(107, 2, 10, 'aggregation', 1444670429, 3, 7, 12, NULL, '100.00000', '0.00000', NULL, NULL, '85.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(108, 2, 9, 'mod/assign', 1444670437, 3, 12, 12, '85.00000', '100.00000', '0.00000', NULL, 3, '85.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(109, 2, 7, 'mod/assign', 1444670781, 3, 12, 10, '90.00000', '100.00000', '0.00000', NULL, 3, '90.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(110, 2, 8, 'aggregation', 1444670781, 3, 7, 10, NULL, '100.00000', '0.00000', NULL, NULL, '90.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(111, 2, 7, 'mod/assign', 1444670787, 3, 12, 10, '90.00000', '100.00000', '0.00000', NULL, 3, '90.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(112, 2, 9, 'mod/assign', 1444670810, 3, 12, 12, '85.00000', '100.00000', '0.00000', NULL, 3, '85.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(113, 2, 15, 'mod/assign', 1444747903, 3, 12, 9, '80.00000', '100.00000', '0.00000', NULL, 3, '80.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(114, 2, 6, 'aggregation', 1444747903, 3, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '69.50000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(115, 2, 9, 'mod/assign', 1444747957, 3, 12, 12, '0.00000', '100.00000', '0.00000', NULL, 3, '0.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(116, 2, 10, 'aggregation', 1444747957, 3, 7, 12, NULL, '100.00000', '0.00000', NULL, NULL, '0.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(117, 2, 9, 'mod/assign', 1444747960, 3, 12, 12, '0.00000', '100.00000', '0.00000', NULL, 3, '0.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(118, 2, 9, 'mod/assign', 1444747961, 3, 12, 12, '0.00000', '100.00000', '0.00000', NULL, 3, '0.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(119, 2, 9, 'mod/assign', 1444747963, 3, 12, 12, '0.00000', '100.00000', '0.00000', NULL, 3, '0.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0),
-(120, 2, 7, 'mod/assign', 1444748227, 3, 12, 10, '90.00000', '100.00000', '0.00000', NULL, 3, '90.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_grade_import_newitem`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_grade_import_newitem` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `itemname` varchar(255) NOT NULL DEFAULT '',
-  `importcode` bigint(10) NOT NULL,
-  `importer` bigint(10) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `mdl_gradimponewi_imp_ix` (`importer`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='temporary table for storing new grade_item names from grade ' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_grade_import_values`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_grade_import_values` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `itemid` bigint(10) DEFAULT NULL,
-  `newgradeitem` bigint(10) DEFAULT NULL,
-  `userid` bigint(10) NOT NULL,
-  `finalgrade` decimal(10,5) DEFAULT NULL,
-  `feedback` longtext,
-  `importcode` bigint(10) NOT NULL,
-  `importer` bigint(10) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `mdl_gradimpovalu_ite_ix` (`itemid`),
-  KEY `mdl_gradimpovalu_new_ix` (`newgradeitem`),
-  KEY `mdl_gradimpovalu_imp_ix` (`importer`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Temporary table for importing grades' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_grade_items`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_grade_items` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `courseid` bigint(10) DEFAULT NULL,
-  `categoryid` bigint(10) DEFAULT NULL,
-  `itemname` varchar(255) DEFAULT NULL,
-  `itemtype` varchar(30) NOT NULL DEFAULT '',
-  `itemmodule` varchar(30) DEFAULT NULL,
-  `iteminstance` bigint(10) DEFAULT NULL,
-  `itemnumber` bigint(10) DEFAULT NULL,
-  `iteminfo` longtext,
-  `idnumber` varchar(255) DEFAULT NULL,
-  `calculation` longtext,
-  `gradetype` smallint(4) NOT NULL DEFAULT '1',
-  `grademax` decimal(10,5) NOT NULL DEFAULT '100.00000',
-  `grademin` decimal(10,5) NOT NULL DEFAULT '0.00000',
-  `scaleid` bigint(10) DEFAULT NULL,
-  `outcomeid` bigint(10) DEFAULT NULL,
-  `gradepass` decimal(10,5) NOT NULL DEFAULT '0.00000',
-  `multfactor` decimal(10,5) NOT NULL DEFAULT '1.00000',
-  `plusfactor` decimal(10,5) NOT NULL DEFAULT '0.00000',
-  `aggregationcoef` decimal(10,5) NOT NULL DEFAULT '0.00000',
-  `sortorder` bigint(10) NOT NULL DEFAULT '0',
-  `display` bigint(10) NOT NULL DEFAULT '0',
-  `decimals` tinyint(1) DEFAULT NULL,
-  `hidden` bigint(10) NOT NULL DEFAULT '0',
-  `locked` bigint(10) NOT NULL DEFAULT '0',
-  `locktime` bigint(10) NOT NULL DEFAULT '0',
-  `needsupdate` bigint(10) NOT NULL DEFAULT '0',
-  `timecreated` bigint(10) DEFAULT NULL,
-  `timemodified` bigint(10) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `mdl_graditem_locloc_ix` (`locked`,`locktime`),
-  KEY `mdl_graditem_itenee_ix` (`itemtype`,`needsupdate`),
-  KEY `mdl_graditem_gra_ix` (`gradetype`),
-  KEY `mdl_graditem_idncou_ix` (`idnumber`,`courseid`),
-  KEY `mdl_graditem_cou_ix` (`courseid`),
-  KEY `mdl_graditem_cat_ix` (`categoryid`),
-  KEY `mdl_graditem_sca_ix` (`scaleid`),
-  KEY `mdl_graditem_out_ix` (`outcomeid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='This table keeps information about gradeable items (ie colum' AUTO_INCREMENT=19 ;
-
---
--- Volcado de datos para la tabla `mdl_grade_items`
---
-
-INSERT INTO `mdl_grade_items` (`id`, `courseid`, `categoryid`, `itemname`, `itemtype`, `itemmodule`, `iteminstance`, `itemnumber`, `iteminfo`, `idnumber`, `calculation`, `gradetype`, `grademax`, `grademin`, `scaleid`, `outcomeid`, `gradepass`, `multfactor`, `plusfactor`, `aggregationcoef`, `sortorder`, `display`, `decimals`, `hidden`, `locked`, `locktime`, `needsupdate`, `timecreated`, `timemodified`) VALUES
-(5, 6, NULL, NULL, 'course', NULL, 5, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, NULL, 0, 0, 0, 0, 1428947266, 1428947266),
-(6, 6, 5, 'Tarea 1', 'mod', 'assign', 1, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 2, 0, NULL, 0, 0, 0, 0, 1429290119, 1430841471),
-(7, 8, NULL, NULL, 'course', NULL, 6, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, NULL, 0, 0, 0, 0, 1431014062, 1431014062),
-(8, 1, NULL, NULL, 'course', NULL, 7, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, NULL, 0, 0, 0, 1, 1431014141, 1431014141),
-(15, 6, 5, 'Css responsivo', 'mod', 'assign', 5, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 5, 0, NULL, 0, 0, 0, 0, 1443035848, 1443035897),
-(10, 9, NULL, NULL, 'course', NULL, 9, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, NULL, 0, 0, 0, 0, 1431454870, 1431454870),
-(11, 8, 6, 'tarea 2.1', 'mod', 'assign', 2, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 2, 0, NULL, 0, 0, 0, 0, 1431456310, 1431456310),
-(12, 8, 6, 'Monitoreo', 'mod', 'assign', 3, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 3, 0, NULL, 0, 0, 0, 0, 1442594706, 1443110202),
-(13, 6, 5, 'Examen de la unidad', 'mod', 'quiz', 1, 0, NULL, '', NULL, 1, '10.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 3, 0, NULL, 0, 0, 0, 0, 1442594963, 1442594963),
-(14, 6, 5, 'Diseño', 'mod', 'assign', 4, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 4, 0, NULL, 0, 0, 0, 0, 1442595077, 1443039117),
-(16, 6, 5, 'Examen', 'mod', 'quiz', 2, 0, NULL, '', NULL, 1, '10.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 6, 0, NULL, 0, 0, 0, 0, 1443040467, 1443040467),
-(17, 8, 6, 'Cuestionario de Protocolos', 'mod', 'assign', 6, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 4, 0, NULL, 0, 0, 0, 0, 1443109591, 1443109714);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_grade_items_history`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_grade_items_history` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `action` bigint(10) NOT NULL DEFAULT '0',
-  `oldid` bigint(10) NOT NULL,
-  `source` varchar(255) DEFAULT NULL,
-  `timemodified` bigint(10) DEFAULT NULL,
-  `loggeduser` bigint(10) DEFAULT NULL,
-  `courseid` bigint(10) DEFAULT NULL,
-  `categoryid` bigint(10) DEFAULT NULL,
-  `itemname` varchar(255) DEFAULT NULL,
-  `itemtype` varchar(30) NOT NULL DEFAULT '',
-  `itemmodule` varchar(30) DEFAULT NULL,
-  `iteminstance` bigint(10) DEFAULT NULL,
-  `itemnumber` bigint(10) DEFAULT NULL,
-  `iteminfo` longtext,
-  `idnumber` varchar(255) DEFAULT NULL,
-  `calculation` longtext,
-  `gradetype` smallint(4) NOT NULL DEFAULT '1',
-  `grademax` decimal(10,5) NOT NULL DEFAULT '100.00000',
-  `grademin` decimal(10,5) NOT NULL DEFAULT '0.00000',
-  `scaleid` bigint(10) DEFAULT NULL,
-  `outcomeid` bigint(10) DEFAULT NULL,
-  `gradepass` decimal(10,5) NOT NULL DEFAULT '0.00000',
-  `multfactor` decimal(10,5) NOT NULL DEFAULT '1.00000',
-  `plusfactor` decimal(10,5) NOT NULL DEFAULT '0.00000',
-  `aggregationcoef` decimal(10,5) NOT NULL DEFAULT '0.00000',
-  `sortorder` bigint(10) NOT NULL DEFAULT '0',
-  `hidden` bigint(10) NOT NULL DEFAULT '0',
-  `locked` bigint(10) NOT NULL DEFAULT '0',
-  `locktime` bigint(10) NOT NULL DEFAULT '0',
-  `needsupdate` bigint(10) NOT NULL DEFAULT '0',
-  `display` bigint(10) NOT NULL DEFAULT '0',
-  `decimals` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `mdl_graditemhist_act_ix` (`action`),
-  KEY `mdl_graditemhist_old_ix` (`oldid`),
-  KEY `mdl_graditemhist_cou_ix` (`courseid`),
-  KEY `mdl_graditemhist_cat_ix` (`categoryid`),
-  KEY `mdl_graditemhist_sca_ix` (`scaleid`),
-  KEY `mdl_graditemhist_out_ix` (`outcomeid`),
-  KEY `mdl_graditemhist_log_ix` (`loggeduser`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='History of grade_items' AUTO_INCREMENT=41 ;
-
---
--- Volcado de datos para la tabla `mdl_grade_items_history`
---
-
-INSERT INTO `mdl_grade_items_history` (`id`, `action`, `oldid`, `source`, `timemodified`, `loggeduser`, `courseid`, `categoryid`, `itemname`, `itemtype`, `itemmodule`, `iteminstance`, `itemnumber`, `iteminfo`, `idnumber`, `calculation`, `gradetype`, `grademax`, `grademin`, `scaleid`, `outcomeid`, `gradepass`, `multfactor`, `plusfactor`, `aggregationcoef`, `sortorder`, `hidden`, `locked`, `locktime`, `needsupdate`, `display`, `decimals`) VALUES
-(1, 1, 1, 'system', 1426093804, 3, 3, NULL, NULL, 'course', NULL, 1, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 1, 0, NULL),
-(2, 1, 2, 'system', 1428945021, 2, 5, NULL, NULL, 'course', NULL, 2, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 1, 0, NULL),
-(3, 3, 2, 'coursedelete', 1428945021, 2, 5, NULL, NULL, 'course', NULL, 2, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 1, 0, NULL),
-(4, 1, 3, 'system', 1428945031, 2, 4, NULL, NULL, 'course', NULL, 3, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 1, 0, NULL),
-(5, 3, 3, 'coursedelete', 1428945031, 2, 4, NULL, NULL, 'course', NULL, 3, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 1, 0, NULL),
-(6, 3, 1, 'coursedelete', 1428945040, 2, 3, NULL, NULL, 'course', NULL, 1, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 1, 0, NULL),
-(7, 1, 4, 'system', 1428945050, 2, 2, NULL, NULL, 'course', NULL, 4, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 1, 0, NULL),
-(8, 3, 4, 'coursedelete', 1428945050, 2, 2, NULL, NULL, 'course', NULL, 4, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 1, 0, NULL),
-(9, 1, 5, 'system', 1428947266, 2, 6, NULL, NULL, 'course', NULL, 5, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 1, 0, NULL),
-(10, 1, 6, NULL, 1429290119, 3, 6, 5, 'Tarea 1', 'mod', 'assign', 1, 0, NULL, '8', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 2, 0, 0, 0, 1, 0, NULL),
-(11, 2, 6, NULL, 1429290120, 3, 6, 5, 'Tarea 1', 'mod', 'assign', 1, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 2, 0, 0, 0, 1, 0, NULL),
-(12, 2, 6, NULL, 1430841471, 3, 6, 5, 'Tarea 1', 'mod', 'assign', 1, 0, NULL, '8', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 2, 0, 0, 0, 0, 0, NULL),
-(13, 2, 6, NULL, 1430841471, 3, 6, 5, 'Tarea 1', 'mod', 'assign', 1, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 2, 0, 0, 0, 0, 0, NULL),
-(14, 1, 7, 'system', 1431014062, 3, 8, NULL, NULL, 'course', NULL, 6, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 1, 0, NULL),
-(15, 1, 8, 'system', 1431014141, 3, 1, NULL, NULL, 'course', NULL, 7, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 1, 0, NULL),
-(16, 1, 9, 'system', 1431014162, 3, 7, NULL, NULL, 'course', NULL, 8, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 1, 0, NULL),
-(17, 1, 10, 'system', 1431454870, 11, 9, NULL, NULL, 'course', NULL, 9, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 1, 0, NULL),
-(18, 1, 11, NULL, 1431456310, 3, 8, 6, 'tarea 2.1', 'mod', 'assign', 2, 0, NULL, '13', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 2, 0, 0, 0, 1, 0, NULL),
-(19, 2, 11, NULL, 1431456310, 3, 8, 6, 'tarea 2.1', 'mod', 'assign', 2, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 2, 0, 0, 0, 1, 0, NULL),
-(20, 1, 12, NULL, 1442594706, 3, 8, 6, 'Monitoreo', 'mod', 'assign', 3, 0, NULL, '17', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 3, 0, 0, 0, 1, 0, NULL),
-(21, 2, 12, NULL, 1442594706, 3, 8, 6, 'Monitoreo', 'mod', 'assign', 3, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 3, 0, 0, 0, 1, 0, NULL),
-(22, 1, 13, NULL, 1442594963, 3, 6, 5, 'Examen de la unidad', 'mod', 'quiz', 1, 0, NULL, '', NULL, 1, '10.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 3, 0, 0, 0, 1, 0, NULL),
-(23, 1, 14, NULL, 1442595077, 3, 6, 5, 'Diseño', 'mod', 'assign', 4, 0, NULL, '19', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 4, 0, 0, 0, 1, 0, NULL),
-(24, 2, 14, NULL, 1442595077, 3, 6, 5, 'Diseño', 'mod', 'assign', 4, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 4, 0, 0, 0, 1, 0, NULL),
-(25, 3, 9, 'coursedelete', 1442848967, 2, 7, NULL, NULL, 'course', NULL, 8, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 0, 0, NULL),
-(26, 1, 15, NULL, 1443035848, 2, 6, 5, 'Css responsivo', 'mod', 'assign', 5, 0, NULL, '22', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 5, 0, 0, 0, 1, 0, NULL),
-(27, 2, 15, NULL, 1443035848, 2, 6, 5, 'Css responsivo', 'mod', 'assign', 5, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 5, 0, 0, 0, 1, 0, NULL),
-(28, 2, 15, NULL, 1443035897, 2, 6, 5, 'Css responsivo', 'mod', 'assign', 5, 0, NULL, '22', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 5, 0, 0, 0, 0, 0, NULL),
-(29, 2, 15, NULL, 1443035897, 2, 6, 5, 'Css responsivo', 'mod', 'assign', 5, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 5, 0, 0, 0, 0, 0, NULL),
-(30, 2, 14, NULL, 1443039117, 2, 6, 5, 'Diseño', 'mod', 'assign', 4, 0, NULL, '19', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 4, 0, 0, 0, 0, 0, NULL),
-(31, 2, 14, NULL, 1443039117, 2, 6, 5, 'Diseño', 'mod', 'assign', 4, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 4, 0, 0, 0, 0, 0, NULL),
-(32, 1, 16, NULL, 1443040467, 2, 6, 5, 'Examen', 'mod', 'quiz', 2, 0, NULL, '', NULL, 1, '10.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 6, 0, 0, 0, 1, 0, NULL),
-(33, 1, 17, NULL, 1443109591, 3, 8, 6, 'Cuestionario de Protocolos', 'mod', 'assign', 6, 0, NULL, '24', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 4, 0, 0, 0, 1, 0, NULL),
-(34, 2, 17, NULL, 1443109591, 3, 8, 6, 'Cuestionario de Protocolos', 'mod', 'assign', 6, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 4, 0, 0, 0, 1, 0, NULL),
-(35, 2, 17, NULL, 1443109714, 3, 8, 6, 'Cuestionario de Protocolos', 'mod', 'assign', 6, 0, NULL, '24', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 4, 0, 0, 0, 0, 0, NULL),
-(36, 2, 17, NULL, 1443109714, 3, 8, 6, 'Cuestionario de Protocolos', 'mod', 'assign', 6, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 4, 0, 0, 0, 0, 0, NULL),
-(37, 2, 12, NULL, 1443110202, 2, 8, 6, 'Monitoreo', 'mod', 'assign', 3, 0, NULL, '17', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 3, 0, 0, 0, 0, 0, NULL),
-(38, 2, 12, NULL, 1443110202, 2, 8, 6, 'Monitoreo', 'mod', 'assign', 3, 0, NULL, '', NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 3, 0, 0, 0, 0, 0, NULL),
-(39, 1, 18, 'system', 1443111274, 2, 12, NULL, NULL, 'course', NULL, 10, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 1, 0, NULL),
-(40, 3, 18, 'coursedelete', 1443111274, 2, 12, NULL, NULL, 'course', NULL, 10, NULL, NULL, NULL, NULL, 1, '100.00000', '0.00000', NULL, NULL, '0.00000', '1.00000', '0.00000', '0.00000', 1, 0, 0, 0, 1, 0, NULL);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_grade_letters`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_grade_letters` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `contextid` bigint(10) NOT NULL,
-  `lowerboundary` decimal(10,5) NOT NULL,
-  `letter` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `mdl_gradlett_conlowlet_uix` (`contextid`,`lowerboundary`,`letter`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Repository for grade letters, for courses and other moodle e' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_grade_outcomes`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_grade_outcomes` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `courseid` bigint(10) DEFAULT NULL,
-  `shortname` varchar(255) NOT NULL DEFAULT '',
-  `fullname` longtext NOT NULL,
-  `scaleid` bigint(10) DEFAULT NULL,
-  `description` longtext,
-  `descriptionformat` tinyint(2) NOT NULL DEFAULT '0',
-  `timecreated` bigint(10) DEFAULT NULL,
-  `timemodified` bigint(10) DEFAULT NULL,
-  `usermodified` bigint(10) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `mdl_gradoutc_cousho_uix` (`courseid`,`shortname`),
-  KEY `mdl_gradoutc_cou_ix` (`courseid`),
-  KEY `mdl_gradoutc_sca_ix` (`scaleid`),
-  KEY `mdl_gradoutc_use_ix` (`usermodified`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='This table describes the outcomes used in the system. An out' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_grade_outcomes_courses`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_grade_outcomes_courses` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `courseid` bigint(10) NOT NULL,
-  `outcomeid` bigint(10) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `mdl_gradoutccour_couout_uix` (`courseid`,`outcomeid`),
-  KEY `mdl_gradoutccour_cou_ix` (`courseid`),
-  KEY `mdl_gradoutccour_out_ix` (`outcomeid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='stores what outcomes are used in what courses.' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_grade_outcomes_history`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_grade_outcomes_history` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `action` bigint(10) NOT NULL DEFAULT '0',
-  `oldid` bigint(10) NOT NULL,
-  `source` varchar(255) DEFAULT NULL,
-  `timemodified` bigint(10) DEFAULT NULL,
-  `loggeduser` bigint(10) DEFAULT NULL,
-  `courseid` bigint(10) DEFAULT NULL,
-  `shortname` varchar(255) NOT NULL DEFAULT '',
-  `fullname` longtext NOT NULL,
-  `scaleid` bigint(10) DEFAULT NULL,
-  `description` longtext,
-  `descriptionformat` tinyint(2) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `mdl_gradoutchist_act_ix` (`action`),
-  KEY `mdl_gradoutchist_old_ix` (`oldid`),
-  KEY `mdl_gradoutchist_cou_ix` (`courseid`),
-  KEY `mdl_gradoutchist_sca_ix` (`scaleid`),
-  KEY `mdl_gradoutchist_log_ix` (`loggeduser`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='History table' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_grade_settings`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_grade_settings` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `courseid` bigint(10) NOT NULL,
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `value` longtext,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `mdl_gradsett_counam_uix` (`courseid`,`name`),
-  KEY `mdl_gradsett_cou_ix` (`courseid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='gradebook settings' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_gradingform_guide_comments`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_gradingform_guide_comments` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `definitionid` bigint(10) NOT NULL,
-  `sortorder` bigint(10) NOT NULL,
-  `description` longtext,
-  `descriptionformat` tinyint(2) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `mdl_gradguidcomm_def_ix` (`definitionid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='frequently used comments used in marking guide' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_gradingform_guide_criteria`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_gradingform_guide_criteria` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `definitionid` bigint(10) NOT NULL,
-  `sortorder` bigint(10) NOT NULL,
-  `shortname` varchar(255) NOT NULL DEFAULT '',
-  `description` longtext,
-  `descriptionformat` tinyint(2) DEFAULT NULL,
-  `descriptionmarkers` longtext,
-  `descriptionmarkersformat` tinyint(2) DEFAULT NULL,
-  `maxscore` decimal(10,5) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `mdl_gradguidcrit_def_ix` (`definitionid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Stores the rows of the criteria grid.' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_gradingform_guide_fillings`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_gradingform_guide_fillings` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `instanceid` bigint(10) NOT NULL,
-  `criterionid` bigint(10) NOT NULL,
-  `remark` longtext,
-  `remarkformat` tinyint(2) DEFAULT NULL,
-  `score` decimal(10,5) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `mdl_gradguidfill_inscri_uix` (`instanceid`,`criterionid`),
-  KEY `mdl_gradguidfill_ins_ix` (`instanceid`),
-  KEY `mdl_gradguidfill_cri_ix` (`criterionid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Stores the data of how the guide is filled by a particular r' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_gradingform_rubric_criteria`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_gradingform_rubric_criteria` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `definitionid` bigint(10) NOT NULL,
-  `sortorder` bigint(10) NOT NULL,
-  `description` longtext,
-  `descriptionformat` tinyint(2) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `mdl_gradrubrcrit_def_ix` (`definitionid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Stores the rows of the rubric grid.' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_gradingform_rubric_fillings`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_gradingform_rubric_fillings` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `instanceid` bigint(10) NOT NULL,
-  `criterionid` bigint(10) NOT NULL,
-  `levelid` bigint(10) DEFAULT NULL,
-  `remark` longtext,
-  `remarkformat` tinyint(2) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `mdl_gradrubrfill_inscri_uix` (`instanceid`,`criterionid`),
-  KEY `mdl_gradrubrfill_lev_ix` (`levelid`),
-  KEY `mdl_gradrubrfill_ins_ix` (`instanceid`),
-  KEY `mdl_gradrubrfill_cri_ix` (`criterionid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Stores the data of how the rubric is filled by a particular ' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_gradingform_rubric_levels`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_gradingform_rubric_levels` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `criterionid` bigint(10) NOT NULL,
-  `score` decimal(10,5) NOT NULL,
-  `definition` longtext,
-  `definitionformat` bigint(10) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `mdl_gradrubrleve_cri_ix` (`criterionid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Stores the columns of the rubric grid.' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3106,201 +2304,6 @@ CREATE TABLE IF NOT EXISTS `mdl_label` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `mdl_lesson`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_lesson` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `course` bigint(10) NOT NULL DEFAULT '0',
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `practice` smallint(3) NOT NULL DEFAULT '0',
-  `modattempts` smallint(3) NOT NULL DEFAULT '0',
-  `usepassword` smallint(3) NOT NULL DEFAULT '0',
-  `password` varchar(32) NOT NULL DEFAULT '',
-  `dependency` bigint(10) NOT NULL DEFAULT '0',
-  `conditions` longtext NOT NULL,
-  `grade` smallint(3) NOT NULL DEFAULT '0',
-  `custom` smallint(3) NOT NULL DEFAULT '0',
-  `ongoing` smallint(3) NOT NULL DEFAULT '0',
-  `usemaxgrade` smallint(3) NOT NULL DEFAULT '0',
-  `maxanswers` smallint(3) NOT NULL DEFAULT '4',
-  `maxattempts` smallint(3) NOT NULL DEFAULT '5',
-  `review` smallint(3) NOT NULL DEFAULT '0',
-  `nextpagedefault` smallint(3) NOT NULL DEFAULT '0',
-  `feedback` smallint(3) NOT NULL DEFAULT '1',
-  `minquestions` smallint(3) NOT NULL DEFAULT '0',
-  `maxpages` smallint(3) NOT NULL DEFAULT '0',
-  `timed` smallint(3) NOT NULL DEFAULT '0',
-  `maxtime` bigint(10) NOT NULL DEFAULT '0',
-  `retake` smallint(3) NOT NULL DEFAULT '1',
-  `activitylink` bigint(10) NOT NULL DEFAULT '0',
-  `mediafile` varchar(255) NOT NULL DEFAULT '',
-  `mediaheight` bigint(10) NOT NULL DEFAULT '100',
-  `mediawidth` bigint(10) NOT NULL DEFAULT '650',
-  `mediaclose` smallint(3) NOT NULL DEFAULT '0',
-  `slideshow` smallint(3) NOT NULL DEFAULT '0',
-  `width` bigint(10) NOT NULL DEFAULT '640',
-  `height` bigint(10) NOT NULL DEFAULT '480',
-  `bgcolor` varchar(7) NOT NULL DEFAULT '#FFFFFF',
-  `displayleft` smallint(3) NOT NULL DEFAULT '0',
-  `displayleftif` smallint(3) NOT NULL DEFAULT '0',
-  `progressbar` smallint(3) NOT NULL DEFAULT '0',
-  `highscores` smallint(3) NOT NULL DEFAULT '0',
-  `maxhighscores` bigint(10) NOT NULL DEFAULT '0',
-  `available` bigint(10) NOT NULL DEFAULT '0',
-  `deadline` bigint(10) NOT NULL DEFAULT '0',
-  `timemodified` bigint(10) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `mdl_less_cou_ix` (`course`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Defines lesson' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_lesson_answers`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_lesson_answers` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `lessonid` bigint(10) NOT NULL DEFAULT '0',
-  `pageid` bigint(10) NOT NULL DEFAULT '0',
-  `jumpto` bigint(11) NOT NULL DEFAULT '0',
-  `grade` smallint(4) NOT NULL DEFAULT '0',
-  `score` bigint(10) NOT NULL DEFAULT '0',
-  `flags` smallint(3) NOT NULL DEFAULT '0',
-  `timecreated` bigint(10) NOT NULL DEFAULT '0',
-  `timemodified` bigint(10) NOT NULL DEFAULT '0',
-  `answer` longtext,
-  `answerformat` tinyint(2) NOT NULL DEFAULT '0',
-  `response` longtext,
-  `responseformat` tinyint(2) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `mdl_lessansw_les_ix` (`lessonid`),
-  KEY `mdl_lessansw_pag_ix` (`pageid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Defines lesson_answers' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_lesson_attempts`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_lesson_attempts` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `lessonid` bigint(10) NOT NULL DEFAULT '0',
-  `pageid` bigint(10) NOT NULL DEFAULT '0',
-  `userid` bigint(10) NOT NULL DEFAULT '0',
-  `answerid` bigint(10) NOT NULL DEFAULT '0',
-  `retry` smallint(3) NOT NULL DEFAULT '0',
-  `correct` bigint(10) NOT NULL DEFAULT '0',
-  `useranswer` longtext,
-  `timeseen` bigint(10) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `mdl_lessatte_use_ix` (`userid`),
-  KEY `mdl_lessatte_les_ix` (`lessonid`),
-  KEY `mdl_lessatte_pag_ix` (`pageid`),
-  KEY `mdl_lessatte_ans_ix` (`answerid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Defines lesson_attempts' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_lesson_branch`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_lesson_branch` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `lessonid` bigint(10) NOT NULL DEFAULT '0',
-  `userid` bigint(10) NOT NULL DEFAULT '0',
-  `pageid` bigint(10) NOT NULL DEFAULT '0',
-  `retry` bigint(10) NOT NULL DEFAULT '0',
-  `flag` smallint(3) NOT NULL DEFAULT '0',
-  `timeseen` bigint(10) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `mdl_lessbran_use_ix` (`userid`),
-  KEY `mdl_lessbran_les_ix` (`lessonid`),
-  KEY `mdl_lessbran_pag_ix` (`pageid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='branches for each lesson/user' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_lesson_grades`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_lesson_grades` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `lessonid` bigint(10) NOT NULL DEFAULT '0',
-  `userid` bigint(10) NOT NULL DEFAULT '0',
-  `grade` double NOT NULL DEFAULT '0',
-  `late` smallint(3) NOT NULL DEFAULT '0',
-  `completed` bigint(10) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `mdl_lessgrad_use_ix` (`userid`),
-  KEY `mdl_lessgrad_les_ix` (`lessonid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Defines lesson_grades' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_lesson_high_scores`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_lesson_high_scores` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `lessonid` bigint(10) NOT NULL DEFAULT '0',
-  `userid` bigint(10) NOT NULL DEFAULT '0',
-  `gradeid` bigint(10) NOT NULL DEFAULT '0',
-  `nickname` varchar(5) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `mdl_lesshighscor_use_ix` (`userid`),
-  KEY `mdl_lesshighscor_les_ix` (`lessonid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='high scores for each lesson' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_lesson_pages`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_lesson_pages` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `lessonid` bigint(10) NOT NULL DEFAULT '0',
-  `prevpageid` bigint(10) NOT NULL DEFAULT '0',
-  `nextpageid` bigint(10) NOT NULL DEFAULT '0',
-  `qtype` smallint(3) NOT NULL DEFAULT '0',
-  `qoption` smallint(3) NOT NULL DEFAULT '0',
-  `layout` smallint(3) NOT NULL DEFAULT '1',
-  `display` smallint(3) NOT NULL DEFAULT '1',
-  `timecreated` bigint(10) NOT NULL DEFAULT '0',
-  `timemodified` bigint(10) NOT NULL DEFAULT '0',
-  `title` varchar(255) NOT NULL DEFAULT '',
-  `contents` longtext NOT NULL,
-  `contentsformat` tinyint(2) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `mdl_lesspage_les_ix` (`lessonid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Defines lesson_pages' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_lesson_timer`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_lesson_timer` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `lessonid` bigint(10) NOT NULL DEFAULT '0',
-  `userid` bigint(10) NOT NULL DEFAULT '0',
-  `starttime` bigint(10) NOT NULL DEFAULT '0',
-  `lessontime` bigint(10) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `mdl_lesstime_use_ix` (`userid`),
-  KEY `mdl_lesstime_les_ix` (`lessonid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='lesson timer for each lesson' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `mdl_lti`
 --
 
@@ -3395,6 +2398,639 @@ CREATE TABLE IF NOT EXISTS `mdl_lti_types_config` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `mdl_mnetservice_enrol_courses`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_mnetservice_enrol_courses` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `hostid` bigint(10) NOT NULL,
+  `remoteid` bigint(10) NOT NULL,
+  `categoryid` bigint(10) NOT NULL,
+  `categoryname` varchar(255) NOT NULL DEFAULT '',
+  `sortorder` bigint(10) NOT NULL DEFAULT '0',
+  `fullname` varchar(254) NOT NULL DEFAULT '',
+  `shortname` varchar(100) NOT NULL DEFAULT '',
+  `idnumber` varchar(100) NOT NULL DEFAULT '',
+  `summary` longtext NOT NULL,
+  `summaryformat` smallint(3) DEFAULT '0',
+  `startdate` bigint(10) NOT NULL,
+  `roleid` bigint(10) NOT NULL,
+  `rolename` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_mnetenrocour_hosrem_uix` (`hostid`,`remoteid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Caches the information fetched via XML-RPC about courses on ' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_mnetservice_enrol_enrolments`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_mnetservice_enrol_enrolments` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `hostid` bigint(10) NOT NULL,
+  `userid` bigint(10) NOT NULL,
+  `remotecourseid` bigint(10) NOT NULL,
+  `rolename` varchar(255) NOT NULL DEFAULT '',
+  `enroltime` bigint(10) NOT NULL DEFAULT '0',
+  `enroltype` varchar(20) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `mdl_mnetenroenro_use_ix` (`userid`),
+  KEY `mdl_mnetenroenro_hos_ix` (`hostid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Caches the information about enrolments of our local users i' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_mnet_application`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_mnet_application` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `display_name` varchar(50) NOT NULL DEFAULT '',
+  `xmlrpc_server_url` varchar(255) NOT NULL DEFAULT '',
+  `sso_land_url` varchar(255) NOT NULL DEFAULT '',
+  `sso_jump_url` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Information about applications on remote hosts' AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `mdl_mnet_application`
+--
+
+INSERT INTO `mdl_mnet_application` (`id`, `name`, `display_name`, `xmlrpc_server_url`, `sso_land_url`, `sso_jump_url`) VALUES
+(1, 'moodle', 'Moodle', '/mnet/xmlrpc/server.php', '/auth/mnet/land.php', '/auth/mnet/jump.php'),
+(2, 'mahara', 'Mahara', '/api/xmlrpc/server.php', '/auth/xmlrpc/land.php', '/auth/xmlrpc/jump.php');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_mnet_host`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_mnet_host` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `wwwroot` varchar(255) NOT NULL DEFAULT '',
+  `ip_address` varchar(45) NOT NULL DEFAULT '',
+  `name` varchar(80) NOT NULL DEFAULT '',
+  `public_key` longtext NOT NULL,
+  `public_key_expires` bigint(10) NOT NULL DEFAULT '0',
+  `transport` tinyint(2) NOT NULL DEFAULT '0',
+  `portno` mediumint(5) NOT NULL DEFAULT '0',
+  `last_connect_time` bigint(10) NOT NULL DEFAULT '0',
+  `last_log_id` bigint(10) NOT NULL DEFAULT '0',
+  `force_theme` tinyint(1) NOT NULL DEFAULT '0',
+  `theme` varchar(100) DEFAULT NULL,
+  `applicationid` bigint(10) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `mdl_mnethost_app_ix` (`applicationid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Information about the local and remote hosts for RPC' AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `mdl_mnet_host`
+--
+
+INSERT INTO `mdl_mnet_host` (`id`, `deleted`, `wwwroot`, `ip_address`, `name`, `public_key`, `public_key_expires`, `transport`, `portno`, `last_connect_time`, `last_log_id`, `force_theme`, `theme`, `applicationid`) VALUES
+(1, 0, 'http://localhost/moodle2/moodle', '::1', '', '', 0, 0, 0, 0, 0, 0, NULL, 1),
+(2, 0, '', '', 'All Hosts', '', 0, 0, 0, 0, 0, 0, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_mnet_host2service`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_mnet_host2service` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `hostid` bigint(10) NOT NULL DEFAULT '0',
+  `serviceid` bigint(10) NOT NULL DEFAULT '0',
+  `publish` tinyint(1) NOT NULL DEFAULT '0',
+  `subscribe` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_mnethost_hosser_uix` (`hostid`,`serviceid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Information about the services for a given host' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_mnet_log`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_mnet_log` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `hostid` bigint(10) NOT NULL DEFAULT '0',
+  `remoteid` bigint(10) NOT NULL DEFAULT '0',
+  `time` bigint(10) NOT NULL DEFAULT '0',
+  `userid` bigint(10) NOT NULL DEFAULT '0',
+  `ip` varchar(45) NOT NULL DEFAULT '',
+  `course` bigint(10) NOT NULL DEFAULT '0',
+  `coursename` varchar(40) NOT NULL DEFAULT '',
+  `module` varchar(20) NOT NULL DEFAULT '',
+  `cmid` bigint(10) NOT NULL DEFAULT '0',
+  `action` varchar(40) NOT NULL DEFAULT '',
+  `url` varchar(100) NOT NULL DEFAULT '',
+  `info` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `mdl_mnetlog_hosusecou_ix` (`hostid`,`userid`,`course`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Store session data from users migrating to other sites' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_mnet_remote_rpc`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_mnet_remote_rpc` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `functionname` varchar(40) NOT NULL DEFAULT '',
+  `xmlrpcpath` varchar(80) NOT NULL DEFAULT '',
+  `plugintype` varchar(20) NOT NULL DEFAULT '',
+  `pluginname` varchar(20) NOT NULL DEFAULT '',
+  `enabled` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='This table describes functions that might be called remotely' AUTO_INCREMENT=17 ;
+
+--
+-- Volcado de datos para la tabla `mdl_mnet_remote_rpc`
+--
+
+INSERT INTO `mdl_mnet_remote_rpc` (`id`, `functionname`, `xmlrpcpath`, `plugintype`, `pluginname`, `enabled`) VALUES
+(1, 'user_authorise', 'auth/mnet/auth.php/user_authorise', 'auth', 'mnet', 1),
+(2, 'keepalive_server', 'auth/mnet/auth.php/keepalive_server', 'auth', 'mnet', 1),
+(3, 'kill_children', 'auth/mnet/auth.php/kill_children', 'auth', 'mnet', 1),
+(4, 'refresh_log', 'auth/mnet/auth.php/refresh_log', 'auth', 'mnet', 1),
+(5, 'fetch_user_image', 'auth/mnet/auth.php/fetch_user_image', 'auth', 'mnet', 1),
+(6, 'fetch_theme_info', 'auth/mnet/auth.php/fetch_theme_info', 'auth', 'mnet', 1),
+(7, 'update_enrolments', 'auth/mnet/auth.php/update_enrolments', 'auth', 'mnet', 1),
+(8, 'keepalive_client', 'auth/mnet/auth.php/keepalive_client', 'auth', 'mnet', 1),
+(9, 'kill_child', 'auth/mnet/auth.php/kill_child', 'auth', 'mnet', 1),
+(10, 'available_courses', 'enrol/mnet/enrol.php/available_courses', 'enrol', 'mnet', 1),
+(11, 'user_enrolments', 'enrol/mnet/enrol.php/user_enrolments', 'enrol', 'mnet', 1),
+(12, 'enrol_user', 'enrol/mnet/enrol.php/enrol_user', 'enrol', 'mnet', 1),
+(13, 'unenrol_user', 'enrol/mnet/enrol.php/unenrol_user', 'enrol', 'mnet', 1),
+(14, 'course_enrolments', 'enrol/mnet/enrol.php/course_enrolments', 'enrol', 'mnet', 1),
+(15, 'send_content_intent', 'portfolio/mahara/lib.php/send_content_intent', 'portfolio', 'mahara', 1),
+(16, 'send_content_ready', 'portfolio/mahara/lib.php/send_content_ready', 'portfolio', 'mahara', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_mnet_remote_service2rpc`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_mnet_remote_service2rpc` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `serviceid` bigint(10) NOT NULL DEFAULT '0',
+  `rpcid` bigint(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_mnetremoserv_rpcser_uix` (`rpcid`,`serviceid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Group functions or methods under a service' AUTO_INCREMENT=17 ;
+
+--
+-- Volcado de datos para la tabla `mdl_mnet_remote_service2rpc`
+--
+
+INSERT INTO `mdl_mnet_remote_service2rpc` (`id`, `serviceid`, `rpcid`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 4),
+(5, 1, 5),
+(6, 1, 6),
+(7, 1, 7),
+(8, 2, 8),
+(9, 2, 9),
+(10, 3, 10),
+(11, 3, 11),
+(12, 3, 12),
+(13, 3, 13),
+(14, 3, 14),
+(15, 4, 15),
+(16, 4, 16);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_mnet_rpc`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_mnet_rpc` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `functionname` varchar(40) NOT NULL DEFAULT '',
+  `xmlrpcpath` varchar(80) NOT NULL DEFAULT '',
+  `plugintype` varchar(20) NOT NULL DEFAULT '',
+  `pluginname` varchar(20) NOT NULL DEFAULT '',
+  `enabled` tinyint(1) NOT NULL DEFAULT '0',
+  `help` longtext NOT NULL,
+  `profile` longtext NOT NULL,
+  `filename` varchar(100) NOT NULL DEFAULT '',
+  `classname` varchar(150) DEFAULT NULL,
+  `static` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `mdl_mnetrpc_enaxml_ix` (`enabled`,`xmlrpcpath`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Functions or methods that we may publish or subscribe to' AUTO_INCREMENT=16 ;
+
+--
+-- Volcado de datos para la tabla `mdl_mnet_rpc`
+--
+
+INSERT INTO `mdl_mnet_rpc` (`id`, `functionname`, `xmlrpcpath`, `plugintype`, `pluginname`, `enabled`, `help`, `profile`, `filename`, `classname`, `static`) VALUES
+(1, 'user_authorise', 'auth/mnet/auth.php/user_authorise', 'auth', 'mnet', 1, 'Return user data for the provided token, compare with user_agent string.', 'a:2:{s:10:"parameters";a:2:{i:0;a:3:{s:4:"name";s:5:"token";s:4:"type";s:6:"string";s:11:"description";s:37:"The unique ID provided by remotehost.";}i:1;a:3:{s:4:"name";s:9:"useragent";s:4:"type";s:6:"string";s:11:"description";s:0:"";}}s:6:"return";a:2:{s:4:"type";s:5:"array";s:11:"description";s:44:"$userdata Array of user info for remote host";}}', 'auth.php', 'auth_plugin_mnet', 0),
+(2, 'keepalive_server', 'auth/mnet/auth.php/keepalive_server', 'auth', 'mnet', 1, 'Receives an array of usernames from a remote machine and prods their\nsessions to keep them alive', 'a:2:{s:10:"parameters";a:1:{i:0;a:3:{s:4:"name";s:5:"array";s:4:"type";s:5:"array";s:11:"description";s:21:"An array of usernames";}}s:6:"return";a:2:{s:4:"type";s:6:"string";s:11:"description";s:28:""All ok" or an error message";}}', 'auth.php', 'auth_plugin_mnet', 0),
+(3, 'kill_children', 'auth/mnet/auth.php/kill_children', 'auth', 'mnet', 1, 'The IdP uses this function to kill child sessions on other hosts', 'a:2:{s:10:"parameters";a:2:{i:0;a:3:{s:4:"name";s:8:"username";s:4:"type";s:6:"string";s:11:"description";s:28:"Username for session to kill";}i:1;a:3:{s:4:"name";s:9:"useragent";s:4:"type";s:6:"string";s:11:"description";s:0:"";}}s:6:"return";a:2:{s:4:"type";s:6:"string";s:11:"description";s:39:"A plaintext report of what has happened";}}', 'auth.php', 'auth_plugin_mnet', 0),
+(4, 'refresh_log', 'auth/mnet/auth.php/refresh_log', 'auth', 'mnet', 1, 'Receives an array of log entries from an SP and adds them to the mnet_log\ntable', 'a:2:{s:10:"parameters";a:1:{i:0;a:3:{s:4:"name";s:5:"array";s:4:"type";s:5:"array";s:11:"description";s:21:"An array of usernames";}}s:6:"return";a:2:{s:4:"type";s:6:"string";s:11:"description";s:28:""All ok" or an error message";}}', 'auth.php', 'auth_plugin_mnet', 0),
+(5, 'fetch_user_image', 'auth/mnet/auth.php/fetch_user_image', 'auth', 'mnet', 1, 'Returns the user''s profile image info\nIf the user exists and has a profile picture, the returned array will contain keys:\n f1          - the content of the default 100x100px image\n f1_mimetype - the mimetype of the f1 file\n f2          - the content of the 35x35px variant of the image\n f2_mimetype - the mimetype of the f2 file\nThe mimetype information was added in Moodle 2.0. In Moodle 1.x, images are always jpegs.', 'a:2:{s:10:"parameters";a:1:{i:0;a:3:{s:4:"name";s:8:"username";s:4:"type";s:3:"int";s:11:"description";s:18:"The id of the user";}}s:6:"return";a:2:{s:4:"type";s:5:"array";s:11:"description";s:84:"false if user not found, empty array if no picture exists, array with data otherwise";}}', 'auth.php', 'auth_plugin_mnet', 0),
+(6, 'fetch_theme_info', 'auth/mnet/auth.php/fetch_theme_info', 'auth', 'mnet', 1, 'Returns the theme information and logo url as strings.', 'a:2:{s:10:"parameters";a:0:{}s:6:"return";a:2:{s:4:"type";s:6:"string";s:11:"description";s:14:"The theme info";}}', 'auth.php', 'auth_plugin_mnet', 0),
+(7, 'update_enrolments', 'auth/mnet/auth.php/update_enrolments', 'auth', 'mnet', 1, 'Invoke this function _on_ the IDP to update it with enrolment info local to\nthe SP right after calling user_authorise()\nNormally called by the SP after calling user_authorise()', 'a:2:{s:10:"parameters";a:2:{i:0;a:3:{s:4:"name";s:8:"username";s:4:"type";s:6:"string";s:11:"description";s:12:"The username";}i:1;a:3:{s:4:"name";s:7:"courses";s:4:"type";s:5:"array";s:11:"description";s:0:"";}}s:6:"return";a:2:{s:4:"type";s:4:"bool";s:11:"description";s:0:"";}}', 'auth.php', 'auth_plugin_mnet', 0),
+(8, 'keepalive_client', 'auth/mnet/auth.php/keepalive_client', 'auth', 'mnet', 1, 'Poll the IdP server to let it know that a user it has authenticated is still\nonline', 'a:2:{s:10:"parameters";a:0:{}s:6:"return";a:2:{s:4:"type";s:4:"void";s:11:"description";s:0:"";}}', 'auth.php', 'auth_plugin_mnet', 0),
+(9, 'kill_child', 'auth/mnet/auth.php/kill_child', 'auth', 'mnet', 1, 'When the IdP requests that child sessions are terminated,\nthis function will be called on each of the child hosts. The machine that\ncalls the function (over xmlrpc) provides us with the mnethostid we need.', 'a:2:{s:10:"parameters";a:2:{i:0;a:3:{s:4:"name";s:8:"username";s:4:"type";s:6:"string";s:11:"description";s:28:"Username for session to kill";}i:1;a:3:{s:4:"name";s:9:"useragent";s:4:"type";s:6:"string";s:11:"description";s:0:"";}}s:6:"return";a:2:{s:4:"type";s:4:"bool";s:11:"description";s:15:"True on success";}}', 'auth.php', 'auth_plugin_mnet', 0),
+(10, 'available_courses', 'enrol/mnet/enrol.php/available_courses', 'enrol', 'mnet', 1, 'Returns list of courses that we offer to the caller for remote enrolment of their users\nSince Moodle 2.0, courses are made available for MNet peers by creating an instance\nof enrol_mnet plugin for the course. Hidden courses are not returned. If there are two\ninstances - one specific for the host and one for ''All hosts'', the setting of the specific\none is used. The id of the peer is kept in customint1, no other custom fields are used.', 'a:2:{s:10:"parameters";a:0:{}s:6:"return";a:2:{s:4:"type";s:5:"array";s:11:"description";s:0:"";}}', 'enrol.php', 'enrol_mnet_mnetservice_enrol', 0),
+(11, 'user_enrolments', 'enrol/mnet/enrol.php/user_enrolments', 'enrol', 'mnet', 1, 'This method has never been implemented in Moodle MNet API', 'a:2:{s:10:"parameters";a:0:{}s:6:"return";a:2:{s:4:"type";s:5:"array";s:11:"description";s:11:"empty array";}}', 'enrol.php', 'enrol_mnet_mnetservice_enrol', 0),
+(12, 'enrol_user', 'enrol/mnet/enrol.php/enrol_user', 'enrol', 'mnet', 1, 'Enrol remote user to our course\nIf we do not have local record for the remote user in our database,\nit gets created here.', 'a:2:{s:10:"parameters";a:2:{i:0;a:3:{s:4:"name";s:8:"userdata";s:4:"type";s:5:"array";s:11:"description";s:14:"user details {";}i:1;a:3:{s:4:"name";s:8:"courseid";s:4:"type";s:3:"int";s:11:"description";s:19:"our local course id";}}s:6:"return";a:2:{s:4:"type";s:4:"bool";s:11:"description";s:69:"true if the enrolment has been successful, throws exception otherwise";}}', 'enrol.php', 'enrol_mnet_mnetservice_enrol', 0),
+(13, 'unenrol_user', 'enrol/mnet/enrol.php/unenrol_user', 'enrol', 'mnet', 1, 'Unenrol remote user from our course\nOnly users enrolled via enrol_mnet plugin can be unenrolled remotely. If the\nremote user is enrolled into the local course via some other enrol plugin\n(enrol_manual for example), the remote host can''t touch such enrolment. Please\ndo not report this behaviour as bug, it is a feature ;-)', 'a:2:{s:10:"parameters";a:2:{i:0;a:3:{s:4:"name";s:8:"username";s:4:"type";s:6:"string";s:11:"description";s:18:"of the remote user";}i:1;a:3:{s:4:"name";s:8:"courseid";s:4:"type";s:3:"int";s:11:"description";s:0:"";}}s:6:"return";a:2:{s:4:"type";s:4:"bool";s:11:"description";s:71:"true if the unenrolment has been successful, throws exception otherwise";}}', 'enrol.php', 'enrol_mnet_mnetservice_enrol', 0),
+(14, 'course_enrolments', 'enrol/mnet/enrol.php/course_enrolments', 'enrol', 'mnet', 1, 'Returns a list of users from the client server who are enrolled in our course\nSuitable instance of enrol_mnet must be created in the course. This method will not\nreturn any information about the enrolments in courses that are not available for\nremote enrolment, even if their users are enrolled into them via other plugin\n(note the difference from {@link self::user_enrolments()}).\nThis method will return enrolment information for users from hosts regardless\nthe enrolment plugin. It does not matter if the user was enrolled remotely by\ntheir admin or locally. Once the course is available for remote enrolments, we\nwill tell them everything about their users.\nIn Moodle 1.x the returned array used to be indexed by username. The side effect\nof MDL-19219 fix is that we do not need to use such index and therefore we can\nreturn all enrolment records. MNet clients 1.x will only use the last record for\nthe student, if she is enrolled via multiple plugins.', 'a:2:{s:10:"parameters";a:2:{i:0;a:3:{s:4:"name";s:8:"courseid";s:4:"type";s:3:"int";s:11:"description";s:16:"ID of our course";}i:1;a:3:{s:4:"name";s:5:"roles";s:4:"type";s:5:"array";s:11:"description";s:0:"";}}s:6:"return";a:2:{s:4:"type";s:5:"array";s:11:"description";s:0:"";}}', 'enrol.php', 'enrol_mnet_mnetservice_enrol', 0),
+(15, 'fetch_file', 'portfolio/mahara/lib.php/fetch_file', 'portfolio', 'mahara', 1, 'xmlrpc (mnet) function to get the file.\nreads in the file and returns it base_64 encoded\nso that it can be enrypted by mnet.', 'a:2:{s:10:"parameters";a:1:{i:0;a:3:{s:4:"name";s:5:"token";s:4:"type";s:6:"string";s:11:"description";s:56:"the token recieved previously during send_content_intent";}}s:6:"return";a:2:{s:4:"type";s:4:"void";s:11:"description";s:0:"";}}', 'lib.php', 'portfolio_plugin_mahara', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_mnet_service`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_mnet_service` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) NOT NULL DEFAULT '',
+  `description` varchar(40) NOT NULL DEFAULT '',
+  `apiversion` varchar(10) NOT NULL DEFAULT '',
+  `offer` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='A service is a group of functions' AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `mdl_mnet_service`
+--
+
+INSERT INTO `mdl_mnet_service` (`id`, `name`, `description`, `apiversion`, `offer`) VALUES
+(1, 'sso_idp', '', '1', 1),
+(2, 'sso_sp', '', '1', 1),
+(3, 'mnet_enrol', '', '1', 1),
+(4, 'pf', '', '1', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_mnet_service2rpc`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_mnet_service2rpc` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `serviceid` bigint(10) NOT NULL DEFAULT '0',
+  `rpcid` bigint(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_mnetserv_rpcser_uix` (`rpcid`,`serviceid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Group functions or methods under a service' AUTO_INCREMENT=16 ;
+
+--
+-- Volcado de datos para la tabla `mdl_mnet_service2rpc`
+--
+
+INSERT INTO `mdl_mnet_service2rpc` (`id`, `serviceid`, `rpcid`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 4),
+(5, 1, 5),
+(6, 1, 6),
+(7, 1, 7),
+(8, 2, 8),
+(9, 2, 9),
+(10, 3, 10),
+(11, 3, 11),
+(12, 3, 12),
+(13, 3, 13),
+(14, 3, 14),
+(15, 4, 15);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_mnet_session`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_mnet_session` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `userid` bigint(10) NOT NULL DEFAULT '0',
+  `username` varchar(100) NOT NULL DEFAULT '',
+  `token` varchar(40) NOT NULL DEFAULT '',
+  `mnethostid` bigint(10) NOT NULL DEFAULT '0',
+  `useragent` varchar(40) NOT NULL DEFAULT '',
+  `confirm_timeout` bigint(10) NOT NULL DEFAULT '0',
+  `session_id` varchar(40) NOT NULL DEFAULT '',
+  `expires` bigint(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_mnetsess_tok_uix` (`token`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Store session data from users migrating to other sites' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_mnet_sso_access_control`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_mnet_sso_access_control` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL DEFAULT '',
+  `mnet_host_id` bigint(10) NOT NULL DEFAULT '0',
+  `accessctrl` varchar(20) NOT NULL DEFAULT 'allow',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_mnetssoaccecont_mneuse_uix` (`mnet_host_id`,`username`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Users by host permitted (or not) to login from a remote prov' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_modules`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_modules` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL DEFAULT '',
+  `cron` bigint(10) NOT NULL DEFAULT '0',
+  `lastcron` bigint(10) NOT NULL DEFAULT '0',
+  `search` varchar(255) NOT NULL DEFAULT '',
+  `visible` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `mdl_modu_nam_ix` (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='modules available in the site' AUTO_INCREMENT=23 ;
+
+--
+-- Volcado de datos para la tabla `mdl_modules`
+--
+
+INSERT INTO `mdl_modules` (`id`, `name`, `cron`, `lastcron`, `search`, `visible`) VALUES
+(1, 'assign', 60, 0, '', 1),
+(2, 'assignment', 60, 0, '', 0),
+(3, 'book', 0, 0, '', 1),
+(4, 'chat', 300, 1430844827, '', 1),
+(5, 'choice', 0, 0, '', 1),
+(6, 'data', 0, 0, '', 1),
+(7, 'feedback', 0, 0, '', 0),
+(8, 'folder', 0, 0, '', 1),
+(9, 'forum', 60, 1430844827, '', 1),
+(10, 'glossary', 0, 0, '', 1),
+(11, 'imscp', 0, 0, '', 1),
+(12, 'label', 0, 0, '', 1),
+(13, 'lesson', 0, 0, '', 1),
+(14, 'lti', 0, 0, '', 1),
+(15, 'page', 0, 0, '', 1),
+(16, 'quiz', 60, 1430844827, '', 1),
+(17, 'resource', 0, 0, '', 1),
+(18, 'scorm', 300, 1430844827, '', 1),
+(19, 'survey', 0, 0, '', 1),
+(20, 'url', 0, 0, '', 1),
+(21, 'wiki', 0, 0, '', 1),
+(22, 'workshop', 60, 1430844827, '', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_my_pages`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_my_pages` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `userid` bigint(10) DEFAULT '0',
+  `name` varchar(200) NOT NULL DEFAULT '',
+  `private` tinyint(1) NOT NULL DEFAULT '1',
+  `sortorder` mediumint(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `mdl_mypage_usepri_ix` (`userid`,`private`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Extra user pages for the My Moodle system' AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `mdl_my_pages`
+--
+
+INSERT INTO `mdl_my_pages` (`id`, `userid`, `name`, `private`, `sortorder`) VALUES
+(1, NULL, '__default', 0, 0),
+(2, NULL, '__default', 1, 0),
+(3, 2, '__default', 1, 0),
+(4, 3, '__default', 1, 0),
+(5, 11, '__default', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_page`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_page` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `course` bigint(10) NOT NULL DEFAULT '0',
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `intro` longtext,
+  `introformat` smallint(4) NOT NULL DEFAULT '0',
+  `content` longtext,
+  `contentformat` smallint(4) NOT NULL DEFAULT '0',
+  `legacyfiles` smallint(4) NOT NULL DEFAULT '0',
+  `legacyfileslast` bigint(10) DEFAULT NULL,
+  `display` smallint(4) NOT NULL DEFAULT '0',
+  `displayoptions` longtext,
+  `revision` bigint(10) NOT NULL DEFAULT '0',
+  `timemodified` bigint(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `mdl_page_cou_ix` (`course`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Each record is one page and its config data' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_post`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_post` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `module` varchar(20) NOT NULL DEFAULT '',
+  `userid` bigint(10) NOT NULL DEFAULT '0',
+  `courseid` bigint(10) NOT NULL DEFAULT '0',
+  `groupid` bigint(10) NOT NULL DEFAULT '0',
+  `moduleid` bigint(10) NOT NULL DEFAULT '0',
+  `coursemoduleid` bigint(10) NOT NULL DEFAULT '0',
+  `subject` varchar(128) NOT NULL DEFAULT '',
+  `summary` longtext,
+  `content` longtext,
+  `uniquehash` varchar(255) NOT NULL DEFAULT '',
+  `rating` bigint(10) NOT NULL DEFAULT '0',
+  `format` bigint(10) NOT NULL DEFAULT '0',
+  `summaryformat` tinyint(2) NOT NULL DEFAULT '0',
+  `attachment` varchar(100) DEFAULT NULL,
+  `publishstate` varchar(20) NOT NULL DEFAULT 'draft',
+  `lastmodified` bigint(10) NOT NULL DEFAULT '0',
+  `created` bigint(10) NOT NULL DEFAULT '0',
+  `usermodified` bigint(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_post_iduse_uix` (`id`,`userid`),
+  KEY `mdl_post_las_ix` (`lastmodified`),
+  KEY `mdl_post_mod_ix` (`module`),
+  KEY `mdl_post_sub_ix` (`subject`),
+  KEY `mdl_post_use_ix` (`usermodified`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Generic post table to hold data blog entries etc in differen' AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `mdl_post`
+--
+
+INSERT INTO `mdl_post` (`id`, `module`, `userid`, `courseid`, `groupid`, `moduleid`, `coursemoduleid`, `subject`, `summary`, `content`, `uniquehash`, `rating`, `format`, `summaryformat`, `attachment`, `publishstate`, `lastmodified`, `created`, `usermodified`) VALUES
+(1, 'notes', 10, 8, 0, 0, 0, '', NULL, 'Hola nota', '', 0, 1, 0, NULL, 'draft', 1446765233, 1446765233, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_profiling`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_profiling` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `runid` varchar(32) NOT NULL DEFAULT '',
+  `url` varchar(255) NOT NULL DEFAULT '',
+  `data` longtext NOT NULL,
+  `totalexecutiontime` bigint(10) NOT NULL,
+  `totalcputime` bigint(10) NOT NULL,
+  `totalcalls` bigint(10) NOT NULL,
+  `totalmemory` bigint(10) NOT NULL,
+  `runreference` tinyint(2) NOT NULL DEFAULT '0',
+  `runcomment` varchar(255) NOT NULL DEFAULT '',
+  `timecreated` bigint(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_prof_run_uix` (`runid`),
+  KEY `mdl_prof_urlrun_ix` (`url`,`runreference`),
+  KEY `mdl_prof_timrun_ix` (`timecreated`,`runreference`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Stores the results of all the profiling runs' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_qtype_essay_options`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_qtype_essay_options` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `questionid` bigint(10) NOT NULL,
+  `responseformat` varchar(16) NOT NULL DEFAULT 'editor',
+  `responserequired` tinyint(2) NOT NULL DEFAULT '1',
+  `responsefieldlines` smallint(4) NOT NULL DEFAULT '15',
+  `attachments` smallint(4) NOT NULL DEFAULT '0',
+  `attachmentsrequired` smallint(4) NOT NULL DEFAULT '0',
+  `graderinfo` longtext,
+  `graderinfoformat` smallint(4) NOT NULL DEFAULT '0',
+  `responsetemplate` longtext,
+  `responsetemplateformat` smallint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_qtypessaopti_que_uix` (`questionid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Extra options for essay questions.' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_qtype_match_options`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_qtype_match_options` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `questionid` bigint(10) NOT NULL DEFAULT '0',
+  `shuffleanswers` smallint(4) NOT NULL DEFAULT '1',
+  `correctfeedback` longtext NOT NULL,
+  `correctfeedbackformat` tinyint(2) NOT NULL DEFAULT '0',
+  `partiallycorrectfeedback` longtext NOT NULL,
+  `partiallycorrectfeedbackformat` tinyint(2) NOT NULL DEFAULT '0',
+  `incorrectfeedback` longtext NOT NULL,
+  `incorrectfeedbackformat` tinyint(2) NOT NULL DEFAULT '0',
+  `shownumcorrect` tinyint(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_qtypmatcopti_que_uix` (`questionid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Defines the question-type specific options for matching ques' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_qtype_match_subquestions`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_qtype_match_subquestions` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `questionid` bigint(10) NOT NULL DEFAULT '0',
+  `questiontext` longtext NOT NULL,
+  `questiontextformat` tinyint(2) NOT NULL DEFAULT '0',
+  `answertext` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `mdl_qtypmatcsubq_que_ix` (`questionid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='The subquestions that make up a matching question' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_qtype_multichoice_options`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_qtype_multichoice_options` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `questionid` bigint(10) NOT NULL DEFAULT '0',
+  `layout` smallint(4) NOT NULL DEFAULT '0',
+  `single` smallint(4) NOT NULL DEFAULT '0',
+  `shuffleanswers` smallint(4) NOT NULL DEFAULT '1',
+  `correctfeedback` longtext NOT NULL,
+  `correctfeedbackformat` tinyint(2) NOT NULL DEFAULT '0',
+  `partiallycorrectfeedback` longtext NOT NULL,
+  `partiallycorrectfeedbackformat` tinyint(2) NOT NULL DEFAULT '0',
+  `incorrectfeedback` longtext NOT NULL,
+  `incorrectfeedbackformat` tinyint(2) NOT NULL DEFAULT '0',
+  `answernumbering` varchar(10) NOT NULL DEFAULT 'abc',
+  `shownumcorrect` tinyint(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_qtypmultopti_que_uix` (`questionid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Options for multiple choice questions' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_qtype_randomsamatch_options`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_qtype_randomsamatch_options` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `questionid` bigint(10) NOT NULL DEFAULT '0',
+  `choose` bigint(10) NOT NULL DEFAULT '4',
+  `subcats` tinyint(2) NOT NULL DEFAULT '1',
+  `correctfeedback` longtext NOT NULL,
+  `correctfeedbackformat` tinyint(2) NOT NULL DEFAULT '0',
+  `partiallycorrectfeedback` longtext NOT NULL,
+  `partiallycorrectfeedbackformat` tinyint(2) NOT NULL DEFAULT '0',
+  `incorrectfeedback` longtext NOT NULL,
+  `incorrectfeedbackformat` tinyint(2) NOT NULL DEFAULT '0',
+  `shownumcorrect` tinyint(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_qtyprandopti_que_uix` (`questionid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Info about a random short-answer matching question' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_qtype_shortanswer_options`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_qtype_shortanswer_options` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `questionid` bigint(10) NOT NULL DEFAULT '0',
+  `usecase` tinyint(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_qtypshoropti_que_uix` (`questionid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Options for short answer questions' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `mdl_role`
 --
 
@@ -3454,6 +3090,72 @@ INSERT INTO `mdl_role_allow_assign` (`id`, `roleid`, `allowassign`) VALUES
 (6, 3, 4),
 (7, 3, 5),
 (9, 9, 9);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_role_allow_override`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_role_allow_override` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `roleid` bigint(10) NOT NULL DEFAULT '0',
+  `allowoverride` bigint(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_rolealloover_rolall_uix` (`roleid`,`allowoverride`),
+  KEY `mdl_rolealloover_rol_ix` (`roleid`),
+  KEY `mdl_rolealloover_all_ix` (`allowoverride`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='this defines what role can override what role' AUTO_INCREMENT=13 ;
+
+--
+-- Volcado de datos para la tabla `mdl_role_allow_override`
+--
+
+INSERT INTO `mdl_role_allow_override` (`id`, `roleid`, `allowoverride`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 4),
+(5, 1, 5),
+(6, 1, 6),
+(7, 1, 7),
+(8, 1, 8),
+(9, 3, 4),
+(10, 3, 5),
+(11, 3, 6),
+(12, 9, 9);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_role_allow_switch`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_role_allow_switch` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `roleid` bigint(10) NOT NULL,
+  `allowswitch` bigint(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_rolealloswit_rolall_uix` (`roleid`,`allowswitch`),
+  KEY `mdl_rolealloswit_rol_ix` (`roleid`),
+  KEY `mdl_rolealloswit_all_ix` (`allowswitch`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='This table stores which which other roles a user is allowed ' AUTO_INCREMENT=11 ;
+
+--
+-- Volcado de datos para la tabla `mdl_role_allow_switch`
+--
+
+INSERT INTO `mdl_role_allow_switch` (`id`, `roleid`, `allowswitch`) VALUES
+(1, 1, 3),
+(2, 1, 4),
+(3, 1, 5),
+(4, 1, 6),
+(5, 3, 4),
+(6, 3, 5),
+(7, 3, 6),
+(8, 4, 5),
+(9, 4, 6),
+(10, 9, 9);
 
 -- --------------------------------------------------------
 
@@ -4761,6 +4463,1261 @@ CREATE TABLE IF NOT EXISTS `mdl_role_sortorder` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `mdl_upgrade_log`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_upgrade_log` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `type` bigint(10) NOT NULL,
+  `plugin` varchar(100) DEFAULT NULL,
+  `version` varchar(100) DEFAULT NULL,
+  `targetversion` varchar(100) DEFAULT NULL,
+  `info` varchar(255) NOT NULL DEFAULT '',
+  `details` longtext,
+  `backtrace` longtext,
+  `userid` bigint(10) NOT NULL,
+  `timemodified` bigint(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `mdl_upgrlog_tim_ix` (`timemodified`),
+  KEY `mdl_upgrlog_typtim_ix` (`type`,`timemodified`),
+  KEY `mdl_upgrlog_use_ix` (`userid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Upgrade logging' AUTO_INCREMENT=1196 ;
+
+--
+-- Volcado de datos para la tabla `mdl_upgrade_log`
+--
+
+INSERT INTO `mdl_upgrade_log` (`id`, `type`, `plugin`, `version`, `targetversion`, `info`, `details`, `backtrace`, `userid`, `timemodified`) VALUES
+(1, 0, 'core', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422298947),
+(2, 0, 'core', '2014051200', '2014051200', 'Core installed', NULL, '', 0, 1422299064),
+(3, 0, 'availability_completion', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299066),
+(4, 0, 'availability_completion', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299066),
+(5, 0, 'availability_completion', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299066),
+(6, 0, 'availability_date', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299066),
+(7, 0, 'availability_date', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299067),
+(8, 0, 'availability_date', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299067),
+(9, 0, 'availability_grade', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299067),
+(10, 0, 'availability_grade', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299067),
+(11, 0, 'availability_grade', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299068),
+(12, 0, 'availability_group', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299068),
+(13, 0, 'availability_group', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299068),
+(14, 0, 'availability_group', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299068),
+(15, 0, 'availability_grouping', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299068),
+(16, 0, 'availability_grouping', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299068),
+(17, 0, 'availability_grouping', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299069),
+(18, 0, 'availability_profile', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299069),
+(19, 0, 'availability_profile', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299069),
+(20, 0, 'availability_profile', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299069),
+(21, 0, 'qtype_calculated', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299069),
+(22, 0, 'qtype_calculated', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299071),
+(23, 0, 'qtype_calculated', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299071),
+(24, 0, 'qtype_calculatedmulti', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299071),
+(25, 0, 'qtype_calculatedmulti', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299071),
+(26, 0, 'qtype_calculatedmulti', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299072),
+(27, 0, 'qtype_calculatedsimple', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299072),
+(28, 0, 'qtype_calculatedsimple', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299072),
+(29, 0, 'qtype_calculatedsimple', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299072),
+(30, 0, 'qtype_description', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299073),
+(31, 0, 'qtype_description', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299073),
+(32, 0, 'qtype_description', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299073),
+(33, 0, 'qtype_essay', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299073),
+(34, 0, 'qtype_essay', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299074),
+(35, 0, 'qtype_essay', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299074),
+(36, 0, 'qtype_match', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299075),
+(37, 0, 'qtype_match', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299075),
+(38, 0, 'qtype_match', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299075),
+(39, 0, 'qtype_missingtype', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299076),
+(40, 0, 'qtype_missingtype', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299076),
+(41, 0, 'qtype_missingtype', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299076),
+(42, 0, 'qtype_multianswer', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299076),
+(43, 0, 'qtype_multianswer', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299076),
+(44, 0, 'qtype_multianswer', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299077),
+(45, 0, 'qtype_multichoice', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299077),
+(46, 0, 'qtype_multichoice', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299077),
+(47, 0, 'qtype_multichoice', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299077),
+(48, 0, 'qtype_numerical', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299078),
+(49, 0, 'qtype_numerical', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299078),
+(50, 0, 'qtype_numerical', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299078),
+(51, 0, 'qtype_random', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299078),
+(52, 0, 'qtype_random', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299079),
+(53, 0, 'qtype_random', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299079),
+(54, 0, 'qtype_randomsamatch', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299079),
+(55, 0, 'qtype_randomsamatch', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299079),
+(56, 0, 'qtype_randomsamatch', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299080),
+(57, 0, 'qtype_shortanswer', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299080),
+(58, 0, 'qtype_shortanswer', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299080),
+(59, 0, 'qtype_shortanswer', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299080),
+(60, 0, 'qtype_truefalse', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299081),
+(61, 0, 'qtype_truefalse', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299082),
+(62, 0, 'qtype_truefalse', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299082),
+(63, 0, 'mod_assign', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299082),
+(64, 0, 'mod_assign', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299083),
+(65, 0, 'mod_assign', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299090),
+(66, 0, 'mod_assignment', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299090),
+(67, 0, 'mod_assignment', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299091),
+(68, 0, 'mod_assignment', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299095),
+(69, 0, 'mod_book', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299095),
+(70, 0, 'mod_book', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299096),
+(71, 0, 'mod_book', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299099),
+(72, 0, 'mod_chat', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299099),
+(73, 0, 'mod_chat', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299101),
+(74, 0, 'mod_chat', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299107),
+(75, 0, 'mod_choice', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299108),
+(76, 0, 'mod_choice', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299109),
+(77, 0, 'mod_choice', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299112),
+(78, 0, 'mod_data', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299112),
+(79, 0, 'mod_data', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299113),
+(80, 0, 'mod_data', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299120),
+(81, 0, 'mod_feedback', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299120),
+(82, 0, 'mod_feedback', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299122),
+(83, 0, 'mod_feedback', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299126),
+(84, 0, 'mod_folder', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299126),
+(85, 0, 'mod_folder', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299127),
+(86, 0, 'mod_folder', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299128),
+(87, 0, 'mod_forum', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299128),
+(88, 0, 'mod_forum', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299129),
+(89, 0, 'mod_forum', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299141),
+(90, 0, 'mod_glossary', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299141),
+(91, 0, 'mod_glossary', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299142),
+(92, 0, 'mod_glossary', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299150),
+(93, 0, 'mod_imscp', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299150),
+(94, 0, 'mod_imscp', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299150),
+(95, 0, 'mod_imscp', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299152),
+(96, 0, 'mod_label', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299152),
+(97, 0, 'mod_label', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299152),
+(98, 0, 'mod_label', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299153),
+(99, 0, 'mod_lesson', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299153),
+(100, 0, 'mod_lesson', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299155),
+(101, 0, 'mod_lesson', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299157),
+(102, 0, 'mod_lti', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299157),
+(103, 0, 'mod_lti', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299158),
+(104, 0, 'mod_lti', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299162),
+(105, 0, 'mod_page', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299162),
+(106, 0, 'mod_page', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299162),
+(107, 0, 'mod_page', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299164),
+(108, 0, 'mod_quiz', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299164),
+(109, 0, 'mod_quiz', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299165),
+(110, 0, 'mod_quiz', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299170),
+(111, 0, 'mod_resource', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299170),
+(112, 0, 'mod_resource', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299171),
+(113, 0, 'mod_resource', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299172),
+(114, 0, 'mod_scorm', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299172),
+(115, 0, 'mod_scorm', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299174),
+(116, 0, 'mod_scorm', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299177),
+(117, 0, 'mod_survey', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299177),
+(118, 0, 'mod_survey', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299178),
+(119, 0, 'mod_survey', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299186),
+(120, 0, 'mod_url', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299186),
+(121, 0, 'mod_url', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299187),
+(122, 0, 'mod_url', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299188),
+(123, 0, 'mod_wiki', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299188),
+(124, 0, 'mod_wiki', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299189),
+(125, 0, 'mod_wiki', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299194),
+(126, 0, 'mod_workshop', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299194),
+(127, 0, 'mod_workshop', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299196),
+(128, 0, 'mod_workshop', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299205),
+(129, 0, 'auth_cas', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299205),
+(130, 0, 'auth_cas', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299205),
+(131, 0, 'auth_cas', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299206),
+(132, 0, 'auth_db', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299206),
+(133, 0, 'auth_db', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299206),
+(134, 0, 'auth_db', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299207),
+(135, 0, 'auth_email', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299207),
+(136, 0, 'auth_email', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299207),
+(137, 0, 'auth_email', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299208),
+(138, 0, 'auth_fc', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299208),
+(139, 0, 'auth_fc', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299208),
+(140, 0, 'auth_fc', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299208),
+(141, 0, 'auth_imap', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299209),
+(142, 0, 'auth_imap', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299209),
+(143, 0, 'auth_imap', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299209),
+(144, 0, 'auth_ldap', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299210),
+(145, 0, 'auth_ldap', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299210),
+(146, 0, 'auth_ldap', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299210),
+(147, 0, 'auth_manual', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299210),
+(148, 0, 'auth_manual', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299211),
+(149, 0, 'auth_manual', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299211),
+(150, 0, 'auth_mnet', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299211),
+(151, 0, 'auth_mnet', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299211),
+(152, 0, 'auth_mnet', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299217),
+(153, 0, 'auth_nntp', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299217),
+(154, 0, 'auth_nntp', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299217),
+(155, 0, 'auth_nntp', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299218),
+(156, 0, 'auth_nologin', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299218),
+(157, 0, 'auth_nologin', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299218),
+(158, 0, 'auth_nologin', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299219),
+(159, 0, 'auth_none', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299219),
+(160, 0, 'auth_none', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299219),
+(161, 0, 'auth_none', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299219),
+(162, 0, 'auth_pam', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299220),
+(163, 0, 'auth_pam', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299220),
+(164, 0, 'auth_pam', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299220),
+(165, 0, 'auth_pop3', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299220),
+(166, 0, 'auth_pop3', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299221),
+(167, 0, 'auth_pop3', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299221),
+(168, 0, 'auth_radius', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299221),
+(169, 0, 'auth_radius', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299222),
+(170, 0, 'auth_radius', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299222),
+(171, 0, 'auth_shibboleth', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299222),
+(172, 0, 'auth_shibboleth', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299223),
+(173, 0, 'auth_shibboleth', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299223),
+(174, 0, 'auth_webservice', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299223),
+(175, 0, 'auth_webservice', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299223),
+(176, 0, 'auth_webservice', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299224),
+(177, 0, 'calendartype_gregorian', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299224),
+(178, 0, 'calendartype_gregorian', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299224),
+(179, 0, 'calendartype_gregorian', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299225),
+(180, 0, 'enrol_category', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299225),
+(181, 0, 'enrol_category', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299225),
+(182, 0, 'enrol_category', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299226),
+(183, 0, 'enrol_cohort', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299226),
+(184, 0, 'enrol_cohort', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299227),
+(185, 0, 'enrol_cohort', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299228),
+(186, 0, 'enrol_database', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299228),
+(187, 0, 'enrol_database', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299228),
+(188, 0, 'enrol_database', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299229),
+(189, 0, 'enrol_flatfile', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299229),
+(190, 0, 'enrol_flatfile', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299230),
+(191, 0, 'enrol_flatfile', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299231),
+(192, 0, 'enrol_guest', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299231),
+(193, 0, 'enrol_guest', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299231),
+(194, 0, 'enrol_guest', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299232),
+(195, 0, 'enrol_imsenterprise', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299232),
+(196, 0, 'enrol_imsenterprise', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299233),
+(197, 0, 'enrol_imsenterprise', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299233),
+(198, 0, 'enrol_ldap', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299233),
+(199, 0, 'enrol_ldap', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299233),
+(200, 0, 'enrol_ldap', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299234),
+(201, 0, 'enrol_manual', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299234),
+(202, 0, 'enrol_manual', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299234),
+(203, 0, 'enrol_manual', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299236),
+(204, 0, 'enrol_meta', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299236),
+(205, 0, 'enrol_meta', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299236),
+(206, 0, 'enrol_meta', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299238),
+(207, 0, 'enrol_mnet', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299238),
+(208, 0, 'enrol_mnet', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299238),
+(209, 0, 'enrol_mnet', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299240),
+(210, 0, 'enrol_paypal', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299241),
+(211, 0, 'enrol_paypal', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299241),
+(212, 0, 'enrol_paypal', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299242),
+(213, 0, 'enrol_self', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299242),
+(214, 0, 'enrol_self', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299242),
+(215, 0, 'enrol_self', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299244),
+(216, 0, 'message_airnotifier', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299244),
+(217, 0, 'message_airnotifier', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299245),
+(218, 0, 'message_airnotifier', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299247),
+(219, 0, 'message_email', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299248),
+(220, 0, 'message_email', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299248),
+(221, 0, 'message_email', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299252),
+(222, 0, 'message_jabber', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299252),
+(223, 0, 'message_jabber', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299252),
+(224, 0, 'message_jabber', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299254),
+(225, 0, 'message_popup', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299254),
+(226, 0, 'message_popup', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299254),
+(227, 0, 'message_popup', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299256),
+(228, 0, 'block_activity_modules', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299256),
+(229, 0, 'block_activity_modules', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299257),
+(230, 0, 'block_activity_modules', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299258),
+(231, 0, 'block_admin_bookmarks', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299258),
+(232, 0, 'block_admin_bookmarks', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299258),
+(233, 0, 'block_admin_bookmarks', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299259),
+(234, 0, 'block_badges', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299259),
+(235, 0, 'block_badges', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299259),
+(236, 0, 'block_badges', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299260),
+(237, 0, 'block_blog_menu', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299260),
+(238, 0, 'block_blog_menu', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299260),
+(239, 0, 'block_blog_menu', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299261),
+(240, 0, 'block_blog_recent', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299261),
+(241, 0, 'block_blog_recent', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299261),
+(242, 0, 'block_blog_recent', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299262),
+(243, 0, 'block_blog_tags', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299262),
+(244, 0, 'block_blog_tags', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299262),
+(245, 0, 'block_blog_tags', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299263),
+(246, 0, 'block_calendar_month', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299263),
+(247, 0, 'block_calendar_month', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299263),
+(248, 0, 'block_calendar_month', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299264),
+(249, 0, 'block_calendar_upcoming', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299264),
+(250, 0, 'block_calendar_upcoming', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299264),
+(251, 0, 'block_calendar_upcoming', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299265),
+(252, 0, 'block_comments', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299265),
+(253, 0, 'block_comments', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299266),
+(254, 0, 'block_comments', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299266),
+(255, 0, 'block_community', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299267),
+(256, 0, 'block_community', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299267),
+(257, 0, 'block_community', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299268),
+(258, 0, 'block_completionstatus', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299268),
+(259, 0, 'block_completionstatus', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299268),
+(260, 0, 'block_completionstatus', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299269),
+(261, 0, 'block_course_list', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299269),
+(262, 0, 'block_course_list', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299269),
+(263, 0, 'block_course_list', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299270),
+(264, 0, 'block_course_overview', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299270),
+(265, 0, 'block_course_overview', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299271),
+(266, 0, 'block_course_overview', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299272),
+(267, 0, 'block_course_summary', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299272),
+(268, 0, 'block_course_summary', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299272),
+(269, 0, 'block_course_summary', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299273),
+(270, 0, 'block_feedback', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299273),
+(271, 0, 'block_feedback', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299274),
+(272, 0, 'block_feedback', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299274),
+(273, 0, 'block_glossary_random', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299274),
+(274, 0, 'block_glossary_random', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299275),
+(275, 0, 'block_glossary_random', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299275),
+(276, 0, 'block_html', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299276),
+(277, 0, 'block_html', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299276),
+(278, 0, 'block_html', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299277),
+(279, 0, 'block_login', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299277),
+(280, 0, 'block_login', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299277),
+(281, 0, 'block_login', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299278),
+(282, 0, 'block_mentees', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299278),
+(283, 0, 'block_mentees', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299278),
+(284, 0, 'block_mentees', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299279),
+(285, 0, 'block_messages', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299279),
+(286, 0, 'block_messages', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299279),
+(287, 0, 'block_messages', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299280),
+(288, 0, 'block_mnet_hosts', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299280),
+(289, 0, 'block_mnet_hosts', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299281),
+(290, 0, 'block_mnet_hosts', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299281),
+(291, 0, 'block_myprofile', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299281),
+(292, 0, 'block_myprofile', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299282),
+(293, 0, 'block_myprofile', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299282),
+(294, 0, 'block_navigation', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299282),
+(295, 0, 'block_navigation', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299283),
+(296, 0, 'block_navigation', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299283),
+(297, 0, 'block_news_items', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299284),
+(298, 0, 'block_news_items', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299284),
+(299, 0, 'block_news_items', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299285),
+(300, 0, 'block_online_users', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299285),
+(301, 0, 'block_online_users', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299285),
+(302, 0, 'block_online_users', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299287),
+(303, 0, 'block_participants', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299287),
+(304, 0, 'block_participants', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299287),
+(305, 0, 'block_participants', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299287),
+(306, 0, 'block_private_files', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299288),
+(307, 0, 'block_private_files', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299288),
+(308, 0, 'block_private_files', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299288),
+(309, 0, 'block_quiz_results', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299289),
+(310, 0, 'block_quiz_results', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299289),
+(311, 0, 'block_quiz_results', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299289),
+(312, 0, 'block_recent_activity', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299290),
+(313, 0, 'block_recent_activity', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299290),
+(314, 0, 'block_recent_activity', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299292),
+(315, 0, 'block_rss_client', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299292),
+(316, 0, 'block_rss_client', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299292),
+(317, 0, 'block_rss_client', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299293),
+(318, 0, 'block_search_forums', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299293),
+(319, 0, 'block_search_forums', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299294),
+(320, 0, 'block_search_forums', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299294),
+(321, 0, 'block_section_links', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299294),
+(322, 0, 'block_section_links', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299295),
+(323, 0, 'block_section_links', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299295),
+(324, 0, 'block_selfcompletion', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299295),
+(325, 0, 'block_selfcompletion', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299295),
+(326, 0, 'block_selfcompletion', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299296),
+(327, 0, 'block_settings', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299296),
+(328, 0, 'block_settings', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299297),
+(329, 0, 'block_settings', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299297),
+(330, 0, 'block_site_main_menu', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299297),
+(331, 0, 'block_site_main_menu', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299298),
+(332, 0, 'block_site_main_menu', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299298),
+(333, 0, 'block_social_activities', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299299),
+(334, 0, 'block_social_activities', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299299),
+(335, 0, 'block_social_activities', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299300),
+(336, 0, 'block_tag_flickr', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299300),
+(337, 0, 'block_tag_flickr', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299300),
+(338, 0, 'block_tag_flickr', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299301),
+(339, 0, 'block_tag_youtube', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299301),
+(340, 0, 'block_tag_youtube', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299301),
+(341, 0, 'block_tag_youtube', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299302),
+(342, 0, 'block_tags', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299302),
+(343, 0, 'block_tags', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299302),
+(344, 0, 'block_tags', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299303),
+(345, 0, 'filter_activitynames', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299305),
+(346, 0, 'filter_activitynames', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299305),
+(347, 0, 'filter_activitynames', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299306),
+(348, 0, 'filter_algebra', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299306),
+(349, 0, 'filter_algebra', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299306),
+(350, 0, 'filter_algebra', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299307),
+(351, 0, 'filter_censor', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299307),
+(352, 0, 'filter_censor', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299307),
+(353, 0, 'filter_censor', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299307),
+(354, 0, 'filter_data', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299307),
+(355, 0, 'filter_data', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299308),
+(356, 0, 'filter_data', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299308),
+(357, 0, 'filter_emailprotect', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299308),
+(358, 0, 'filter_emailprotect', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299308),
+(359, 0, 'filter_emailprotect', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299309),
+(360, 0, 'filter_emoticon', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299309),
+(361, 0, 'filter_emoticon', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299309),
+(362, 0, 'filter_emoticon', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299309),
+(363, 0, 'filter_glossary', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299309),
+(364, 0, 'filter_glossary', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299309),
+(365, 0, 'filter_glossary', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299310),
+(366, 0, 'filter_mathjaxloader', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299310),
+(367, 0, 'filter_mathjaxloader', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299310),
+(368, 0, 'filter_mathjaxloader', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299311),
+(369, 0, 'filter_mediaplugin', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299311),
+(370, 0, 'filter_mediaplugin', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299311),
+(371, 0, 'filter_mediaplugin', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299312),
+(372, 0, 'filter_multilang', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299312),
+(373, 0, 'filter_multilang', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299312),
+(374, 0, 'filter_multilang', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299312),
+(375, 0, 'filter_tex', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299312),
+(376, 0, 'filter_tex', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299313),
+(377, 0, 'filter_tex', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299314),
+(378, 0, 'filter_tidy', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299314),
+(379, 0, 'filter_tidy', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299314),
+(380, 0, 'filter_tidy', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299315),
+(381, 0, 'filter_urltolink', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299315),
+(382, 0, 'filter_urltolink', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299315),
+(383, 0, 'filter_urltolink', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299315),
+(384, 0, 'editor_atto', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299315),
+(385, 0, 'editor_atto', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299316),
+(386, 0, 'editor_atto', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299316),
+(387, 0, 'editor_textarea', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299316),
+(388, 0, 'editor_textarea', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299316),
+(389, 0, 'editor_textarea', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299317),
+(390, 0, 'editor_tinymce', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299317),
+(391, 0, 'editor_tinymce', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299317),
+(392, 0, 'editor_tinymce', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299317),
+(393, 0, 'format_singleactivity', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299317),
+(394, 0, 'format_singleactivity', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299317),
+(395, 0, 'format_singleactivity', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299318),
+(396, 0, 'format_social', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299318),
+(397, 0, 'format_social', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299318),
+(398, 0, 'format_social', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299318),
+(399, 0, 'format_topics', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299318),
+(400, 0, 'format_topics', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299318),
+(401, 0, 'format_topics', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299319),
+(402, 0, 'format_weeks', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299319),
+(403, 0, 'format_weeks', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299319),
+(404, 0, 'format_weeks', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299319),
+(405, 0, 'profilefield_checkbox', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299319),
+(406, 0, 'profilefield_checkbox', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299320),
+(407, 0, 'profilefield_checkbox', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299320),
+(408, 0, 'profilefield_datetime', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299320),
+(409, 0, 'profilefield_datetime', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299320),
+(410, 0, 'profilefield_datetime', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299320),
+(411, 0, 'profilefield_menu', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299321),
+(412, 0, 'profilefield_menu', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299321),
+(413, 0, 'profilefield_menu', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299321),
+(414, 0, 'profilefield_text', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299321),
+(415, 0, 'profilefield_text', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299321),
+(416, 0, 'profilefield_text', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299322),
+(417, 0, 'profilefield_textarea', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299322),
+(418, 0, 'profilefield_textarea', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299322),
+(419, 0, 'profilefield_textarea', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299322),
+(420, 0, 'report_backups', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299322),
+(421, 0, 'report_backups', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299322),
+(422, 0, 'report_backups', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299323),
+(423, 0, 'report_completion', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299323),
+(424, 0, 'report_completion', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299323),
+(425, 0, 'report_completion', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299324),
+(426, 0, 'report_configlog', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299324),
+(427, 0, 'report_configlog', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299325),
+(428, 0, 'report_configlog', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299325),
+(429, 0, 'report_courseoverview', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299325),
+(430, 0, 'report_courseoverview', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299325),
+(431, 0, 'report_courseoverview', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299326),
+(432, 0, 'report_eventlist', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299326),
+(433, 0, 'report_eventlist', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299326),
+(434, 0, 'report_eventlist', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299326),
+(435, 0, 'report_log', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299326),
+(436, 0, 'report_log', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299327),
+(437, 0, 'report_log', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299328),
+(438, 0, 'report_loglive', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299328),
+(439, 0, 'report_loglive', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299328),
+(440, 0, 'report_loglive', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299328),
+(441, 0, 'report_outline', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299329),
+(442, 0, 'report_outline', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299329),
+(443, 0, 'report_outline', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299329),
+(444, 0, 'report_participation', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299330),
+(445, 0, 'report_participation', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299330),
+(446, 0, 'report_participation', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299331),
+(447, 0, 'report_performance', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299331),
+(448, 0, 'report_performance', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299331),
+(449, 0, 'report_performance', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299332),
+(450, 0, 'report_progress', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299332),
+(451, 0, 'report_progress', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299332),
+(452, 0, 'report_progress', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299333),
+(453, 0, 'report_questioninstances', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299333),
+(454, 0, 'report_questioninstances', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299333),
+(455, 0, 'report_questioninstances', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299334),
+(456, 0, 'report_security', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299334),
+(457, 0, 'report_security', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299334),
+(458, 0, 'report_security', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299336),
+(459, 0, 'report_stats', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299336),
+(460, 0, 'report_stats', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299336),
+(461, 0, 'report_stats', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299337),
+(462, 0, 'gradeexport_ods', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299337),
+(463, 0, 'gradeexport_ods', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299337),
+(464, 0, 'gradeexport_ods', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299338),
+(465, 0, 'gradeexport_txt', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299339),
+(466, 0, 'gradeexport_txt', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299339),
+(467, 0, 'gradeexport_txt', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299340),
+(468, 0, 'gradeexport_xls', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299340),
+(469, 0, 'gradeexport_xls', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299340),
+(470, 0, 'gradeexport_xls', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299341),
+(471, 0, 'gradeexport_xml', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299341),
+(472, 0, 'gradeexport_xml', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299341),
+(473, 0, 'gradeexport_xml', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299342),
+(474, 0, 'gradeimport_csv', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299342),
+(475, 0, 'gradeimport_csv', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299342),
+(476, 0, 'gradeimport_csv', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299343),
+(477, 0, 'gradeimport_xml', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299343),
+(478, 0, 'gradeimport_xml', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299343),
+(479, 0, 'gradeimport_xml', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299344),
+(480, 0, 'gradereport_grader', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299345);
+INSERT INTO `mdl_upgrade_log` (`id`, `type`, `plugin`, `version`, `targetversion`, `info`, `details`, `backtrace`, `userid`, `timemodified`) VALUES
+(481, 0, 'gradereport_grader', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299345),
+(482, 0, 'gradereport_grader', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299346),
+(483, 0, 'gradereport_outcomes', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299346),
+(484, 0, 'gradereport_outcomes', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299346),
+(485, 0, 'gradereport_outcomes', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299347),
+(486, 0, 'gradereport_overview', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299347),
+(487, 0, 'gradereport_overview', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299348),
+(488, 0, 'gradereport_overview', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299348),
+(489, 0, 'gradereport_user', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299349),
+(490, 0, 'gradereport_user', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299349),
+(491, 0, 'gradereport_user', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299350),
+(492, 0, 'gradingform_guide', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299350),
+(493, 0, 'gradingform_guide', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299350),
+(494, 0, 'gradingform_guide', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299351),
+(495, 0, 'gradingform_rubric', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299351),
+(496, 0, 'gradingform_rubric', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299351),
+(497, 0, 'gradingform_rubric', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299351),
+(498, 0, 'mnetservice_enrol', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299352),
+(499, 0, 'mnetservice_enrol', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299352),
+(500, 0, 'mnetservice_enrol', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299352),
+(501, 0, 'webservice_amf', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299352),
+(502, 0, 'webservice_amf', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299353),
+(503, 0, 'webservice_amf', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299353),
+(504, 0, 'webservice_rest', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299353),
+(505, 0, 'webservice_rest', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299353),
+(506, 0, 'webservice_rest', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299354),
+(507, 0, 'webservice_soap', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299354),
+(508, 0, 'webservice_soap', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299354),
+(509, 0, 'webservice_soap', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299354),
+(510, 0, 'webservice_xmlrpc', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299354),
+(511, 0, 'webservice_xmlrpc', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299354),
+(512, 0, 'webservice_xmlrpc', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299355),
+(513, 0, 'repository_alfresco', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299355),
+(514, 0, 'repository_alfresco', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299355),
+(515, 0, 'repository_alfresco', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299356),
+(516, 0, 'repository_areafiles', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299356),
+(517, 0, 'repository_areafiles', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299356),
+(518, 0, 'repository_areafiles', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299357),
+(519, 0, 'repository_boxnet', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299357),
+(520, 0, 'repository_boxnet', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299357),
+(521, 0, 'repository_boxnet', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299358),
+(522, 0, 'repository_coursefiles', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299358),
+(523, 0, 'repository_coursefiles', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299359),
+(524, 0, 'repository_coursefiles', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299360),
+(525, 0, 'repository_dropbox', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299360),
+(526, 0, 'repository_dropbox', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299360),
+(527, 0, 'repository_dropbox', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299361),
+(528, 0, 'repository_equella', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299361),
+(529, 0, 'repository_equella', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299361),
+(530, 0, 'repository_equella', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299361),
+(531, 0, 'repository_filesystem', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299361),
+(532, 0, 'repository_filesystem', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299362),
+(533, 0, 'repository_filesystem', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299362),
+(534, 0, 'repository_flickr', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299362),
+(535, 0, 'repository_flickr', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299363),
+(536, 0, 'repository_flickr', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299363),
+(537, 0, 'repository_flickr_public', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299363),
+(538, 0, 'repository_flickr_public', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299363),
+(539, 0, 'repository_flickr_public', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299364),
+(540, 0, 'repository_googledocs', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299364),
+(541, 0, 'repository_googledocs', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299364),
+(542, 0, 'repository_googledocs', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299365),
+(543, 0, 'repository_local', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299365),
+(544, 0, 'repository_local', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299365),
+(545, 0, 'repository_local', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299366),
+(546, 0, 'repository_merlot', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299366),
+(547, 0, 'repository_merlot', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299366),
+(548, 0, 'repository_merlot', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299367),
+(549, 0, 'repository_picasa', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299367),
+(550, 0, 'repository_picasa', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299367),
+(551, 0, 'repository_picasa', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299367),
+(552, 0, 'repository_recent', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299368),
+(553, 0, 'repository_recent', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299368),
+(554, 0, 'repository_recent', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299369),
+(555, 0, 'repository_s3', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299369),
+(556, 0, 'repository_s3', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299369),
+(557, 0, 'repository_s3', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299370),
+(558, 0, 'repository_skydrive', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299370),
+(559, 0, 'repository_skydrive', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299370),
+(560, 0, 'repository_skydrive', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299371),
+(561, 0, 'repository_upload', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299371),
+(562, 0, 'repository_upload', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299371),
+(563, 0, 'repository_upload', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299372),
+(564, 0, 'repository_url', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299372),
+(565, 0, 'repository_url', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299372),
+(566, 0, 'repository_url', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299373),
+(567, 0, 'repository_user', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299373),
+(568, 0, 'repository_user', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299373),
+(569, 0, 'repository_user', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299374),
+(570, 0, 'repository_webdav', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299374),
+(571, 0, 'repository_webdav', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299375),
+(572, 0, 'repository_webdav', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299376),
+(573, 0, 'repository_wikimedia', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299376),
+(574, 0, 'repository_wikimedia', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299376),
+(575, 0, 'repository_wikimedia', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299377),
+(576, 0, 'repository_youtube', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299377),
+(577, 0, 'repository_youtube', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299378),
+(578, 0, 'repository_youtube', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299379),
+(579, 0, 'portfolio_boxnet', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299379),
+(580, 0, 'portfolio_boxnet', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299380),
+(581, 0, 'portfolio_boxnet', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299380),
+(582, 0, 'portfolio_download', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299381),
+(583, 0, 'portfolio_download', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299381),
+(584, 0, 'portfolio_download', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299381),
+(585, 0, 'portfolio_flickr', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299381),
+(586, 0, 'portfolio_flickr', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299382),
+(587, 0, 'portfolio_flickr', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299382),
+(588, 0, 'portfolio_googledocs', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299382),
+(589, 0, 'portfolio_googledocs', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299382),
+(590, 0, 'portfolio_googledocs', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299383),
+(591, 0, 'portfolio_mahara', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299383),
+(592, 0, 'portfolio_mahara', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299383),
+(593, 0, 'portfolio_mahara', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299385),
+(594, 0, 'portfolio_picasa', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299385),
+(595, 0, 'portfolio_picasa', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299385),
+(596, 0, 'portfolio_picasa', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299385),
+(597, 0, 'qbehaviour_adaptive', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299386),
+(598, 0, 'qbehaviour_adaptive', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299386),
+(599, 0, 'qbehaviour_adaptive', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299386),
+(600, 0, 'qbehaviour_adaptivenopenalty', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299386),
+(601, 0, 'qbehaviour_adaptivenopenalty', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299387),
+(602, 0, 'qbehaviour_adaptivenopenalty', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299387),
+(603, 0, 'qbehaviour_deferredcbm', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299387),
+(604, 0, 'qbehaviour_deferredcbm', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299387),
+(605, 0, 'qbehaviour_deferredcbm', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299388),
+(606, 0, 'qbehaviour_deferredfeedback', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299388),
+(607, 0, 'qbehaviour_deferredfeedback', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299388),
+(608, 0, 'qbehaviour_deferredfeedback', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299388),
+(609, 0, 'qbehaviour_immediatecbm', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299389),
+(610, 0, 'qbehaviour_immediatecbm', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299389),
+(611, 0, 'qbehaviour_immediatecbm', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299389),
+(612, 0, 'qbehaviour_immediatefeedback', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299389),
+(613, 0, 'qbehaviour_immediatefeedback', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299390),
+(614, 0, 'qbehaviour_immediatefeedback', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299390),
+(615, 0, 'qbehaviour_informationitem', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299390),
+(616, 0, 'qbehaviour_informationitem', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299390),
+(617, 0, 'qbehaviour_informationitem', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299391),
+(618, 0, 'qbehaviour_interactive', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299391),
+(619, 0, 'qbehaviour_interactive', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299392),
+(620, 0, 'qbehaviour_interactive', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299392),
+(621, 0, 'qbehaviour_interactivecountback', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299392),
+(622, 0, 'qbehaviour_interactivecountback', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299392),
+(623, 0, 'qbehaviour_interactivecountback', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299393),
+(624, 0, 'qbehaviour_manualgraded', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299393),
+(625, 0, 'qbehaviour_manualgraded', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299393),
+(626, 0, 'qbehaviour_manualgraded', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299394),
+(627, 0, 'qbehaviour_missing', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299394),
+(628, 0, 'qbehaviour_missing', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299394),
+(629, 0, 'qbehaviour_missing', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299394),
+(630, 0, 'qformat_aiken', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299395),
+(631, 0, 'qformat_aiken', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299395),
+(632, 0, 'qformat_aiken', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299395),
+(633, 0, 'qformat_blackboard_six', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299395),
+(634, 0, 'qformat_blackboard_six', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299395),
+(635, 0, 'qformat_blackboard_six', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299396),
+(636, 0, 'qformat_examview', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299396),
+(637, 0, 'qformat_examview', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299396),
+(638, 0, 'qformat_examview', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299397),
+(639, 0, 'qformat_gift', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299397),
+(640, 0, 'qformat_gift', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299397),
+(641, 0, 'qformat_gift', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299397),
+(642, 0, 'qformat_learnwise', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299398),
+(643, 0, 'qformat_learnwise', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299398),
+(644, 0, 'qformat_learnwise', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299398),
+(645, 0, 'qformat_missingword', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299398),
+(646, 0, 'qformat_missingword', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299399),
+(647, 0, 'qformat_missingword', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299399),
+(648, 0, 'qformat_multianswer', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299399),
+(649, 0, 'qformat_multianswer', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299399),
+(650, 0, 'qformat_multianswer', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299400),
+(651, 0, 'qformat_webct', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299400),
+(652, 0, 'qformat_webct', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299400),
+(653, 0, 'qformat_webct', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299401),
+(654, 0, 'qformat_xhtml', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299401),
+(655, 0, 'qformat_xhtml', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299401),
+(656, 0, 'qformat_xhtml', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299401),
+(657, 0, 'qformat_xml', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299401),
+(658, 0, 'qformat_xml', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299402),
+(659, 0, 'qformat_xml', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299403),
+(660, 0, 'tool_assignmentupgrade', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299403),
+(661, 0, 'tool_assignmentupgrade', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299403),
+(662, 0, 'tool_assignmentupgrade', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299403),
+(663, 0, 'tool_availabilityconditions', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299403),
+(664, 0, 'tool_availabilityconditions', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299404),
+(665, 0, 'tool_availabilityconditions', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299404),
+(666, 0, 'tool_behat', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299404),
+(667, 0, 'tool_behat', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299405),
+(668, 0, 'tool_behat', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299405),
+(669, 0, 'tool_capability', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299405),
+(670, 0, 'tool_capability', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299405),
+(671, 0, 'tool_capability', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299406),
+(672, 0, 'tool_customlang', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299406),
+(673, 0, 'tool_customlang', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299406),
+(674, 0, 'tool_customlang', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299407),
+(675, 0, 'tool_dbtransfer', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299407),
+(676, 0, 'tool_dbtransfer', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299408),
+(677, 0, 'tool_dbtransfer', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299408),
+(678, 0, 'tool_generator', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299408),
+(679, 0, 'tool_generator', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299408),
+(680, 0, 'tool_generator', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299409),
+(681, 0, 'tool_health', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299409),
+(682, 0, 'tool_health', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299409),
+(683, 0, 'tool_health', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299410),
+(684, 0, 'tool_innodb', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299410),
+(685, 0, 'tool_innodb', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299410),
+(686, 0, 'tool_innodb', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299410),
+(687, 0, 'tool_installaddon', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299410),
+(688, 0, 'tool_installaddon', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299411),
+(689, 0, 'tool_installaddon', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299411),
+(690, 0, 'tool_langimport', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299411),
+(691, 0, 'tool_langimport', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299411),
+(692, 0, 'tool_langimport', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299412),
+(693, 0, 'tool_log', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299412),
+(694, 0, 'tool_log', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299412),
+(695, 0, 'tool_log', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299412),
+(696, 0, 'tool_multilangupgrade', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299412),
+(697, 0, 'tool_multilangupgrade', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299413),
+(698, 0, 'tool_multilangupgrade', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299413),
+(699, 0, 'tool_phpunit', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299414),
+(700, 0, 'tool_phpunit', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299414),
+(701, 0, 'tool_phpunit', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299414),
+(702, 0, 'tool_profiling', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299414),
+(703, 0, 'tool_profiling', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299414),
+(704, 0, 'tool_profiling', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299415),
+(705, 0, 'tool_replace', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299415),
+(706, 0, 'tool_replace', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299415),
+(707, 0, 'tool_replace', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299415),
+(708, 0, 'tool_spamcleaner', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299415),
+(709, 0, 'tool_spamcleaner', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299415),
+(710, 0, 'tool_spamcleaner', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299416),
+(711, 0, 'tool_task', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299416),
+(712, 0, 'tool_task', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299416),
+(713, 0, 'tool_task', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299416),
+(714, 0, 'tool_timezoneimport', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299416),
+(715, 0, 'tool_timezoneimport', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299417),
+(716, 0, 'tool_timezoneimport', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299417),
+(717, 0, 'tool_unsuproles', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299417),
+(718, 0, 'tool_unsuproles', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299417),
+(719, 0, 'tool_unsuproles', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299418),
+(720, 0, 'tool_uploadcourse', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299418),
+(721, 0, 'tool_uploadcourse', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299418),
+(722, 0, 'tool_uploadcourse', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299418),
+(723, 0, 'tool_uploaduser', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299418),
+(724, 0, 'tool_uploaduser', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299418),
+(725, 0, 'tool_uploaduser', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299419),
+(726, 0, 'tool_xmldb', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299419),
+(727, 0, 'tool_xmldb', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299419),
+(728, 0, 'tool_xmldb', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299419),
+(729, 0, 'cachestore_file', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299420),
+(730, 0, 'cachestore_file', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299420),
+(731, 0, 'cachestore_file', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299420),
+(732, 0, 'cachestore_memcache', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299420),
+(733, 0, 'cachestore_memcache', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299420),
+(734, 0, 'cachestore_memcache', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299421),
+(735, 0, 'cachestore_memcached', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299421),
+(736, 0, 'cachestore_memcached', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299421),
+(737, 0, 'cachestore_memcached', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299421),
+(738, 0, 'cachestore_mongodb', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299421),
+(739, 0, 'cachestore_mongodb', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299421),
+(740, 0, 'cachestore_mongodb', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299422),
+(741, 0, 'cachestore_session', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299422),
+(742, 0, 'cachestore_session', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299422),
+(743, 0, 'cachestore_session', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299422),
+(744, 0, 'cachestore_static', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299422),
+(745, 0, 'cachestore_static', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299423),
+(746, 0, 'cachestore_static', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299423),
+(747, 0, 'cachelock_file', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299423),
+(748, 0, 'cachelock_file', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299423),
+(749, 0, 'cachelock_file', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299423),
+(750, 0, 'theme_base', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299424),
+(751, 0, 'theme_base', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299424),
+(752, 0, 'theme_base', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299425),
+(753, 0, 'theme_bootstrapbase', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299425),
+(754, 0, 'theme_bootstrapbase', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299425),
+(755, 0, 'theme_bootstrapbase', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299425),
+(756, 0, 'theme_canvas', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299425),
+(757, 0, 'theme_canvas', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299426),
+(758, 0, 'theme_canvas', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299426),
+(759, 0, 'theme_clean', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299426),
+(760, 0, 'theme_clean', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299426),
+(761, 0, 'theme_clean', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299427),
+(762, 0, 'theme_more', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299427),
+(763, 0, 'theme_more', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299427),
+(764, 0, 'theme_more', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299428),
+(765, 0, 'assignsubmission_comments', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299428),
+(766, 0, 'assignsubmission_comments', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299429),
+(767, 0, 'assignsubmission_comments', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299430),
+(768, 0, 'assignsubmission_file', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299430),
+(769, 0, 'assignsubmission_file', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299430),
+(770, 0, 'assignsubmission_file', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299431),
+(771, 0, 'assignsubmission_onlinetext', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299431),
+(772, 0, 'assignsubmission_onlinetext', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299431),
+(773, 0, 'assignsubmission_onlinetext', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299432),
+(774, 0, 'assignfeedback_comments', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299432),
+(775, 0, 'assignfeedback_comments', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299433),
+(776, 0, 'assignfeedback_comments', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299434),
+(777, 0, 'assignfeedback_editpdf', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299434),
+(778, 0, 'assignfeedback_editpdf', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299435),
+(779, 0, 'assignfeedback_editpdf', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299437),
+(780, 0, 'assignfeedback_file', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299437),
+(781, 0, 'assignfeedback_file', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299437),
+(782, 0, 'assignfeedback_file', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299438),
+(783, 0, 'assignfeedback_offline', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299438),
+(784, 0, 'assignfeedback_offline', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299439),
+(785, 0, 'assignfeedback_offline', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299439),
+(786, 0, 'assignment_offline', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299439),
+(787, 0, 'assignment_offline', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299439),
+(788, 0, 'assignment_offline', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299440),
+(789, 0, 'assignment_online', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299440),
+(790, 0, 'assignment_online', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299440),
+(791, 0, 'assignment_online', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299440),
+(792, 0, 'assignment_upload', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299440),
+(793, 0, 'assignment_upload', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299440),
+(794, 0, 'assignment_upload', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299441),
+(795, 0, 'assignment_uploadsingle', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299441),
+(796, 0, 'assignment_uploadsingle', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299441),
+(797, 0, 'assignment_uploadsingle', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299441),
+(798, 0, 'booktool_exportimscp', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299441),
+(799, 0, 'booktool_exportimscp', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299441),
+(800, 0, 'booktool_exportimscp', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299442),
+(801, 0, 'booktool_importhtml', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299442),
+(802, 0, 'booktool_importhtml', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299442),
+(803, 0, 'booktool_importhtml', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299443),
+(804, 0, 'booktool_print', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299443),
+(805, 0, 'booktool_print', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299444),
+(806, 0, 'booktool_print', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299445),
+(807, 0, 'datafield_checkbox', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299445),
+(808, 0, 'datafield_checkbox', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299445),
+(809, 0, 'datafield_checkbox', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299445),
+(810, 0, 'datafield_date', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299445),
+(811, 0, 'datafield_date', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299445),
+(812, 0, 'datafield_date', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299446),
+(813, 0, 'datafield_file', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299446),
+(814, 0, 'datafield_file', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299446),
+(815, 0, 'datafield_file', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299447),
+(816, 0, 'datafield_latlong', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299447),
+(817, 0, 'datafield_latlong', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299447),
+(818, 0, 'datafield_latlong', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299447),
+(819, 0, 'datafield_menu', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299447),
+(820, 0, 'datafield_menu', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299447),
+(821, 0, 'datafield_menu', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299448),
+(822, 0, 'datafield_multimenu', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299448),
+(823, 0, 'datafield_multimenu', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299448),
+(824, 0, 'datafield_multimenu', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299448),
+(825, 0, 'datafield_number', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299448),
+(826, 0, 'datafield_number', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299449),
+(827, 0, 'datafield_number', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299449),
+(828, 0, 'datafield_picture', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299449),
+(829, 0, 'datafield_picture', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299449),
+(830, 0, 'datafield_picture', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299449),
+(831, 0, 'datafield_radiobutton', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299449),
+(832, 0, 'datafield_radiobutton', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299450),
+(833, 0, 'datafield_radiobutton', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299450),
+(834, 0, 'datafield_text', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299450),
+(835, 0, 'datafield_text', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299450),
+(836, 0, 'datafield_text', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299450),
+(837, 0, 'datafield_textarea', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299450),
+(838, 0, 'datafield_textarea', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299451),
+(839, 0, 'datafield_textarea', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299451),
+(840, 0, 'datafield_url', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299451),
+(841, 0, 'datafield_url', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299451),
+(842, 0, 'datafield_url', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299451),
+(843, 0, 'datapreset_imagegallery', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299451),
+(844, 0, 'datapreset_imagegallery', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299452),
+(845, 0, 'datapreset_imagegallery', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299452),
+(846, 0, 'quiz_grading', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299452),
+(847, 0, 'quiz_grading', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299452),
+(848, 0, 'quiz_grading', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299453),
+(849, 0, 'quiz_overview', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299453),
+(850, 0, 'quiz_overview', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299453),
+(851, 0, 'quiz_overview', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299454),
+(852, 0, 'quiz_responses', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299454),
+(853, 0, 'quiz_responses', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299454),
+(854, 0, 'quiz_responses', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299455),
+(855, 0, 'quiz_statistics', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299455),
+(856, 0, 'quiz_statistics', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299455),
+(857, 0, 'quiz_statistics', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299456),
+(858, 0, 'quizaccess_delaybetweenattempts', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299456),
+(859, 0, 'quizaccess_delaybetweenattempts', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299456),
+(860, 0, 'quizaccess_delaybetweenattempts', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299456),
+(861, 0, 'quizaccess_ipaddress', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299456),
+(862, 0, 'quizaccess_ipaddress', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299457),
+(863, 0, 'quizaccess_ipaddress', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299457),
+(864, 0, 'quizaccess_numattempts', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299457),
+(865, 0, 'quizaccess_numattempts', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299457),
+(866, 0, 'quizaccess_numattempts', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299458),
+(867, 0, 'quizaccess_openclosedate', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299458),
+(868, 0, 'quizaccess_openclosedate', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299458),
+(869, 0, 'quizaccess_openclosedate', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299459),
+(870, 0, 'quizaccess_password', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299459),
+(871, 0, 'quizaccess_password', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299459),
+(872, 0, 'quizaccess_password', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299459),
+(873, 0, 'quizaccess_safebrowser', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299459),
+(874, 0, 'quizaccess_safebrowser', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299459),
+(875, 0, 'quizaccess_safebrowser', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299460),
+(876, 0, 'quizaccess_securewindow', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299460),
+(877, 0, 'quizaccess_securewindow', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299460),
+(878, 0, 'quizaccess_securewindow', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299460),
+(879, 0, 'quizaccess_timelimit', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299460),
+(880, 0, 'quizaccess_timelimit', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299460),
+(881, 0, 'quizaccess_timelimit', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299461),
+(882, 0, 'scormreport_basic', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299461),
+(883, 0, 'scormreport_basic', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299461),
+(884, 0, 'scormreport_basic', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299461),
+(885, 0, 'scormreport_graphs', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299461),
+(886, 0, 'scormreport_graphs', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299462),
+(887, 0, 'scormreport_graphs', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299462),
+(888, 0, 'scormreport_interactions', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299462),
+(889, 0, 'scormreport_interactions', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299462),
+(890, 0, 'scormreport_interactions', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299462),
+(891, 0, 'scormreport_objectives', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299463),
+(892, 0, 'scormreport_objectives', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299463),
+(893, 0, 'scormreport_objectives', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299463),
+(894, 0, 'workshopform_accumulative', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299463),
+(895, 0, 'workshopform_accumulative', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299463),
+(896, 0, 'workshopform_accumulative', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299464),
+(897, 0, 'workshopform_comments', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299464),
+(898, 0, 'workshopform_comments', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299464),
+(899, 0, 'workshopform_comments', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299465),
+(900, 0, 'workshopform_numerrors', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299465),
+(901, 0, 'workshopform_numerrors', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299465),
+(902, 0, 'workshopform_numerrors', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299466),
+(903, 0, 'workshopform_rubric', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299466),
+(904, 0, 'workshopform_rubric', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299466),
+(905, 0, 'workshopform_rubric', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299467),
+(906, 0, 'workshopallocation_manual', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299467),
+(907, 0, 'workshopallocation_manual', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299467),
+(908, 0, 'workshopallocation_manual', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299467),
+(909, 0, 'workshopallocation_random', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299468),
+(910, 0, 'workshopallocation_random', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299468),
+(911, 0, 'workshopallocation_random', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299468),
+(912, 0, 'workshopallocation_scheduled', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299468),
+(913, 0, 'workshopallocation_scheduled', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299469),
+(914, 0, 'workshopallocation_scheduled', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299470),
+(915, 0, 'workshopeval_best', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299470),
+(916, 0, 'workshopeval_best', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299470),
+(917, 0, 'workshopeval_best', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299470),
+(918, 0, 'atto_accessibilitychecker', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299471),
+(919, 0, 'atto_accessibilitychecker', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299471),
+(920, 0, 'atto_accessibilitychecker', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299471),
+(921, 0, 'atto_accessibilityhelper', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299471),
+(922, 0, 'atto_accessibilityhelper', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299471),
+(923, 0, 'atto_accessibilityhelper', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299472),
+(924, 0, 'atto_align', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299472),
+(925, 0, 'atto_align', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299472),
+(926, 0, 'atto_align', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299472),
+(927, 0, 'atto_backcolor', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299472),
+(928, 0, 'atto_backcolor', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299472),
+(929, 0, 'atto_backcolor', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299473),
+(930, 0, 'atto_bold', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299473),
+(931, 0, 'atto_bold', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299473),
+(932, 0, 'atto_bold', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299473),
+(933, 0, 'atto_charmap', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299473),
+(934, 0, 'atto_charmap', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299474),
+(935, 0, 'atto_charmap', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299474),
+(936, 0, 'atto_clear', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299474),
+(937, 0, 'atto_clear', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299474),
+(938, 0, 'atto_clear', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299475),
+(939, 0, 'atto_collapse', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299475),
+(940, 0, 'atto_collapse', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299475),
+(941, 0, 'atto_collapse', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299475),
+(942, 0, 'atto_emoticon', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299475),
+(943, 0, 'atto_emoticon', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299475),
+(944, 0, 'atto_emoticon', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299476),
+(945, 0, 'atto_equation', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299476);
+INSERT INTO `mdl_upgrade_log` (`id`, `type`, `plugin`, `version`, `targetversion`, `info`, `details`, `backtrace`, `userid`, `timemodified`) VALUES
+(946, 0, 'atto_equation', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299476),
+(947, 0, 'atto_equation', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299476),
+(948, 0, 'atto_fontcolor', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299477),
+(949, 0, 'atto_fontcolor', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299477),
+(950, 0, 'atto_fontcolor', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299477),
+(951, 0, 'atto_html', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299477),
+(952, 0, 'atto_html', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299477),
+(953, 0, 'atto_html', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299478),
+(954, 0, 'atto_image', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299478),
+(955, 0, 'atto_image', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299478),
+(956, 0, 'atto_image', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299478),
+(957, 0, 'atto_indent', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299478),
+(958, 0, 'atto_indent', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299478),
+(959, 0, 'atto_indent', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299479),
+(960, 0, 'atto_italic', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299479),
+(961, 0, 'atto_italic', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299479),
+(962, 0, 'atto_italic', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299479),
+(963, 0, 'atto_link', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299479),
+(964, 0, 'atto_link', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299479),
+(965, 0, 'atto_link', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299480),
+(966, 0, 'atto_managefiles', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299480),
+(967, 0, 'atto_managefiles', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299480),
+(968, 0, 'atto_managefiles', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299481),
+(969, 0, 'atto_media', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299481),
+(970, 0, 'atto_media', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299481),
+(971, 0, 'atto_media', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299481),
+(972, 0, 'atto_noautolink', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299481),
+(973, 0, 'atto_noautolink', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299482),
+(974, 0, 'atto_noautolink', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299482),
+(975, 0, 'atto_orderedlist', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299482),
+(976, 0, 'atto_orderedlist', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299482),
+(977, 0, 'atto_orderedlist', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299482),
+(978, 0, 'atto_rtl', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299482),
+(979, 0, 'atto_rtl', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299483),
+(980, 0, 'atto_rtl', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299483),
+(981, 0, 'atto_strike', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299483),
+(982, 0, 'atto_strike', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299483),
+(983, 0, 'atto_strike', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299484),
+(984, 0, 'atto_subscript', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299484),
+(985, 0, 'atto_subscript', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299484),
+(986, 0, 'atto_subscript', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299484),
+(987, 0, 'atto_superscript', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299484),
+(988, 0, 'atto_superscript', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299484),
+(989, 0, 'atto_superscript', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299485),
+(990, 0, 'atto_table', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299485),
+(991, 0, 'atto_table', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299485),
+(992, 0, 'atto_table', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299485),
+(993, 0, 'atto_title', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299485),
+(994, 0, 'atto_title', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299485),
+(995, 0, 'atto_title', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299486),
+(996, 0, 'atto_underline', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299486),
+(997, 0, 'atto_underline', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299486),
+(998, 0, 'atto_underline', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299486),
+(999, 0, 'atto_undo', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299486),
+(1000, 0, 'atto_undo', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299486),
+(1001, 0, 'atto_undo', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299487),
+(1002, 0, 'atto_unorderedlist', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299487),
+(1003, 0, 'atto_unorderedlist', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299487),
+(1004, 0, 'atto_unorderedlist', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299487),
+(1005, 0, 'tinymce_ctrlhelp', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299487),
+(1006, 0, 'tinymce_ctrlhelp', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299488),
+(1007, 0, 'tinymce_ctrlhelp', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299488),
+(1008, 0, 'tinymce_dragmath', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299488),
+(1009, 0, 'tinymce_dragmath', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299488),
+(1010, 0, 'tinymce_dragmath', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299488),
+(1011, 0, 'tinymce_managefiles', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299489),
+(1012, 0, 'tinymce_managefiles', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299489),
+(1013, 0, 'tinymce_managefiles', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299489),
+(1014, 0, 'tinymce_moodleemoticon', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299489),
+(1015, 0, 'tinymce_moodleemoticon', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299489),
+(1016, 0, 'tinymce_moodleemoticon', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299490),
+(1017, 0, 'tinymce_moodleimage', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299490),
+(1018, 0, 'tinymce_moodleimage', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299490),
+(1019, 0, 'tinymce_moodleimage', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299490),
+(1020, 0, 'tinymce_moodlemedia', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299490),
+(1021, 0, 'tinymce_moodlemedia', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299491),
+(1022, 0, 'tinymce_moodlemedia', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299491),
+(1023, 0, 'tinymce_moodlenolink', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299491),
+(1024, 0, 'tinymce_moodlenolink', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299491),
+(1025, 0, 'tinymce_moodlenolink', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299492),
+(1026, 0, 'tinymce_pdw', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299492),
+(1027, 0, 'tinymce_pdw', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299492),
+(1028, 0, 'tinymce_pdw', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299492),
+(1029, 0, 'tinymce_spellchecker', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299492),
+(1030, 0, 'tinymce_spellchecker', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299492),
+(1031, 0, 'tinymce_spellchecker', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299493),
+(1032, 0, 'tinymce_wrap', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299493),
+(1033, 0, 'tinymce_wrap', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299493),
+(1034, 0, 'tinymce_wrap', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299493),
+(1035, 0, 'logstore_database', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299493),
+(1036, 0, 'logstore_database', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299494),
+(1037, 0, 'logstore_database', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299494),
+(1038, 0, 'logstore_legacy', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299494),
+(1039, 0, 'logstore_legacy', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299494),
+(1040, 0, 'logstore_legacy', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299495),
+(1041, 0, 'logstore_standard', NULL, '2014051200', 'Starting plugin installation', NULL, '', 0, 1422299495),
+(1042, 0, 'logstore_standard', '2014051200', '2014051200', 'Upgrade savepoint reached', NULL, '', 0, 1422299495),
+(1043, 0, 'logstore_standard', '2014051200', '2014051200', 'Plugin installed', NULL, '', 0, 1422299495),
+(1044, 0, 'local_mobile', NULL, '2014060412', 'Starting plugin installation', NULL, '', 2, 1429716058),
+(1045, 0, 'local_mobile', '2014060412', '2014060412', 'Upgrade savepoint reached', NULL, '', 2, 1429716058),
+(1046, 0, 'local_mobile', '2014060412', '2014060412', 'Plugin installed', NULL, '', 2, 1429716059),
+(1047, 0, 'local_wstemplate', NULL, '2015040412', 'Starting plugin installation', NULL, '', 2, 1429895247),
+(1048, 0, 'local_wstemplate', '2015040412', '2015040412', 'Upgrade savepoint reached', NULL, '', 2, 1429895247),
+(1049, 0, 'local_wstemplate', '2015040412', '2015040412', 'Plugin installed', NULL, '', 2, 1429895249),
+(1050, 0, 'local_wstemplate', '2015040412', '2015040512', 'Starting plugin upgrade', NULL, '', 2, 1429897560),
+(1051, 0, 'local_wstemplate', '2015040512', '2015040512', 'Upgrade savepoint reached', NULL, '', 2, 1429897560),
+(1052, 0, 'local_wstemplate', '2015040512', '2015040512', 'Plugin upgraded', NULL, '', 2, 1429897560),
+(1053, 0, 'local_wstemplate', '2015040512', '2015040612', 'Starting plugin upgrade', NULL, '', 2, 1429898230),
+(1054, 0, 'local_wstemplate', '2015040612', '2015040612', 'Upgrade savepoint reached', NULL, '', 2, 1429898230),
+(1055, 0, 'local_wstemplate', '2015040612', '2015040612', 'Plugin upgraded', NULL, '', 2, 1429898230),
+(1056, 0, 'local_wstemplate', '2015040612', '2015040712', 'Starting plugin upgrade', NULL, '', 2, 1430148072),
+(1057, 0, 'local_wstemplate', '2015040712', '2015040712', 'Upgrade savepoint reached', NULL, '', 2, 1430148072),
+(1058, 0, 'local_wstemplate', '2015040712', '2015040712', 'Plugin upgraded', NULL, '', 2, 1430148073),
+(1059, 0, 'local_wstemplate', '2015040712', '2015040715', 'Starting plugin upgrade', NULL, '', 2, 1430148393),
+(1060, 0, 'local_wstemplate', '2015040715', '2015040715', 'Upgrade savepoint reached', NULL, '', 2, 1430148393),
+(1061, 0, 'local_wstemplate', '2015040715', '2015040715', 'Plugin upgraded', NULL, '', 2, 1430148393),
+(1062, 0, 'local_wstemplate', '2015040715', '2015040716', 'Starting plugin upgrade', NULL, '', 2, 1430148527),
+(1063, 0, 'local_wstemplate', '2015040716', '2015040716', 'Upgrade savepoint reached', NULL, '', 2, 1430148527),
+(1064, 0, 'local_wstemplate', '2015040716', '2015040716', 'Plugin upgraded', NULL, '', 2, 1430148527),
+(1065, 0, 'local_wstemplate', '2015040716', '2015040717', 'Starting plugin upgrade', NULL, '', 2, 1430148671),
+(1066, 0, 'local_wstemplate', '2015040717', '2015040717', 'Upgrade savepoint reached', NULL, '', 2, 1430148672),
+(1067, 0, 'local_wstemplate', '2015040717', '2015040717', 'Plugin upgraded', NULL, '', 2, 1430148672),
+(1068, 0, 'local_wstemplate', '2015040717', '2015040718', 'Starting plugin upgrade', NULL, '', 2, 1430149527),
+(1069, 0, 'local_wstemplate', '2015040718', '2015040718', 'Upgrade savepoint reached', NULL, '', 2, 1430149527),
+(1070, 0, 'local_wstemplate', '2015040718', '2015040718', 'Plugin upgraded', NULL, '', 2, 1430149527),
+(1071, 0, 'local_wstemplate', '2015040718', '2015040720', 'Starting plugin upgrade', NULL, '', 2, 1430149942),
+(1072, 0, 'local_wstemplate', '2015040720', '2015040720', 'Upgrade savepoint reached', NULL, '', 2, 1430149942),
+(1073, 0, 'local_wstemplate', '2015040720', '2015040720', 'Plugin upgraded', NULL, '', 2, 1430149942),
+(1074, 0, 'local_wstemplate', '2015040720', '2015040721', 'Starting plugin upgrade', NULL, '', 2, 1430150461),
+(1075, 0, 'local_wstemplate', '2015040721', '2015040721', 'Upgrade savepoint reached', NULL, '', 2, 1430150461),
+(1076, 0, 'local_wstemplate', '2015040721', '2015040721', 'Plugin upgraded', NULL, '', 2, 1430150461),
+(1077, 0, 'local_wstemplate', '2015040721', '2015040722', 'Starting plugin upgrade', NULL, '', 2, 1430151652),
+(1078, 0, 'local_wstemplate', '2015040722', '2015040722', 'Upgrade savepoint reached', NULL, '', 2, 1430151652),
+(1079, 0, 'local_wstemplate', '2015040722', '2015040722', 'Plugin upgraded', NULL, '', 2, 1430151652),
+(1080, 0, 'local_wstemplate', '2015040722', '2015040723', 'Starting plugin upgrade', NULL, '', 2, 1430151908),
+(1081, 0, 'local_wstemplate', '2015040723', '2015040723', 'Upgrade savepoint reached', NULL, '', 2, 1430151908),
+(1082, 0, 'local_wstemplate', '2015040723', '2015040723', 'Plugin upgraded', NULL, '', 2, 1430151908),
+(1083, 0, 'local_wstemplate', '2015040723', '2015040724', 'Starting plugin upgrade', NULL, '', 2, 1430152160),
+(1084, 0, 'local_wstemplate', '2015040724', '2015040724', 'Upgrade savepoint reached', NULL, '', 2, 1430152160),
+(1085, 0, 'local_wstemplate', '2015040724', '2015040724', 'Plugin upgraded', NULL, '', 2, 1430152160),
+(1086, 0, 'local_wstemplate', '2015040724', '2015040725', 'Starting plugin upgrade', NULL, '', 2, 1430152332),
+(1087, 0, 'local_wstemplate', '2015040725', '2015040725', 'Upgrade savepoint reached', NULL, '', 2, 1430152332),
+(1088, 0, 'local_wstemplate', '2015040725', '2015040725', 'Plugin upgraded', NULL, '', 2, 1430152332),
+(1089, 0, 'local_wstemplate', '2015040725', '2015040726', 'Starting plugin upgrade', NULL, '', 2, 1430152924),
+(1090, 0, 'local_wstemplate', '2015040726', '2015040726', 'Upgrade savepoint reached', NULL, '', 2, 1430152924),
+(1091, 0, 'local_wstemplate', '2015040726', '2015040726', 'Plugin upgraded', NULL, '', 2, 1430152924),
+(1092, 0, 'local_wstemplate', '2015040726', '2015040727', 'Starting plugin upgrade', NULL, '', 2, 1430153065),
+(1093, 0, 'local_wstemplate', '2015040727', '2015040727', 'Upgrade savepoint reached', NULL, '', 2, 1430153065),
+(1094, 0, 'local_wstemplate', '2015040727', '2015040727', 'Plugin upgraded', NULL, '', 2, 1430153065),
+(1095, 0, 'local_wstemplate', '2015040727', '2015040728', 'Starting plugin upgrade', NULL, '', 2, 1430153775),
+(1096, 0, 'local_wstemplate', '2015040728', '2015040728', 'Upgrade savepoint reached', NULL, '', 2, 1430153775),
+(1097, 0, 'local_wstemplate', '2015040728', '2015040728', 'Plugin upgraded', NULL, '', 2, 1430153775),
+(1098, 0, 'local_wstemplate', '2015040728', '2015040729', 'Starting plugin upgrade', NULL, '', 2, 1430154279),
+(1099, 0, 'local_wstemplate', '2015040729', '2015040729', 'Upgrade savepoint reached', NULL, '', 2, 1430154279),
+(1100, 0, 'local_wstemplate', '2015040729', '2015040729', 'Plugin upgraded', NULL, '', 2, 1430154280),
+(1101, 0, 'local_wstemplate', '2015040729', '2015040730', 'Starting plugin upgrade', NULL, '', 2, 1430154447),
+(1102, 0, 'local_wstemplate', '2015040730', '2015040730', 'Upgrade savepoint reached', NULL, '', 2, 1430154447),
+(1103, 0, 'local_wstemplate', '2015040730', '2015040730', 'Plugin upgraded', NULL, '', 2, 1430154447),
+(1104, 0, 'local_wstemplate', '2015040730', '2015040731', 'Starting plugin upgrade', NULL, '', 2, 1430154670),
+(1105, 0, 'local_wstemplate', '2015040731', '2015040731', 'Upgrade savepoint reached', NULL, '', 2, 1430154670),
+(1106, 0, 'local_wstemplate', '2015040731', '2015040731', 'Plugin upgraded', NULL, '', 2, 1430154670),
+(1107, 0, 'local_wstemplate', '2015040731', '2015040732', 'Starting plugin upgrade', NULL, '', 2, 1430154949),
+(1108, 0, 'local_wstemplate', '2015040732', '2015040732', 'Upgrade savepoint reached', NULL, '', 2, 1430154949),
+(1109, 0, 'local_wstemplate', '2015040732', '2015040732', 'Plugin upgraded', NULL, '', 2, 1430154949),
+(1110, 0, 'local_wstemplate', '2015040732', '2015040733', 'Starting plugin upgrade', NULL, '', 2, 1430155545),
+(1111, 0, 'local_wstemplate', '2015040733', '2015040733', 'Upgrade savepoint reached', NULL, '', 2, 1430155545),
+(1112, 0, 'local_wstemplate', '2015040733', '2015040733', 'Plugin upgraded', NULL, '', 2, 1430155545),
+(1113, 0, 'local_wstemplate', '2015040733', '2015040734', 'Starting plugin upgrade', NULL, '', 2, 1430155814),
+(1114, 0, 'local_wstemplate', '2015040734', '2015040734', 'Upgrade savepoint reached', NULL, '', 2, 1430155814),
+(1115, 0, 'local_wstemplate', '2015040734', '2015040734', 'Plugin upgraded', NULL, '', 2, 1430155814),
+(1116, 0, 'local_wstemplate', '2015040734', '2015040735', 'Starting plugin upgrade', NULL, '', 2, 1430156100),
+(1117, 0, 'local_wstemplate', '2015040735', '2015040735', 'Upgrade savepoint reached', NULL, '', 2, 1430156100),
+(1118, 0, 'local_wstemplate', '2015040735', '2015040735', 'Plugin upgraded', NULL, '', 2, 1430156100),
+(1119, 0, 'local_wstemplate', '2015040735', '2015040736', 'Starting plugin upgrade', NULL, '', 2, 1430236534),
+(1120, 0, 'local_wstemplate', '2015040736', '2015040736', 'Upgrade savepoint reached', NULL, '', 2, 1430236534),
+(1121, 0, 'local_wstemplate', '2015040736', '2015040736', 'Plugin upgraded', NULL, '', 2, 1430236535),
+(1122, 0, 'local_wstemplate', '2015040736', '2015040737', 'Starting plugin upgrade', NULL, '', 2, 1430237189),
+(1123, 0, 'local_wstemplate', '2015040737', '2015040737', 'Upgrade savepoint reached', NULL, '', 2, 1430237189),
+(1124, 0, 'local_wstemplate', '2015040737', '2015040737', 'Plugin upgraded', NULL, '', 2, 1430237189),
+(1125, 0, 'local_wstemplate', '2015040737', '2015040738', 'Starting plugin upgrade', NULL, '', 2, 1430237805),
+(1126, 0, 'local_wstemplate', '2015040738', '2015040738', 'Upgrade savepoint reached', NULL, '', 2, 1430237805),
+(1127, 0, 'local_wstemplate', '2015040738', '2015040738', 'Plugin upgraded', NULL, '', 2, 1430237805),
+(1128, 0, 'local_wstemplate', '2015040738', '2015040739', 'Starting plugin upgrade', NULL, '', 2, 1430238124),
+(1129, 0, 'local_wstemplate', '2015040739', '2015040739', 'Upgrade savepoint reached', NULL, '', 2, 1430238124),
+(1130, 0, 'local_wstemplate', '2015040739', '2015040739', 'Plugin upgraded', NULL, '', 2, 1430238124),
+(1131, 0, 'local_wstemplate', '2015040739', '2015040740', 'Starting plugin upgrade', NULL, '', 2, 1430238559),
+(1132, 0, 'local_wstemplate', '2015040740', '2015040740', 'Upgrade savepoint reached', NULL, '', 2, 1430238559),
+(1133, 0, 'local_wstemplate', '2015040740', '2015040740', 'Plugin upgraded', NULL, '', 2, 1430238559),
+(1134, 0, 'local_wstemplate', '2015040740', '2015040741', 'Starting plugin upgrade', NULL, '', 2, 1430238983),
+(1135, 0, 'local_wstemplate', '2015040741', '2015040741', 'Upgrade savepoint reached', NULL, '', 2, 1430238983),
+(1136, 0, 'local_wstemplate', '2015040741', '2015040741', 'Plugin upgraded', NULL, '', 2, 1430238983),
+(1137, 0, 'local_wstemplate', '2015040741', '2015040742', 'Starting plugin upgrade', NULL, '', 2, 1430239159),
+(1138, 0, 'local_wstemplate', '2015040742', '2015040742', 'Upgrade savepoint reached', NULL, '', 2, 1430239159),
+(1139, 0, 'local_wstemplate', '2015040742', '2015040742', 'Plugin upgraded', NULL, '', 2, 1430239159),
+(1140, 0, 'local_wstemplate', '2015040742', '2015040743', 'Starting plugin upgrade', NULL, '', 2, 1430239423),
+(1141, 0, 'local_wstemplate', '2015040743', '2015040743', 'Upgrade savepoint reached', NULL, '', 2, 1430239423),
+(1142, 0, 'local_wstemplate', '2015040743', '2015040743', 'Plugin upgraded', NULL, '', 2, 1430239423),
+(1143, 0, 'local_mobile', '2014060412', '2014060413', 'Starting plugin upgrade', NULL, '', 2, 1431452822),
+(1144, 0, 'local_mobile', '2014060413', '2014060413', 'Upgrade savepoint reached', NULL, '', 2, 1431452822),
+(1145, 0, 'local_mobile', '2014060413', '2014060413', 'Plugin upgraded', NULL, '', 2, 1431452822),
+(1146, 0, 'local_mobile', '2014060413', '2014060414', 'Starting plugin upgrade', NULL, '', 2, 1432309577),
+(1147, 0, 'local_mobile', '2014060414', '2014060414', 'Upgrade savepoint reached', NULL, '', 2, 1432309578),
+(1148, 2, 'core', '2014051200', '2014051200', 'Exception: dml_write_exception', 'Error al escribir a la base de datos', '* line 446 of /lib/dml/moodle_database.php: dml_write_exception thrown\n* line 1098 of /lib/dml/mysqli_native_moodle_database.php: call to moodle_database->query_end()\n* line 1144 of /lib/dml/mysqli_native_moodle_database.php: call to mysqli_native_moodle_database->insert_record_raw()\n* line 1062 of /lib/upgradelib.php: call to mysqli_native_moodle_database->insert_record()\n* line 549 of /lib/upgradelib.php: call to external_update_descriptions()\n* line 1615 of /lib/upgradelib.php: call to upgrade_plugins()\n* line 432 of /admin/index.php: call to upgrade_noncore()\n', 2, 1432309578),
+(1149, 0, 'local_mobile', '2014060414', '2014060415', 'Starting plugin upgrade', NULL, '', 2, 1432309908),
+(1150, 0, 'local_mobile', '2014060415', '2014060415', 'Upgrade savepoint reached', NULL, '', 2, 1432309908),
+(1151, 0, 'local_mobile', '2014060415', '2014060415', 'Plugin upgraded', NULL, '', 2, 1432309908),
+(1152, 0, 'local_mobile', '2014060415', '2015090415', 'Starting plugin upgrade', NULL, '', 2, 1443541780),
+(1153, 0, 'local_mobile', '2015090415', '2015090415', 'Upgrade savepoint reached', NULL, '', 2, 1443541780),
+(1154, 0, 'local_mobile', '2015090415', '2015090415', 'Plugin upgraded', NULL, '', 2, 1443541780),
+(1155, 0, 'local_mobile', '2015090415', '2015100215', 'Starting plugin upgrade', NULL, '', 2, 1443806289),
+(1156, 0, 'local_mobile', '2015100215', '2015100215', 'Upgrade savepoint reached', NULL, '', 2, 1443806290),
+(1157, 0, 'local_mobile', '2015100215', '2015100215', 'Plugin upgraded', NULL, '', 2, 1443806290),
+(1158, 0, 'local_mobile', '2015100215', '2015100510', 'Starting plugin upgrade', NULL, '', 2, 1444059179),
+(1159, 0, 'local_mobile', '2015100510', '2015100510', 'Upgrade savepoint reached', NULL, '', 2, 1444059180),
+(1160, 0, 'local_mobile', '2015100510', '2015100510', 'Plugin upgraded', NULL, '', 2, 1444059180),
+(1161, 0, 'local_mobile', '2015100510', '2015100520', 'Starting plugin upgrade', NULL, '', 2, 1444095001),
+(1162, 0, 'local_mobile', '2015100520', '2015100520', 'Upgrade savepoint reached', NULL, '', 2, 1444095001),
+(1163, 0, 'local_mobile', '2015100520', '2015100520', 'Plugin upgraded', NULL, '', 2, 1444095001),
+(1164, 0, 'local_mobile', '2015100520', '2015101020', 'Starting plugin upgrade', NULL, '', 2, 1444756843),
+(1165, 0, 'local_mobile', '2015101020', '2015101020', 'Upgrade savepoint reached', NULL, '', 2, 1444756843),
+(1166, 2, 'core', '2014051200', '2014051200', 'Exception: downgrade_exception', 'No se puede degradar local_mobile de 2015101020 a 2015101012.', '* line 561 of /lib/upgradelib.php: downgrade_exception thrown\n* line 1615 of /lib/upgradelib.php: call to upgrade_plugins()\n* line 432 of /admin/index.php: call to upgrade_noncore()\n', 2, 1444757247),
+(1167, 2, 'core', '2014051200', '2014051200', 'Exception: downgrade_exception', 'No se puede degradar local_mobile de 2015101020 a 2015101012.', '* line 561 of /lib/upgradelib.php: downgrade_exception thrown\n* line 1615 of /lib/upgradelib.php: call to upgrade_plugins()\n* line 432 of /admin/index.php: call to upgrade_noncore()\n', 2, 1444757274),
+(1168, 2, 'core', '2014051200', '2014051200', 'Exception: downgrade_exception', 'No se puede degradar local_mobile de 2015101020 a 2015101012.', '* line 561 of /lib/upgradelib.php: downgrade_exception thrown\n* line 1615 of /lib/upgradelib.php: call to upgrade_plugins()\n* line 432 of /admin/index.php: call to upgrade_noncore()\n', 2, 1444757293),
+(1169, 0, 'local_mobile', '2015101020', '2015101030', 'Starting plugin upgrade', NULL, '', 2, 1444757468),
+(1170, 0, 'local_mobile', '2015101030', '2015101030', 'Upgrade savepoint reached', NULL, '', 2, 1444757468),
+(1171, 0, 'local_mobile', '2015101030', '2015101030', 'Plugin upgraded', NULL, '', 2, 1444757468),
+(1172, 0, 'local_wstemplate', '2015040743', '2015100743', 'Starting plugin upgrade', NULL, '', 2, 1444765736),
+(1173, 0, 'local_wstemplate', '2015100743', '2015100743', 'Upgrade savepoint reached', NULL, '', 2, 1444765736),
+(1174, 0, 'local_wstemplate', '2015100743', '2015100743', 'Plugin upgraded', NULL, '', 2, 1444765736),
+(1175, 0, 'local_wstemplate', '2015100743', '2015100843', 'Starting plugin upgrade', NULL, '', 2, 1444766208),
+(1176, 0, 'local_wstemplate', '2015100843', '2015100843', 'Upgrade savepoint reached', NULL, '', 2, 1444766208),
+(1177, 0, 'local_wstemplate', '2015100843', '2015100843', 'Plugin upgraded', NULL, '', 2, 1444766208),
+(1178, 0, 'local_mobile', '2015101030', '2015101130', 'Starting plugin upgrade', NULL, '', 2, 1444871556),
+(1179, 0, 'local_mobile', '2015101130', '2015101130', 'Upgrade savepoint reached', NULL, '', 2, 1444871556),
+(1180, 0, 'local_mobile', '2015101130', '2015101130', 'Plugin upgraded', NULL, '', 2, 1444871556),
+(1181, 0, 'local_wstemplate', '2015100843', '2015101143', 'Starting plugin upgrade', NULL, '', 2, 1444871556),
+(1182, 0, 'local_wstemplate', '2015101143', '2015101143', 'Upgrade savepoint reached', NULL, '', 2, 1444871556),
+(1183, 0, 'local_wstemplate', '2015101143', '2015101143', 'Plugin upgraded', NULL, '', 2, 1444871556),
+(1184, 0, 'local_mobile', '2015101130', '2015101230', 'Starting plugin upgrade', NULL, '', 2, 1444873099),
+(1185, 0, 'local_mobile', '2015101230', '2015101230', 'Upgrade savepoint reached', NULL, '', 2, 1444873099),
+(1186, 0, 'local_mobile', '2015101230', '2015101230', 'Plugin upgraded', NULL, '', 2, 1444873099),
+(1187, 0, 'local_wstemplate', '2015101143', '2015101243', 'Starting plugin upgrade', NULL, '', 2, 1444873825),
+(1188, 0, 'local_wstemplate', '2015101243', '2015101243', 'Upgrade savepoint reached', NULL, '', 2, 1444873825),
+(1189, 0, 'local_wstemplate', '2015101243', '2015101243', 'Plugin upgraded', NULL, '', 2, 1444873825),
+(1190, 0, 'local_mobile', '2015101230', '2015101330', 'Starting plugin upgrade', NULL, '', 2, 1444874097),
+(1191, 0, 'local_mobile', '2015101330', '2015101330', 'Upgrade savepoint reached', NULL, '', 2, 1444874097),
+(1192, 0, 'local_mobile', '2015101330', '2015101330', 'Plugin upgraded', NULL, '', 2, 1444874097),
+(1193, 0, 'local_mobile', '2015101330', '2015101430', 'Starting plugin upgrade', NULL, '', 2, 1445887621),
+(1194, 0, 'local_mobile', '2015101430', '2015101430', 'Upgrade savepoint reached', NULL, '', 2, 1445887621),
+(1195, 0, 'local_mobile', '2015101430', '2015101430', 'Plugin upgraded', NULL, '', 2, 1445887621);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_url`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_url` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `course` bigint(10) NOT NULL DEFAULT '0',
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `intro` longtext,
+  `introformat` smallint(4) NOT NULL DEFAULT '0',
+  `externalurl` longtext NOT NULL,
+  `display` smallint(4) NOT NULL DEFAULT '0',
+  `displayoptions` longtext,
+  `parameters` longtext,
+  `timemodified` bigint(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `mdl_url_cou_ix` (`course`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='each record is one url resource' AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `mdl_url`
+--
+
+INSERT INTO `mdl_url` (`id`, `course`, `name`, `intro`, `introformat`, `externalurl`, `display`, `displayoptions`, `parameters`, `timemodified`) VALUES
+(1, 8, 'Cisco', 'Pagina de cisco', 1, 'http://www.cisco.com', 0, 'a:1:{s:10:"printintro";i:1;}', 'a:0:{}', 1431454223),
+(2, 9, 'face', 'facebook ', 1, 'http://www.youtube.com/v/UKY3scPIMd8#https://youtube.com/devicesupport', 0, 'a:1:{s:10:"printintro";i:1;}', 'a:0:{}', 1431454608);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `mdl_user`
 --
 
@@ -4843,7 +5800,7 @@ CREATE TABLE IF NOT EXISTS `mdl_user` (
 INSERT INTO `mdl_user` (`id`, `auth`, `confirmed`, `policyagreed`, `deleted`, `suspended`, `mnethostid`, `username`, `password`, `idnumber`, `firstname`, `lastname`, `email`, `emailstop`, `icq`, `skype`, `yahoo`, `aim`, `msn`, `phone1`, `phone2`, `institution`, `department`, `address`, `city`, `country`, `lang`, `calendartype`, `theme`, `timezone`, `firstaccess`, `lastaccess`, `lastlogin`, `currentlogin`, `lastip`, `secret`, `picture`, `url`, `description`, `descriptionformat`, `mailformat`, `maildigest`, `maildisplay`, `autosubscribe`, `trackforums`, `timecreated`, `timemodified`, `trustbitmask`, `imagealt`, `lastnamephonetic`, `firstnamephonetic`, `middlename`, `alternatename`) VALUES
 (1, 'manual', 1, 0, 0, 0, 1, 'guest', '1234', '', 'Guest user', ' ', 'root@localhost', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'en', 'gregorian', '', '99', 0, 0, 0, 0, '', '', 0, '', 'This user is a special user that allows read-only access to some courses.', 1, 1, 0, 2, 1, 0, 0, 1422298882, 0, NULL, NULL, NULL, NULL, NULL),
 (2, 'manual', 1, 0, 0, 0, 1, 'admin', '$2y$10$I1LdwDB/Q1hpLeQfFwBguOJmc/nflldGiiBO1KL5r9hg4pokOv8AK', '', 'Admin', 'User', 'admin_count@gmail.com', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 1422299536, 1446831392, 1445959645, 1446831073, '189.215.54.249', '', 17, '', '', 1, 1, 0, 1, 1, 0, 0, 1429210825, 0, '', '', '', '', ''),
-(3, 'manual', 1, 0, 0, 0, 1, 'nayn', '$2y$10$IRy3e4UXEsoGOckH7nSyf.x4SAz4gF6cq.jbYYbw/kVt3/ibZl4C2', '', 'Nayn', 'Ek', 'naynkc15@gmail.com', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 1422465641, 1446868291, 1446839207, 1446868291, '189.221.39.231', '', 63, '', '', 1, 1, 0, 2, 1, 0, 1422385183, 1432644375, 0, '', '', '', '', ''),
+(3, 'manual', 1, 0, 0, 0, 1, 'nayn', '$2y$10$IRy3e4UXEsoGOckH7nSyf.x4SAz4gF6cq.jbYYbw/kVt3/ibZl4C2', '', 'Nayn', 'Ek', 'naynkc15@gmail.com', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 1422465641, 1446868847, 1446839207, 1446868291, '189.221.39.231', '', 63, '', '', 1, 1, 0, 2, 1, 0, 1422385183, 1432644375, 0, '', '', '', '', ''),
 (4, 'manual', 1, 0, 1, 0, 1, 'franciscosalas@gmail.com.1428941698', '$2y$10$nULHxauoK.y2OqWX0JE.j.hPku4JipqAegUT67tGcsbCUEEzT8Zg2', '', 'Francisco', 'Salas', '746b1028212d8961bff8c38fa384a67f', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 1425926392, 1425926392, 0, 1425926392, '0:0:0:0:0:0:0:1', '', 0, '', '', 1, 1, 0, 2, 1, 0, 1425925869, 1428941698, 0, '', '', '', '', ''),
 (5, 'manual', 1, 0, 1, 0, 1, 'julian@gmail.com.1428941706', '$2y$10$NGscFLqJoFtsCtkARhY41OpRvqFXqD8rY6mXnvnkZd6xmS3GRiBu6', '', 'Julian', 'Martinez', '92477f4079129413d9ff9aec6ade6c5e', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 0, 0, 0, 0, '', '', 0, '', '', 1, 1, 0, 2, 1, 0, 1425926774, 1428941706, 0, '', '', '', '', ''),
 (6, 'manual', 1, 0, 1, 0, 1, 'franciscosalas@aol.com.1443111600', '$2y$10$858GXb6sa10m2DxR4f4Te.Z4KxsXu6mIlFMsdqoe7lU/rQHMVNvTW', '', 'Francisco', 'Salas', '117735823fadae51db091c7d63e60eb0', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 1428941982, 1431455233, 1429813903, 1431455233, '187.185.155.234', '', 0, '', '', 1, 1, 0, 2, 1, 0, 1428941794, 1443111600, 0, '', '', '', '', ''),
@@ -4854,6 +5811,285 @@ INSERT INTO `mdl_user` (`id`, `auth`, `confirmed`, `policyagreed`, `deleted`, `s
 (11, 'manual', 1, 0, 0, 0, 1, 'rubi', '$2y$10$XbCiMfi5VIwAE1vl26jX0uHos6cwgwmiAeyXLT3piwBtiOyvZLs22', '', 'Rubi', 'Chan', 'rubi_hearty@hotmail.com', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 1431444933, 1445895582, 1443197117, 1445895582, '189.215.54.249', '', 0, '', '', 1, 1, 0, 2, 1, 0, 1431444502, 1443111726, 0, '', '', '', '', ''),
 (12, 'email', 1, 0, 0, 0, 1, 'josemanuel', '$2y$10$f/BHaebmBbH2166BtMIVb.TT87Q4Y7MtFfYDXAY0zeglBLDSHmpsu', '', 'José Manuel', 'Cortés Aguilar', 'jmanuel_1407@hotmail.com', 0, '', '', '', '', '', '', '', '', '', '', 'Chetumal', 'MX', 'es_mx', 'gregorian', '', '99', 1442597329, 1443469835, 1443197228, 1443468785, '189.221.34.249', '', 99, '', '<p>Mi nombre es José Manuel y soy un estudiante que imparte cursos :)<br /></p>', 1, 1, 0, 2, 1, 0, 1442596682, 1442596682, 0, '', '', '', '', ''),
 (13, 'manual', 1, 0, 1, 0, 1, 'eduardo@gmail.com.1443721676', '$2y$10$C1Go6yC85P1PT73PQZ1w3eZQcppf8UD0sSqQ4Qhhc6tfuHrsyo21q', '', 'Eduardo', 'Carel', '6d6354ece40846bf7fca65dfabd5d9d4', 0, '', '', '', '', '', '', '', '', '', '', '', 'MX', 'es_mx', 'gregorian', '', '99', 0, 0, 0, 0, '', '', 0, '', '', 1, 1, 0, 2, 1, 0, 1443721582, 1443721676, 0, '', '', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_user_devices`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_user_devices` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `userid` bigint(10) NOT NULL DEFAULT '0',
+  `appid` varchar(128) NOT NULL DEFAULT '',
+  `name` varchar(32) NOT NULL DEFAULT '',
+  `model` varchar(32) NOT NULL DEFAULT '',
+  `platform` varchar(32) NOT NULL DEFAULT '',
+  `version` varchar(32) NOT NULL DEFAULT '',
+  `pushid` varchar(255) NOT NULL DEFAULT '',
+  `uuid` varchar(255) NOT NULL DEFAULT '',
+  `timecreated` bigint(10) NOT NULL,
+  `timemodified` bigint(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_userdevi_pususe_uix` (`pushid`,`userid`),
+  UNIQUE KEY `mdl_userdevi_puspla_uix` (`pushid`,`platform`),
+  KEY `mdl_userdevi_use_ix` (`userid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='This table stores user''s mobile devices information in order' AUTO_INCREMENT=9 ;
+
+--
+-- Volcado de datos para la tabla `mdl_user_devices`
+--
+
+INSERT INTO `mdl_user_devices` (`id`, `userid`, `appid`, `name`, `model`, `platform`, `version`, `pushid`, `uuid`, `timecreated`, `timemodified`) VALUES
+(1, 2, 'com.moodle.moodlemobile', '', 'LG-D680', 'Android', '4.4.2', 'APA91bGD8GKJWnpa4mE6ji5quL7JgBAq0_NRNbBl2kzYWqzq_wLFKZKLsGDF4TdQf3uKynu_m6-DZYct9_N5kwgzJknT3NR9PbETS8EokbuDWyKrmTZMSIypBK64GIuDV77wo_yBB9jKo8C92XnIyFW0BaiKZo6KaNqMIej3YAnyHd4CxTVAj_I', 'cd1428232dbb26cb', 1422464934, 1422464934),
+(2, 5, 'com.moodle.moodlemobile', '', 'LG-D680', 'Android', '4.4.2', 'APA91bEwRIh7KXAY2ylVEJHm1NFJeVybvKMoHVesKsePshN7QHARQJ0wJZRbobAfJePlLJ67jOCdt3nyRZee0xObSlKr7iJvGiO-eVV4qtfAOrR0TXuHxmheV9t4M9ZhFBY5buYG11qWq8ZqoFv28NEwYl-4pTH52tl_Gm1J1N_3DQBZz8NXXzA', 'cd1428232dbb26cb', 1422466706, 1422466706),
+(3, 4, 'com.moodle.moodlemobile', '', 'LG-P708g', 'Android', '4.0.3', 'APA91bE7B5UrnH2UQShfTAJcMxqVM3eO6HFDt5PnCnq-KLjDL1l_1Pz6nOQkneBg6RoSUdP5zNZT66evm53qemX3nH14C34GekmgWvtpUQG1-wYrOODk5mp6fVPEXygcZav--fyg8IISQUFuDtgFLSFGsvkRY3Ny6g', 'e9801dc3de9744cf', 1422468937, 1422468937),
+(4, 2, 'com.moodle.moodlemobile', '', 'LG-D680', 'Android', '4.4.2', 'APA91bFg1vLrIpygqGoH1fktenvqmrWRocPdHlxHFXaD2dOi_AjESsm9O4-bcs8YKjC7Mgtv7tp5GfyxUT4rJkKazJScQ71nTZh_5mEj3bC-MIcF5X_y1YJau8HZnOtb59Q8FnNvVVPLqpGJooQa8iM1O1aqsmi609gAoJlzzpUu9gYKjGRjYNQ', 'cd1428232dbb26cb', 1424794157, 1424794157),
+(5, 3, 'com.moodle.moodlemobile', 'emulation_fake_device_name', 'emulation_fake_device_model', 'emulation_fake_device_platform', 'emulation_fake_device_version', 'fake_push_id_gcm', 'emulation_fake_device_uuid', 1426174596, 1426174596),
+(6, 3, 'com.moodle.moodlemobile', '', 'DUFF700', 'Android', '4.4.4', 'APA91bGB48UE4RaZ7QlJ29DBhRMgwz9Xs1gU5LKZK4L9RcAiyDeLmDltM26PGSChL3tuV9OkTXpm2uE1DQFFWAcnakg73OPkgE4ibVfPV6JkLz0cxjNg3MuUxayLmkg1ej4lkquZUOEo', '971a4982a8f13f0c', 1442507823, 1442507823),
+(7, 3, 'com.moodle.moodlemobile', '', 'DUFF700', 'Android', '4.4.4', 'APA91bE41zppg8Dpt68spjl3OtycJqqjAdiuHyBn2IMPNBmr9KyUN1Q8bvGdK0mwGn1iMyhCi0SGpuwzqQNOYf4SUU9bwrXK5-EuwCFXtXbVIjRjNHHlNQqxqs9w216RVkxLCTbL-YiP', '971a4982a8f13f0c', 1442509087, 1442509087),
+(8, 3, 'com.moodle.moodlemobile', '', 'LG-D320', 'Android', '4.4.2', 'APA91bEQtKR4zbZ5_jctkDiUWE65xW0RkgVoXoXmDED7Ukc0YJRpxHAFFmnDQf7V2NJPN4wZoW1D1p-ulD_FhZYDl84tyt11pVzMWY2GIqSTUiXjwQ-rr7gC0K-fG5DRqELXKrDf7Ekb', '744a40781e32e431', 1446764070, 1446764070);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_user_enrolments`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_user_enrolments` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `status` bigint(10) NOT NULL DEFAULT '0',
+  `enrolid` bigint(10) NOT NULL,
+  `userid` bigint(10) NOT NULL,
+  `timestart` bigint(10) NOT NULL DEFAULT '0',
+  `timeend` bigint(10) NOT NULL DEFAULT '2147483647',
+  `modifierid` bigint(10) NOT NULL DEFAULT '0',
+  `timecreated` bigint(10) NOT NULL DEFAULT '0',
+  `timemodified` bigint(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_userenro_enruse_uix` (`enrolid`,`userid`),
+  KEY `mdl_userenro_enr_ix` (`enrolid`),
+  KEY `mdl_userenro_use_ix` (`userid`),
+  KEY `mdl_userenro_mod_ix` (`modifierid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Users participating in courses (aka enrolled users) - everyb' AUTO_INCREMENT=39 ;
+
+--
+-- Volcado de datos para la tabla `mdl_user_enrolments`
+--
+
+INSERT INTO `mdl_user_enrolments` (`id`, `status`, `enrolid`, `userid`, `timestart`, `timeend`, `modifierid`, `timecreated`, `timemodified`) VALUES
+(36, 0, 19, 14, 1444194000, 0, 2, 1444243432, 1444243432),
+(13, 0, 15, 3, 1428946653, 0, 3, 1428946653, 1428946653),
+(14, 0, 21, 3, 1429032757, 0, 3, 1429032757, 1429032757),
+(15, 0, 21, 9, 1429897743, 0, 9, 1429897743, 1429897743),
+(16, 0, 15, 9, 1429897786, 0, 9, 1429897786, 1429897786),
+(18, 0, 22, 9, 1431403200, 0, 2, 1431444730, 1431444730),
+(35, 0, 21, 12, 1443197244, 0, 12, 1443197244, 1443197244),
+(20, 0, 22, 11, 1431403200, 0, 2, 1431444899, 1431444899),
+(22, 0, 25, 12, 1442534400, 0, 2, 1442598137, 1442598137),
+(23, 0, 25, 10, 1442534400, 0, 2, 1442598142, 1442598142),
+(38, 0, 25, 11, 1446789600, 0, 2, 1446831413, 1446831413),
+(34, 0, 21, 10, 1443112054, 0, 10, 1443112054, 1443112054),
+(27, 0, 28, 12, 1442534400, 0, 2, 1442599072, 1442599072),
+(37, 0, 13, 14, 1444280400, 0, 2, 1444266104, 1444266104);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_user_info_category`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_user_info_category` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `sortorder` bigint(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Customisable fields categories' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_user_info_data`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_user_info_data` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `userid` bigint(10) NOT NULL DEFAULT '0',
+  `fieldid` bigint(10) NOT NULL DEFAULT '0',
+  `data` longtext NOT NULL,
+  `dataformat` tinyint(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_userinfodata_usefie_uix` (`userid`,`fieldid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Data for the customisable user fields' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_user_info_field`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_user_info_field` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `shortname` varchar(255) NOT NULL DEFAULT 'shortname',
+  `name` longtext NOT NULL,
+  `datatype` varchar(255) NOT NULL DEFAULT '',
+  `description` longtext,
+  `descriptionformat` tinyint(2) NOT NULL DEFAULT '0',
+  `categoryid` bigint(10) NOT NULL DEFAULT '0',
+  `sortorder` bigint(10) NOT NULL DEFAULT '0',
+  `required` tinyint(2) NOT NULL DEFAULT '0',
+  `locked` tinyint(2) NOT NULL DEFAULT '0',
+  `visible` smallint(4) NOT NULL DEFAULT '0',
+  `forceunique` tinyint(2) NOT NULL DEFAULT '0',
+  `signup` tinyint(2) NOT NULL DEFAULT '0',
+  `defaultdata` longtext,
+  `defaultdataformat` tinyint(2) NOT NULL DEFAULT '0',
+  `param1` longtext,
+  `param2` longtext,
+  `param3` longtext,
+  `param4` longtext,
+  `param5` longtext,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Customisable user profile fields' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_user_lastaccess`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_user_lastaccess` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `userid` bigint(10) NOT NULL DEFAULT '0',
+  `courseid` bigint(10) NOT NULL DEFAULT '0',
+  `timeaccess` bigint(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_userlast_usecou_uix` (`userid`,`courseid`),
+  KEY `mdl_userlast_use_ix` (`userid`),
+  KEY `mdl_userlast_cou_ix` (`courseid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='To keep track of course page access times, used in online pa' AUTO_INCREMENT=36 ;
+
+--
+-- Volcado de datos para la tabla `mdl_user_lastaccess`
+--
+
+INSERT INTO `mdl_user_lastaccess` (`id`, `userid`, `courseid`, `timeaccess`) VALUES
+(8, 2, 6, 1444266219),
+(33, 12, 8, 1443469835),
+(31, 10, 8, 1446832122),
+(15, 3, 6, 1446868262),
+(16, 2, 8, 1446831115),
+(17, 3, 8, 1446868262),
+(18, 9, 8, 1446662644),
+(19, 9, 6, 1446662644),
+(21, 2, 9, 1444243335),
+(22, 11, 9, 1443469934),
+(23, 9, 9, 1446662644),
+(32, 10, 10, 1446832122),
+(25, 2, 10, 1446831392),
+(26, 12, 10, 1443469835),
+(27, 2, 11, 1443113427),
+(34, 14, 8, 1444785183),
+(35, 14, 6, 1444785183),
+(30, 12, 11, 1443469835);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_user_password_resets`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_user_password_resets` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `userid` bigint(10) NOT NULL,
+  `timerequested` bigint(10) NOT NULL,
+  `timererequested` bigint(10) NOT NULL DEFAULT '0',
+  `token` varchar(32) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `mdl_userpassrese_use_ix` (`userid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='table tracking password reset confirmation tokens' AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_user_preferences`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_user_preferences` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `userid` bigint(10) NOT NULL DEFAULT '0',
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `value` varchar(1333) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mdl_userpref_usenam_uix` (`userid`,`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Allows modules to store arbitrary user preferences' AUTO_INCREMENT=114 ;
+
+--
+-- Volcado de datos para la tabla `mdl_user_preferences`
+--
+
+INSERT INTO `mdl_user_preferences` (`id`, `userid`, `name`, `value`) VALUES
+(1, 2, 'auth_manual_passwordupdatetime', '1425925680'),
+(2, 2, 'htmleditor', ''),
+(3, 2, 'email_bounce_count', '0'),
+(4, 2, 'email_send_count', '2'),
+(5, 2, 'login_failed_count_since_success', '35'),
+(6, 3, 'auth_forcepasswordchange', '0'),
+(7, 3, 'htmleditor', ''),
+(8, 3, 'email_bounce_count', '1'),
+(9, 3, 'email_send_count', '9'),
+(14, 2, 'userselector_preserveselected', '0'),
+(15, 2, 'userselector_autoselectunique', '0'),
+(16, 2, 'userselector_searchanywhere', '0'),
+(17, 3, 'login_failed_count_since_success', '122'),
+(30, 2, 'definerole_showadvanced', '1'),
+(45, 16, 'auth_forcepasswordchange', '0'),
+(46, 16, 'htmleditor', ''),
+(47, 16, 'email_bounce_count', '1'),
+(48, 16, 'email_send_count', '1'),
+(49, 16, 'login_failed_count_since_success', '4'),
+(50, 17, 'auth_forcepasswordchange', '0'),
+(51, 17, 'htmleditor', ''),
+(52, 17, 'email_bounce_count', '1'),
+(53, 17, 'email_send_count', '1'),
+(58, 2, 'docked_block_instance_3', '0'),
+(59, 2, 'block3hidden', '0'),
+(113, 14, 'email_send_count', '2'),
+(110, 14, 'auth_forcepasswordchange', '0'),
+(111, 14, 'htmleditor', ''),
+(112, 14, 'email_bounce_count', '1'),
+(104, 10, 'auth_manual_passwordupdatetime', '1443112010'),
+(105, 10, 'login_failed_count_since_success', '1'),
+(73, 9, 'auth_forcepasswordchange', '0'),
+(74, 9, 'htmleditor', ''),
+(75, 9, 'email_bounce_count', '1'),
+(76, 9, 'email_send_count', '13'),
+(77, 2, 'filepicker_recentrepository', '4'),
+(78, 2, 'filepicker_recentlicense', 'allrightsreserved'),
+(79, 9, 'login_failed_count_since_success', '44'),
+(103, 11, 'auth_manual_passwordupdatetime', '1443111726'),
+(81, 9, 'auth_manual_passwordupdatetime', '1429897338'),
+(82, 10, 'auth_forcepasswordchange', '0'),
+(83, 10, 'htmleditor', ''),
+(84, 10, 'email_bounce_count', '1'),
+(85, 10, 'email_send_count', '3'),
+(86, 3, 'filepicker_recentrepository', '3'),
+(87, 3, 'filepicker_recentlicense', 'allrightsreserved'),
+(88, 9, 'filepicker_recentrepository', '4'),
+(89, 9, 'filepicker_recentlicense', 'allrightsreserved'),
+(90, 11, 'auth_forcepasswordchange', '0'),
+(91, 11, 'htmleditor', ''),
+(92, 11, 'email_bounce_count', '1'),
+(93, 11, 'email_send_count', '1'),
+(94, 11, 'userselector_preserveselected', '0'),
+(95, 11, 'userselector_autoselectunique', '0'),
+(96, 11, 'userselector_searchanywhere', '0'),
+(97, 11, 'filepicker_recentrepository', '8'),
+(98, 11, 'filepicker_recentlicense', 'allrightsreserved'),
+(99, 12, 'auth_forcepasswordchange', '0'),
+(100, 12, 'htmleditor', 'atto'),
+(101, 12, 'email_bounce_count', '1'),
+(102, 12, 'email_send_count', '3');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
