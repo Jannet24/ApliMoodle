@@ -4,7 +4,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-11-2015 a las 11:45:24
+-- Tiempo de generación: 18-11-2015 a las 12:04:15
 -- Versión del servidor: 10.0.20-MariaDB
 -- Versión de PHP: 5.2.17
 
@@ -515,70 +515,6 @@ INSERT INTO `mdl_assign_user_flags` (`id`, `userid`, `assignment`, `locked`, `ma
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `mdl_assign_user_mapping`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_assign_user_mapping` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `assignment` bigint(10) NOT NULL DEFAULT '0',
-  `userid` bigint(10) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `mdl_assiusermapp_ass_ix` (`assignment`),
-  KEY `mdl_assiusermapp_use_ix` (`userid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Map an assignment specific id number to a user' AUTO_INCREMENT=44 ;
-
---
--- Volcado de datos para la tabla `mdl_assign_user_mapping`
---
-
-INSERT INTO `mdl_assign_user_mapping` (`id`, `assignment`, `userid`) VALUES
-(1, 0, 3),
-(2, 0, 9),
-(3, 0, 6),
-(4, 0, 7),
-(5, 1, -10),
-(6, 0, 6),
-(7, 0, 9),
-(8, 0, 3),
-(9, 0, 7),
-(10, 1, 9),
-(11, 0, 6),
-(12, 0, 7),
-(13, 0, 3),
-(14, 1, 3),
-(15, 0, 7),
-(16, 0, 6),
-(17, 1, 6),
-(18, 0, 3),
-(19, 0, 9),
-(20, 2, -10),
-(21, 0, 9),
-(22, 0, 3),
-(23, 2, 9),
-(24, 0, 3),
-(25, 0, 10),
-(26, 0, 9),
-(27, 3, -10),
-(28, 0, 9),
-(29, 0, 12),
-(30, 0, 10),
-(31, 0, 3),
-(32, 6, -10),
-(33, 0, 3),
-(34, 0, 9),
-(35, 0, 12),
-(36, 0, 10),
-(37, 6, 3),
-(38, 0, 12),
-(39, 0, 9),
-(40, 0, 3),
-(41, 0, 10),
-(42, 0, 14),
-(43, 3, 14);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `mdl_files`
 --
 
@@ -610,7 +546,7 @@ CREATE TABLE IF NOT EXISTS `mdl_files` (
   KEY `mdl_file_con2_ix` (`contextid`),
   KEY `mdl_file_use_ix` (`userid`),
   KEY `mdl_file_ref_ix` (`referencefileid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='description of files, content is stored in sha1 file pool' AUTO_INCREMENT=139 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='description of files, content is stored in sha1 file pool' AUTO_INCREMENT=140 ;
 
 --
 -- Volcado de datos para la tabla `mdl_files`
@@ -707,7 +643,8 @@ INSERT INTO `mdl_files` (`id`, `contenthash`, `pathnamehash`, `contextid`, `comp
 (135, '4385b23d9096e1eaf8414ada27f38340fde7a8ab', '70de2830b5317f9723edf54253123f1487083bbc', 1, 'core', 'preview', 0, '/thumb/', 'a9df1c08d403b1ada2d49b459b380cd4bd462766', NULL, 16990, 'image/png', 0, NULL, NULL, NULL, 1446839217, 1446839217, 0, NULL),
 (136, '5085eae0029e257dc05da7381680cd4dec02b386', '711d10fec7c01c71aae643c79c09fa7e88d80d81', 24, 'user', 'private', 0, '/', 'image_1446868718109.jpg', 3, 338971, 'image/jpeg', 0, NULL, 'Nayn Ek', 'allrightsreserved', 1446868840, 1446868840, 0, NULL),
 (137, '10a200dd2df63e1d04a1426572a0b8534f4be62f', '891eb74873e2536fe30cc0efa44c5fe40a3f3798', 83, 'user', 'private', 0, '/', '22112015088.jpg', 10, 514256, 'image/jpeg', 0, NULL, 'jannet orozco', 'allrightsreserved', 1447863934, 1447863934, 0, NULL),
-(138, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '078f0edefcf14aaf0aab4bb00cd0d5fcc0f39640', 83, 'user', 'private', 0, '/', '.', 10, 0, NULL, 0, NULL, NULL, NULL, 1447863934, 1447863934, 0, NULL);
+(138, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '078f0edefcf14aaf0aab4bb00cd0d5fcc0f39640', 83, 'user', 'private', 0, '/', '.', 10, 0, NULL, 0, NULL, NULL, NULL, 1447863934, 1447863934, 0, NULL),
+(139, '15aa182b733b2b7e80581b5c75ba30a5e585a072', '50f3bef50443ea065b0c3517e4df0e17a246ddca', 83, 'user', 'private', 0, '/', 'Screenshot_2016-03-28-01-20-32.png', 10, 24688, 'image/png', 0, NULL, 'jannet orozco', 'allrightsreserved', 1447866325, 1447866325, 0, NULL);
 
 -- --------------------------------------------------------
 
