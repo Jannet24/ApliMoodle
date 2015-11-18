@@ -1,10 +1,9 @@
-﻿SinArchivo
 -- phpMyAdmin SQL Dump
 -- version 4.4.12
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-11-2015 a las 16:08:26
+-- Tiempo de generación: 18-11-2015 a las 16:18:41
 -- Versión del servidor: 5.6.25
 -- Versión de PHP: 5.6.11
 
@@ -193,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `mdl_assignsubmission_file` (
   `assignment` bigint(10) NOT NULL DEFAULT '0',
   `submission` bigint(10) NOT NULL DEFAULT '0',
   `numfiles` bigint(10) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='Info about file submissions for assignments';
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='Info about file submissions for assignments';
 
 --
 -- Volcado de datos para la tabla `mdl_assignsubmission_file`
@@ -210,7 +209,8 @@ INSERT INTO `mdl_assignsubmission_file` (`id`, `assignment`, `submission`, `numf
 (8, 3, 8, 0),
 (9, 44, 9, 0),
 (10, 44, 10, 0),
-(11, 47, 11, 1);
+(11, 47, 11, 1),
+(12, 48, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -276,6 +276,233 @@ INSERT INTO `mdl_assign_grades` (`id`, `assignment`, `userid`, `timecreated`, `t
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `mdl_assign_plugin_config`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_assign_plugin_config` (
+  `id` bigint(10) NOT NULL,
+  `assignment` bigint(10) NOT NULL DEFAULT '0',
+  `plugin` varchar(28) NOT NULL DEFAULT '',
+  `subtype` varchar(28) NOT NULL DEFAULT '',
+  `name` varchar(28) NOT NULL DEFAULT '',
+  `value` longtext
+) ENGINE=MyISAM AUTO_INCREMENT=234 DEFAULT CHARSET=utf8 COMMENT='Config data for an instance of a plugin in an assignment.';
+
+--
+-- Volcado de datos para la tabla `mdl_assign_plugin_config`
+--
+
+INSERT INTO `mdl_assign_plugin_config` (`id`, `assignment`, `plugin`, `subtype`, `name`, `value`) VALUES
+(1, 1, 'onlinetext', 'assignsubmission', 'enabled', '0'),
+(2, 1, 'file', 'assignsubmission', 'enabled', '1'),
+(3, 1, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(4, 1, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '0'),
+(5, 1, 'comments', 'assignsubmission', 'enabled', '1'),
+(6, 1, 'comments', 'assignfeedback', 'enabled', '1'),
+(7, 1, 'comments', 'assignfeedback', 'commentinline', '0'),
+(8, 1, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(9, 1, 'offline', 'assignfeedback', 'enabled', '0'),
+(10, 1, 'file', 'assignfeedback', 'enabled', '0'),
+(11, 2, 'onlinetext', 'assignsubmission', 'enabled', '0'),
+(12, 2, 'file', 'assignsubmission', 'enabled', '1'),
+(13, 2, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(14, 2, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '0'),
+(15, 2, 'comments', 'assignsubmission', 'enabled', '1'),
+(16, 2, 'comments', 'assignfeedback', 'enabled', '1'),
+(17, 2, 'comments', 'assignfeedback', 'commentinline', '0'),
+(18, 2, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(19, 2, 'offline', 'assignfeedback', 'enabled', '0'),
+(20, 2, 'file', 'assignfeedback', 'enabled', '0'),
+(21, 3, 'onlinetext', 'assignsubmission', 'enabled', '1'),
+(22, 3, 'onlinetext', 'assignsubmission', 'wordlimit', '0'),
+(23, 3, 'onlinetext', 'assignsubmission', 'wordlimitenabled', '0'),
+(24, 3, 'file', 'assignsubmission', 'enabled', '1'),
+(25, 3, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(26, 3, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '1048576'),
+(27, 3, 'comments', 'assignsubmission', 'enabled', '1'),
+(28, 3, 'comments', 'assignfeedback', 'enabled', '1'),
+(29, 3, 'comments', 'assignfeedback', 'commentinline', '0'),
+(30, 3, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(31, 3, 'offline', 'assignfeedback', 'enabled', '0'),
+(32, 3, 'file', 'assignfeedback', 'enabled', '0'),
+(33, 4, 'onlinetext', 'assignsubmission', 'enabled', '0'),
+(34, 4, 'file', 'assignsubmission', 'enabled', '1'),
+(35, 4, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(36, 4, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '0'),
+(37, 4, 'comments', 'assignsubmission', 'enabled', '1'),
+(38, 4, 'comments', 'assignfeedback', 'enabled', '1'),
+(39, 4, 'comments', 'assignfeedback', 'commentinline', '0'),
+(40, 4, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(41, 4, 'offline', 'assignfeedback', 'enabled', '0'),
+(42, 4, 'file', 'assignfeedback', 'enabled', '0'),
+(43, 5, 'onlinetext', 'assignsubmission', 'enabled', '0'),
+(44, 5, 'file', 'assignsubmission', 'enabled', '1'),
+(45, 5, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(46, 5, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '0'),
+(47, 5, 'comments', 'assignsubmission', 'enabled', '1'),
+(48, 5, 'comments', 'assignfeedback', 'enabled', '1'),
+(49, 5, 'comments', 'assignfeedback', 'commentinline', '0'),
+(50, 5, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(51, 5, 'offline', 'assignfeedback', 'enabled', '0'),
+(52, 5, 'file', 'assignfeedback', 'enabled', '0'),
+(53, 6, 'onlinetext', 'assignsubmission', 'enabled', '1'),
+(54, 6, 'onlinetext', 'assignsubmission', 'wordlimit', '0'),
+(55, 6, 'onlinetext', 'assignsubmission', 'wordlimitenabled', '0'),
+(56, 6, 'file', 'assignsubmission', 'enabled', '1'),
+(57, 6, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(58, 6, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '0'),
+(59, 6, 'comments', 'assignsubmission', 'enabled', '1'),
+(60, 6, 'comments', 'assignfeedback', 'enabled', '1'),
+(61, 6, 'comments', 'assignfeedback', 'commentinline', '0'),
+(62, 6, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(63, 6, 'offline', 'assignfeedback', 'enabled', '0'),
+(64, 6, 'file', 'assignfeedback', 'enabled', '0'),
+(65, 9, 'onlinetext', 'assignsubmission', 'enabled', '1'),
+(66, 9, 'onlinetext', 'assignsubmission', 'wordlimit', '0'),
+(67, 9, 'onlinetext', 'assignsubmission', 'wordlimitenabled', '0'),
+(68, 9, 'file', 'assignsubmission', 'enabled', '1'),
+(69, 9, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(70, 9, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '0'),
+(71, 9, 'comments', 'assignsubmission', 'enabled', '1'),
+(72, 9, 'comments', 'assignfeedback', 'enabled', '1'),
+(73, 9, 'comments', 'assignfeedback', 'commentinline', '0'),
+(74, 9, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(75, 9, 'offline', 'assignfeedback', 'enabled', '0'),
+(76, 9, 'file', 'assignfeedback', 'enabled', '0'),
+(131, 27, 'comments', 'assignfeedback', 'commentinline', '0'),
+(130, 27, 'comments', 'assignfeedback', 'enabled', '1'),
+(129, 27, 'comments', 'assignsubmission', 'enabled', '1'),
+(128, 27, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '0'),
+(127, 27, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(126, 27, 'file', 'assignsubmission', 'enabled', '1'),
+(125, 27, 'onlinetext', 'assignsubmission', 'wordlimitenabled', '0'),
+(124, 27, 'onlinetext', 'assignsubmission', 'wordlimit', '0'),
+(123, 27, 'onlinetext', 'assignsubmission', 'enabled', '1'),
+(89, 11, 'onlinetext', 'assignsubmission', 'enabled', '1'),
+(90, 11, 'onlinetext', 'assignsubmission', 'wordlimit', '0'),
+(91, 11, 'onlinetext', 'assignsubmission', 'wordlimitenabled', '0'),
+(92, 11, 'file', 'assignsubmission', 'enabled', '1'),
+(93, 11, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(94, 11, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '1048576'),
+(95, 11, 'comments', 'assignsubmission', 'enabled', '1'),
+(96, 11, 'comments', 'assignfeedback', 'enabled', '1'),
+(97, 11, 'comments', 'assignfeedback', 'commentinline', '0'),
+(98, 11, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(99, 11, 'offline', 'assignfeedback', 'enabled', '0'),
+(100, 11, 'file', 'assignfeedback', 'enabled', '0'),
+(101, 12, 'onlinetext', 'assignsubmission', 'enabled', '1'),
+(102, 12, 'onlinetext', 'assignsubmission', 'wordlimit', '0'),
+(103, 12, 'onlinetext', 'assignsubmission', 'wordlimitenabled', '0'),
+(104, 12, 'file', 'assignsubmission', 'enabled', '1'),
+(105, 12, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(106, 12, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '1048576'),
+(107, 12, 'comments', 'assignsubmission', 'enabled', '1'),
+(108, 12, 'comments', 'assignfeedback', 'enabled', '1'),
+(109, 12, 'comments', 'assignfeedback', 'commentinline', '0'),
+(110, 12, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(111, 12, 'offline', 'assignfeedback', 'enabled', '0'),
+(112, 12, 'file', 'assignfeedback', 'enabled', '0'),
+(138, 32, 'file', 'assignsubmission', 'enabled', '1'),
+(137, 32, 'onlinetext', 'assignsubmission', 'wordlimitenabled', '0'),
+(136, 32, 'onlinetext', 'assignsubmission', 'wordlimit', '0'),
+(135, 32, 'onlinetext', 'assignsubmission', 'enabled', '1'),
+(134, 27, 'file', 'assignfeedback', 'enabled', '0'),
+(133, 27, 'offline', 'assignfeedback', 'enabled', '0'),
+(132, 27, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(139, 32, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(140, 32, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '0'),
+(141, 32, 'comments', 'assignsubmission', 'enabled', '1'),
+(142, 32, 'comments', 'assignfeedback', 'enabled', '1'),
+(143, 32, 'comments', 'assignfeedback', 'commentinline', '0'),
+(144, 32, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(145, 32, 'offline', 'assignfeedback', 'enabled', '0'),
+(146, 32, 'file', 'assignfeedback', 'enabled', '0'),
+(156, 13, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(155, 13, 'file', 'assignsubmission', 'enabled', NULL),
+(154, 13, 'onlinetext', 'assignsubmission', 'wordlimitenabled', '0'),
+(153, 13, 'onlinetext', 'assignsubmission', 'wordlimit', '0'),
+(152, 13, 'onlinetext', 'assignsubmission', 'enabled', NULL),
+(157, 13, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '1048576'),
+(158, 13, 'comments', 'assignsubmission', 'enabled', '1'),
+(159, 13, 'comments', 'assignfeedback', 'enabled', '1'),
+(160, 13, 'comments', 'assignfeedback', 'commentinline', '0'),
+(161, 13, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(162, 13, 'offline', 'assignfeedback', 'enabled', '0'),
+(163, 13, 'file', 'assignfeedback', 'enabled', '0'),
+(164, 14, 'onlinetext', 'assignsubmission', 'enabled', '1'),
+(165, 14, 'onlinetext', 'assignsubmission', 'wordlimit', '0'),
+(166, 14, 'onlinetext', 'assignsubmission', 'wordlimitenabled', '0'),
+(167, 14, 'file', 'assignsubmission', 'enabled', '1'),
+(168, 14, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(169, 14, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '1048576'),
+(170, 14, 'comments', 'assignsubmission', 'enabled', '1'),
+(171, 14, 'comments', 'assignfeedback', 'enabled', '1'),
+(172, 14, 'comments', 'assignfeedback', 'commentinline', '0'),
+(173, 14, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(174, 14, 'offline', 'assignfeedback', 'enabled', '0'),
+(175, 14, 'file', 'assignfeedback', 'enabled', '0'),
+(176, 42, 'onlinetext', 'assignsubmission', 'enabled', '1'),
+(177, 42, 'onlinetext', 'assignsubmission', 'wordlimit', '0'),
+(178, 42, 'onlinetext', 'assignsubmission', 'wordlimitenabled', '0'),
+(179, 42, 'file', 'assignsubmission', 'enabled', '1'),
+(180, 42, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(181, 42, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '1048576'),
+(182, 42, 'comments', 'assignsubmission', 'enabled', '1'),
+(183, 42, 'comments', 'assignfeedback', 'enabled', '1'),
+(184, 42, 'comments', 'assignfeedback', 'commentinline', '0'),
+(185, 42, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(186, 42, 'offline', 'assignfeedback', 'enabled', '0'),
+(187, 42, 'file', 'assignfeedback', 'enabled', '0'),
+(188, 44, 'onlinetext', 'assignsubmission', 'enabled', '1'),
+(189, 44, 'onlinetext', 'assignsubmission', 'wordlimit', '0'),
+(190, 44, 'onlinetext', 'assignsubmission', 'wordlimitenabled', '0'),
+(191, 44, 'file', 'assignsubmission', 'enabled', '1'),
+(192, 44, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(193, 44, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '1048576'),
+(194, 44, 'comments', 'assignsubmission', 'enabled', '1'),
+(195, 44, 'comments', 'assignfeedback', 'enabled', '1'),
+(196, 44, 'comments', 'assignfeedback', 'commentinline', '0'),
+(197, 44, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(198, 44, 'offline', 'assignfeedback', 'enabled', '0'),
+(199, 44, 'file', 'assignfeedback', 'enabled', '0'),
+(200, 46, 'onlinetext', 'assignsubmission', 'enabled', '1'),
+(201, 46, 'onlinetext', 'assignsubmission', 'wordlimit', '0'),
+(202, 46, 'onlinetext', 'assignsubmission', 'wordlimitenabled', '0'),
+(203, 46, 'file', 'assignsubmission', 'enabled', '1'),
+(204, 46, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(205, 46, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '1048576'),
+(206, 46, 'comments', 'assignsubmission', 'enabled', '1'),
+(207, 46, 'comments', 'assignfeedback', 'enabled', '1'),
+(208, 46, 'comments', 'assignfeedback', 'commentinline', '0'),
+(209, 46, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(210, 46, 'offline', 'assignfeedback', 'enabled', '0'),
+(211, 46, 'file', 'assignfeedback', 'enabled', '0'),
+(212, 47, 'onlinetext', 'assignsubmission', 'enabled', '1'),
+(213, 47, 'onlinetext', 'assignsubmission', 'wordlimit', '0'),
+(214, 47, 'onlinetext', 'assignsubmission', 'wordlimitenabled', '0'),
+(215, 47, 'file', 'assignsubmission', 'enabled', '1'),
+(216, 47, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(217, 47, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '0'),
+(218, 47, 'comments', 'assignsubmission', 'enabled', '1'),
+(219, 47, 'comments', 'assignfeedback', 'enabled', '1'),
+(220, 47, 'comments', 'assignfeedback', 'commentinline', '0'),
+(221, 47, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(222, 47, 'offline', 'assignfeedback', 'enabled', '0'),
+(223, 47, 'file', 'assignfeedback', 'enabled', '0'),
+(224, 48, 'onlinetext', 'assignsubmission', 'enabled', '0'),
+(225, 48, 'file', 'assignsubmission', 'enabled', '1'),
+(226, 48, 'file', 'assignsubmission', 'maxfilesubmissions', '1'),
+(227, 48, 'file', 'assignsubmission', 'maxsubmissionsizebytes', '0'),
+(228, 48, 'comments', 'assignsubmission', 'enabled', '1'),
+(229, 48, 'comments', 'assignfeedback', 'enabled', '1'),
+(230, 48, 'comments', 'assignfeedback', 'commentinline', '0'),
+(231, 48, 'editpdf', 'assignfeedback', 'enabled', '0'),
+(232, 48, 'offline', 'assignfeedback', 'enabled', '0'),
+(233, 48, 'file', 'assignfeedback', 'enabled', '0');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `mdl_assign_submission`
 --
 
@@ -288,7 +515,7 @@ CREATE TABLE IF NOT EXISTS `mdl_assign_submission` (
   `status` varchar(10) DEFAULT NULL,
   `groupid` bigint(10) NOT NULL DEFAULT '0',
   `attemptnumber` bigint(10) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='This table keeps information about student interactions with';
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='This table keeps information about student interactions with';
 
 --
 -- Volcado de datos para la tabla `mdl_assign_submission`
@@ -305,7 +532,8 @@ INSERT INTO `mdl_assign_submission` (`id`, `assignment`, `userid`, `timecreated`
 (8, 3, 14, 1444243575, 1444243575, 'submitted', 0, 0),
 (9, 44, 10, 1445454600, 1445454600, 'submitted', 0, 0),
 (10, 44, 11, 1445461577, 1445461577, 'submitted', 0, 0),
-(11, 47, 10, 1446670418, 1446670418, 'submitted', 0, 0);
+(11, 47, 10, 1446670418, 1446670418, 'submitted', 0, 0),
+(12, 48, 10, 1447859430, 1447859430, 'submitted', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1444,263 +1672,6 @@ INSERT INTO `mdl_context` (`id`, `contextlevel`, `instanceid`, `path`, `depth`) 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `mdl_course`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_course` (
-  `id` bigint(10) NOT NULL,
-  `category` bigint(10) NOT NULL DEFAULT '0',
-  `sortorder` bigint(10) NOT NULL DEFAULT '0',
-  `fullname` varchar(254) NOT NULL DEFAULT '',
-  `shortname` varchar(255) NOT NULL DEFAULT '',
-  `idnumber` varchar(100) NOT NULL DEFAULT '',
-  `summary` longtext,
-  `summaryformat` tinyint(2) NOT NULL DEFAULT '0',
-  `format` varchar(21) NOT NULL DEFAULT 'topics',
-  `showgrades` tinyint(2) NOT NULL DEFAULT '1',
-  `newsitems` mediumint(5) NOT NULL DEFAULT '1',
-  `startdate` bigint(10) NOT NULL DEFAULT '0',
-  `marker` bigint(10) NOT NULL DEFAULT '0',
-  `maxbytes` bigint(10) NOT NULL DEFAULT '0',
-  `legacyfiles` smallint(4) NOT NULL DEFAULT '0',
-  `showreports` smallint(4) NOT NULL DEFAULT '0',
-  `visible` tinyint(1) NOT NULL DEFAULT '1',
-  `visibleold` tinyint(1) NOT NULL DEFAULT '1',
-  `groupmode` smallint(4) NOT NULL DEFAULT '0',
-  `groupmodeforce` smallint(4) NOT NULL DEFAULT '0',
-  `defaultgroupingid` bigint(10) NOT NULL DEFAULT '0',
-  `lang` varchar(30) NOT NULL DEFAULT '',
-  `calendartype` varchar(30) NOT NULL DEFAULT '',
-  `theme` varchar(50) NOT NULL DEFAULT '',
-  `timecreated` bigint(10) NOT NULL DEFAULT '0',
-  `timemodified` bigint(10) NOT NULL DEFAULT '0',
-  `requested` tinyint(1) NOT NULL DEFAULT '0',
-  `enablecompletion` tinyint(1) NOT NULL DEFAULT '0',
-  `completionnotify` tinyint(1) NOT NULL DEFAULT '0',
-  `cacherev` bigint(10) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='Central course table';
-
---
--- Volcado de datos para la tabla `mdl_course`
---
-
-INSERT INTO `mdl_course` (`id`, `category`, `sortorder`, `fullname`, `shortname`, `idnumber`, `summary`, `summaryformat`, `format`, `showgrades`, `newsitems`, `startdate`, `marker`, `maxbytes`, `legacyfiles`, `showreports`, `visible`, `visibleold`, `groupmode`, `groupmodeforce`, `defaultgroupingid`, `lang`, `calendartype`, `theme`, `timecreated`, `timemodified`, `requested`, `enablecompletion`, `completionnotify`, `cacherev`) VALUES
-(1, 0, 1, 'Moodle', 'Moodle', '', '', 0, 'site', 1, 3, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, '', '', '', 1422298878, 1422381351, 0, 0, 0, 1445659260),
-(6, 2, 10005, 'HTML y CSS', 'HTML', '', '', 1, 'topics', 1, 5, 1422853200, 1, 0, 0, 0, 1, 1, 0, 0, 0, '', '', '', 1428945098, 1428945098, 0, 0, 0, 1447857609),
-(8, 2, 10004, 'AdministraciÃ³n de Redes', 'Admon Redes', '', '', 1, 'topics', 1, 4, 1422853200, 0, 0, 0, 0, 1, 1, 0, 0, 0, '', '', '', 1429032626, 1429032626, 0, 0, 0, 1446670216),
-(9, 2, 10003, 'Sistemas Programables II', 'Sistemas', '', '', 1, 'topics', 1, 5, 1431489600, 0, 0, 0, 0, 1, 1, 0, 0, 0, '', '', '', 1431444697, 1431444697, 0, 0, 0, 1445659260),
-(10, 2, 10002, 'IdentificaciÃ³n de la biodiversidad chetumaleÃ±a', 'IdentificaciÃ³n de la biodiversidad', '', '<p>En este curso aprenderemos los conceptos bÃ¡sicos relacionados con la biologÃ­a y su relaciÃ³n con el medio ambiente.<br></p>', 1, 'topics', 1, 5, 1442620800, 0, 0, 0, 0, 1, 1, 0, 0, 0, '', '', '', 1442597198, 1442597766, 0, 0, 0, 1445659260),
-(11, 2, 10001, 'Mantenimientos a equipo de cÃ³mputo', 'Mantenimiento', '', '', 1, 'topics', 1, 5, 1442620800, 0, 0, 0, 0, 1, 1, 0, 0, 0, '', '', '', 1442598957, 1442599649, 0, 0, 0, 1445659260);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_course_categories`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_course_categories` (
-  `id` bigint(10) NOT NULL,
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `idnumber` varchar(100) DEFAULT NULL,
-  `description` longtext,
-  `descriptionformat` tinyint(2) NOT NULL DEFAULT '0',
-  `parent` bigint(10) NOT NULL DEFAULT '0',
-  `sortorder` bigint(10) NOT NULL DEFAULT '0',
-  `coursecount` bigint(10) NOT NULL DEFAULT '0',
-  `visible` tinyint(1) NOT NULL DEFAULT '1',
-  `visibleold` tinyint(1) NOT NULL DEFAULT '1',
-  `timemodified` bigint(10) NOT NULL DEFAULT '0',
-  `depth` bigint(10) NOT NULL DEFAULT '0',
-  `path` varchar(255) NOT NULL DEFAULT '',
-  `theme` varchar(50) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Course categories';
-
---
--- Volcado de datos para la tabla `mdl_course_categories`
---
-
-INSERT INTO `mdl_course_categories` (`id`, `name`, `idnumber`, `description`, `descriptionformat`, `parent`, `sortorder`, `coursecount`, `visible`, `visibleold`, `timemodified`, `depth`, `path`, `theme`) VALUES
-(2, 'Sistemas y Computacion', '', '<p>Materias de la ingenieria en sistemas computacionales</p>', 1, 0, 10000, 5, 1, 1, 1425927433, 1, '/2', NULL),
-(3, 'Biologia', '', '<p>Materias de biologia</p>', 1, 0, 20000, 0, 1, 1, 1445439259, 1, '/3', NULL);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_course_modules`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_course_modules` (
-  `id` bigint(10) NOT NULL,
-  `course` bigint(10) NOT NULL DEFAULT '0',
-  `module` bigint(10) NOT NULL DEFAULT '0',
-  `instance` bigint(10) NOT NULL DEFAULT '0',
-  `section` bigint(10) NOT NULL DEFAULT '0',
-  `idnumber` varchar(100) DEFAULT NULL,
-  `added` bigint(10) NOT NULL DEFAULT '0',
-  `score` smallint(4) NOT NULL DEFAULT '0',
-  `indent` mediumint(5) NOT NULL DEFAULT '0',
-  `visible` tinyint(1) NOT NULL DEFAULT '1',
-  `visibleold` tinyint(1) NOT NULL DEFAULT '1',
-  `groupmode` smallint(4) NOT NULL DEFAULT '0',
-  `groupingid` bigint(10) NOT NULL DEFAULT '0',
-  `groupmembersonly` smallint(4) NOT NULL DEFAULT '0',
-  `completion` tinyint(1) NOT NULL DEFAULT '0',
-  `completiongradeitemnumber` bigint(10) DEFAULT NULL,
-  `completionview` tinyint(1) NOT NULL DEFAULT '0',
-  `completionexpected` bigint(10) NOT NULL DEFAULT '0',
-  `showdescription` tinyint(1) NOT NULL DEFAULT '0',
-  `availability` longtext
-) ENGINE=MyISAM AUTO_INCREMENT=75 DEFAULT CHARSET=utf8 COMMENT='course_modules table retrofitted from MySQL';
-
---
--- Volcado de datos para la tabla `mdl_course_modules`
---
-
-INSERT INTO `mdl_course_modules` (`id`, `course`, `module`, `instance`, `section`, `idnumber`, `added`, `score`, `indent`, `visible`, `visibleold`, `groupmode`, `groupingid`, `groupmembersonly`, `completion`, `completiongradeitemnumber`, `completionview`, `completionexpected`, `showdescription`, `availability`) VALUES
-(22, 6, 1, 5, 62, '', 1443035848, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(6, 6, 9, 6, 47, NULL, 1428945323, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(14, 8, 3, 1, 70, '', 1432057782, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(8, 6, 1, 1, 59, '', 1429290119, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(9, 9, 9, 8, 75, NULL, 1431444768, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(10, 8, 20, 1, 71, '', 1431454223, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(11, 9, 20, 2, 76, '', 1431454608, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(12, 9, 9, 9, 76, '', 1431454953, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(13, 8, 1, 2, 72, '', 1431456310, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(16, 8, 9, 11, 70, NULL, 1432057850, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(17, 8, 1, 3, 73, '', 1442594706, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(18, 6, 16, 1, 60, '', 1442594963, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(19, 6, 1, 4, 61, '', 1442595077, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(20, 10, 9, 12, 86, NULL, 1442597301, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(21, 11, 9, 13, 97, NULL, 1442599113, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(23, 6, 16, 2, 61, '', 1443040466, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(24, 8, 1, 6, 73, '', 1443109591, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(25, 8, 9, 14, 70, '', 1443719375, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(26, 8, 9, 15, 71, '', 1443719503, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(27, 8, 8, 1, 70, '', 1443855310, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(29, 8, 9, 16, 72, '', 1444143115, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(30, 8, 1, 9, 73, '', 1445018964, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(37, 8, 1, 21, 73, NULL, 1445303651, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(32, 8, 1, 8, 73, '', 1442594706, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(33, 8, 1, 11, 73, '', 1442594707, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(34, 8, 1, 12, 73, '', 1445135095, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(35, 8, 1, 13, 73, NULL, 1442594708, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(38, 0, 0, 0, 0, NULL, 0, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(39, 8, 1, 21, 73, NULL, 1445304076, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(40, 8, 1, 21, 73, NULL, 1445304440, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(41, 8, 1, 1, 73, NULL, 1445305375, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(42, 8, 1, 1, 73, NULL, 1445305404, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(43, 8, 1, 1, 73, NULL, 1445305486, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(44, 8, 1, 1, 73, NULL, 1445305534, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(45, 8, 1, 1, 73, NULL, 1445305873, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(46, 8, 1, 1, 73, NULL, 1445306002, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(47, 8, 1, 22, 73, NULL, 1445306494, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(48, 8, 1, 22, 73, NULL, 1445306592, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(49, 8, 1, 23, 73, NULL, 1445306774, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(50, 8, 1, 24, 73, NULL, 1445370293, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(51, 8, 1, 25, 73, NULL, 1445374361, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(52, 8, 1, 26, 73, NULL, 1445374591, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(53, 8, 1, 27, 70, '', 1445375779, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(54, 8, 1, 28, 73, NULL, 1445376462, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(55, 8, 1, 29, 73, NULL, 1445376682, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(56, 8, 1, 30, 73, NULL, 1445377085, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(57, 8, 1, 31, 73, NULL, 1445377432, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(58, 10, 1, 32, 86, '', 1445379495, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(59, 8, 1, 33, 73, NULL, 1445381718, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(60, 8, 1, 34, 73, NULL, 1445385518, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(61, 8, 1, 35, 73, NULL, 1445400625, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(62, 8, 1, 36, 73, NULL, 1445400816, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(63, 8, 1, 37, 73, NULL, 1445444381, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(64, 8, 1, 38, 73, NULL, 1445444753, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(65, 8, 1, 39, 73, NULL, 1445445147, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(66, 8, 1, 40, 73, NULL, 1445445197, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(67, 8, 1, 41, 73, NULL, 1445445372, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(68, 8, 1, 42, 73, NULL, 1445453246, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(69, 8, 1, 43, 73, NULL, 1445454022, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(70, 8, 1, 44, 73, NULL, 1445454518, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(71, 8, 1, 45, 73, NULL, 1445622265, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(72, 8, 1, 46, 73, NULL, 1445623896, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(73, 8, 1, 47, 74, '', 1446670214, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL),
-(74, 6, 1, 48, 63, '', 1447857607, 0, 0, 1, 1, 0, 0, 0, 0, NULL, 0, 0, 0, NULL);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_event`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_event` (
-  `id` bigint(10) NOT NULL,
-  `name` longtext NOT NULL,
-  `description` longtext NOT NULL,
-  `format` smallint(4) NOT NULL DEFAULT '0',
-  `courseid` bigint(10) NOT NULL DEFAULT '0',
-  `groupid` bigint(10) NOT NULL DEFAULT '0',
-  `userid` bigint(10) NOT NULL DEFAULT '0',
-  `repeatid` bigint(10) NOT NULL DEFAULT '0',
-  `modulename` varchar(20) NOT NULL DEFAULT '',
-  `instance` bigint(10) NOT NULL DEFAULT '0',
-  `eventtype` varchar(20) NOT NULL DEFAULT '',
-  `timestart` bigint(10) NOT NULL DEFAULT '0',
-  `timeduration` bigint(10) NOT NULL DEFAULT '0',
-  `visible` smallint(4) NOT NULL DEFAULT '1',
-  `uuid` varchar(255) NOT NULL DEFAULT '',
-  `sequence` bigint(10) NOT NULL DEFAULT '1',
-  `timemodified` bigint(10) NOT NULL DEFAULT '0',
-  `subscriptionid` bigint(10) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COMMENT='For everything with a time associated to it';
-
---
--- Volcado de datos para la tabla `mdl_event`
---
-
-INSERT INTO `mdl_event` (`id`, `name`, `description`, `format`, `courseid`, `groupid`, `userid`, `repeatid`, `modulename`, `instance`, `eventtype`, `timestart`, `timeduration`, `visible`, `uuid`, `sequence`, `timemodified`, `subscriptionid`) VALUES
-(7, 'Tarea 1', '<p>Agregar sus archivos de tarea</p>', 1, 6, 0, 3, 0, 'assign', 1, 'due', 1432440000, 0, 1, '', 1, 1430841471, NULL),
-(8, 'Tarea Vacacional', 'TendrÃ¡n que subir la tarea ', 1, 0, 0, 2, 0, '0', 0, 'user', 1428506100, 3456000, 1, '', 1, 1430321105, NULL),
-(5, 'Saludo', '<p>Hola a todos</p>', 1, 1, 0, 3, 0, '0', 0, 'site', 1426174800, 0, 1, '', 1, 1426174981, NULL),
-(6, 'Hola', '<p>Tarea 1</p>', 1, 0, 0, 3, 0, '0', 0, 'user', 1426261200, 0, 1, '', 1, 1426175792, NULL),
-(9, 'Tarea2', 'Rsumen2', 1, 6, 0, 3, 0, '0', 0, 'course', 1431272700, 0, 1, '', 1, 1430840977, NULL),
-(10, 'Preguntas1', 'Realizar las preguntas de la unidad', 1, 6, 0, 3, 0, '0', 0, 'course', 1431272700, 0, 1, '', 1, 1430841058, NULL),
-(11, 'tarea 2.1', '<p>Descripcion de redes</p>', 1, 8, 0, 3, 0, 'assign', 2, 'due', 1431993600, 0, 1, '', 1, 1431456310, NULL),
-(12, 'Tarea de la unidad', '<p>Resumen de Redes</p>', 1, 8, 0, 3, 0, '0', 0, 'course', 1442594400, 0, 1, '', 1, 1442594510, NULL),
-(13, 'Monitoreo', '<p>Realizar un monitoreo</p>', 1, 8, 0, 3, 0, 'assign', 3, 'due', 1445706000, 0, 1, '', 1, 1446480040, NULL),
-(14, 'Examen de la unidad (Examen abierto)', '<div class="no-overflow">Examen</div>', 1, 6, 0, 3, 0, 'quiz', 1, 'open', 1442594820, 0, 1, '', 1, 1442594963, NULL),
-(15, 'Examen de la unidad (Examen cerrado)', '<div class="no-overflow">Examen</div>', 1, 6, 0, 3, 0, 'quiz', 1, 'close', 1451148420, 0, 1, '', 1, 1442594963, NULL),
-(16, 'DiseÃ±o', '<p>DiseÃ±o de la pagina anterior</p>', 1, 6, 0, 3, 0, 'assign', 4, 'due', 1451692800, 0, 1, '', 1, 1443039117, NULL),
-(17, 'Css responsivo', 'Se tendrÃ¡ que realizar el css para movil', 1, 6, 0, 2, 0, 'assign', 5, 'due', 1444176000, 0, 1, '', 1, 1443035897, NULL),
-(18, 'Examen (Examen abierto)', '<div class="no-overflow"><p><a class="autolink" title="Examen de la unidad" href="http://naynweb.16mb.com/moodle/mod/quiz/view.php?id=18">Examen de la unidad</a></p></div>', 1, 6, 0, 2, 0, 'quiz', 2, 'open', 1443040320, 0, 1, '', 1, 1443040467, NULL),
-(19, 'Examen (Examen cerrado)', '<div class="no-overflow"><p><a class="autolink" title="Examen de la unidad" href="http://naynweb.16mb.com/moodle/mod/quiz/view.php?id=18">Examen de la unidad</a></p></div>', 1, 6, 0, 2, 0, 'quiz', 2, 'close', 1444163520, 0, 1, '', 1, 1443040467, NULL),
-(20, 'Cuestionario de Protocolos', '<p>Crear 10 pregunas sobre los protocolos de redes.</p>', 1, 8, 0, 3, 0, 'assign', 6, 'due', 1443193200, 0, 1, '', 1, 1443109714, NULL),
-(21, '7 capas', 'InvestigaciÃ³n de las 7 capas', 1, 8, 0, 2, 0, 'assign', 9, 'due', 1446184800, 0, 1, '', 1, 1445018964, NULL),
-(31, 'Tarea Global', '<p>Es una tarea gloabal de Admin Redes</p>', 1, 8, 0, 2, 0, 'assign', 27, 'due', 1445922000, 0, 1, '', 1, 1445375780, NULL),
-(25, 'TAREITA 3', 'MI TAREITA 2', 1, 8, 0, 3, 0, 'assign', 8, 'due', 1445706000, 0, 1, '', 1, 1445017790, NULL),
-(26, 'TAREITA 4', 'XD', 1, 8, 0, 3, 0, 'assign', 11, 'due', 1445706000, 0, 1, '', 1, 1445451810, NULL),
-(27, 'TareaCreadaDesdeMoodle', '<p>Esta es la tarea creada desde el moodle</p>', 1, 8, 0, 3, 0, 'assign', 12, 'due', 1445662800, 0, 1, '', 1, 1445135095, NULL),
-(28, 'base', 'base', 1, 8, 0, 3, 0, 'assign', 13, 'due', 1445706002, 0, 1, '', 1, 1445017792, NULL),
-(32, 'Tarea con module y section y event', 'Bientos', 1, 8, 0, 3, 0, 'assign', 28, '', 144930336, 0, 1, '', 1, 1444930336, NULL),
-(30, 'EventoCourse', 'hey Arnold2222', 1, 8, 0, 3, 0, '', 0, 'course', 1445290690, 1445817600, 1, '', 1, 1445290690, NULL),
-(33, 'Tarea con module y section y events', 'Bientos', 1, 8, 0, 3, 0, 'assign', 29, '', 1444930336, 0, 1, '', 1, 1444930336, NULL),
-(34, 'Tarea con module y section y events y fecha', 'Bientos', 1, 8, 0, 3, 0, 'assign', 30, '', 1448024400, 0, 1, '', 1, 1445346000, NULL),
-(35, 'Tarea con module y section y events y fecha y course', 'Bientos', 1, 8, 0, 3, 0, 'assign', 31, '', 1448024400, 0, 1, '', 1, 1445346000, NULL),
-(36, 'tarea global biodiversidas', '<p>tarea biodiversidad</p>', 1, 10, 0, 2, 0, 'assign', 32, 'due', 1445922000, 0, 1, '', 1, 1445379496, NULL),
-(37, 'Tarea con module y section y events y fecha y course y gradeCategorias', 'Bientos', 1, 8, 0, 3, 0, 'assign', 33, '', 1448024400, 0, 1, '', 1, 1445346000, NULL),
-(38, 'Tarea con module:section:events:course:gradeCat:gradeItems:', 'Bientos', 1, 8, 0, 3, 0, 'assign', 34, '', 1448024400, 0, 1, '', 1, 1445346000, NULL),
-(39, 'Tarea2 con module:section:events:course:gradeCat:gradeItems:', 'Bientos', 1, 8, 0, 3, 0, 'assign', 35, '', 1448024400, 0, 1, '', 1, 1445346000, NULL),
-(40, 'Tarea3 con module:section:events:course:gradeCat:gradeItems:', 'Bientos', 1, 8, 0, 3, 0, 'assign', 36, '', 1448024400, 0, 1, '', 1, 1445346000, NULL),
-(41, 'Tarea con Context:module:section:events:course:gradeCat:gradeItems:', 'Bientos', 1, 8, 0, 3, 0, 'assign', 37, '', 1448024400, 0, 1, '', 1, 1445346000, NULL),
-(42, 'Tarea con Context2:module:section:events:course:gradeCat:gradeItems:', 'Bientos', 1, 8, 0, 3, 0, 'assign', 38, '', 1448024400, 0, 1, '', 1, 1445346000, NULL),
-(43, 'Tarea con Areas:Context2:module:section:events:course:gradeCat:gradeItems:', 'Bientos', 1, 8, 0, 3, 0, 'assign', 39, '', 1448024400, 0, 1, '', 1, 1445346000, NULL),
-(44, 'Tarea con Areas:Context2:module:section:events:course:gradeCat:gradeItems:', 'Bientos', 1, 8, 0, 3, 0, 'assign', 40, '', 1448024400, 0, 1, '', 1, 1445346000, NULL),
-(45, 'Tarea con Areas5:Context2:module:section:events:course:gradeCat:gradeItems:', 'Bientos', 1, 8, 0, 3, 0, 'assign', 41, '', 1448024400, 0, 1, '', 1, 1445346000, NULL),
-(46, 'Tarea con Plugin:Areas:Context:module:section:events:course:gradeCat:gradeItems:', 'Bientos', 1, 8, 0, 3, 0, 'assign', 42, '', 1448024400, 0, 1, '', 1, 1445346000, NULL),
-(47, 'Tarea con Todo Agregado Exito', 'Bientos', 1, 8, 0, 3, 0, 'assign', 43, '', 1448024400, 0, 1, '', 1, 1445346000, NULL),
-(48, 'Tarea Exito', 'Bientos', 1, 8, 0, 3, 0, 'assign', 44, '', 1448024400, 0, 1, '', 1, 1445346000, NULL),
-(49, 'Tarea Exito sin max', 'Bientos', 1, 8, 0, 3, 0, 'assign', 46, '', 1448024400, 0, 1, '', 1, 1445623896, NULL),
-(50, 'Tarea con archivo', '<p>archivo</p>', 1, 8, 0, 3, 0, 'assign', 47, 'due', 1449813600, 0, 1, '', 1, 1446670214, NULL),
-(51, 'Subir el archivo', '<p>Subir el archivo visto en clase corregido</p>', 1, 6, 0, 3, 0, 'assign', 48, 'due', 1451368800, 0, 1, '', 1, 1447857608, NULL);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `mdl_files`
 --
 
@@ -1725,7 +1696,7 @@ CREATE TABLE IF NOT EXISTS `mdl_files` (
   `timemodified` bigint(10) NOT NULL,
   `sortorder` bigint(10) NOT NULL DEFAULT '0',
   `referencefileid` bigint(10) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=126 DEFAULT CHARSET=utf8 COMMENT='description of files, content is stored in sha1 file pool';
+) ENGINE=MyISAM AUTO_INCREMENT=131 DEFAULT CHARSET=utf8 COMMENT='description of files, content is stored in sha1 file pool';
 
 --
 -- Volcado de datos para la tabla `mdl_files`
@@ -1809,7 +1780,12 @@ INSERT INTO `mdl_files` (`id`, `contenthash`, `pathnamehash`, `contextid`, `comp
 (122, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '75298605531053adc3675154c3c9a2c29a5fd67f', 83, 'user', 'draft', 704589844, '/', '.', 10, 0, NULL, 0, NULL, NULL, NULL, 1446670407, 1446670407, 0, NULL),
 (123, 'c09433a85d3fac8cb871a7e65d76589c4a93a916', '67da853c45f713b1fe6d78affa3fc99bb761af09', 1, 'core', 'preview', 0, '/thumb/', '54c2f1a1eb6f12d681a5c7078421a5500cee02ad', NULL, 15903, 'image/png', 0, NULL, NULL, NULL, 1446670409, 1446670409, 0, NULL),
 (124, '54c2f1a1eb6f12d681a5c7078421a5500cee02ad', '7f9993be15469697f4a575fe3e5d10058d3ac791', 178, 'assignsubmission_file', 'submission_files', 11, '/', 'Tulipanes.jpg', 10, 620888, 'image/jpeg', 0, 'Tulips.jpg', 'jannet orozco', 'allrightsreserved', 1446670407, 1446670418, 0, NULL),
-(125, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '1988e98066b42d9ac93abcfb2dd8685122fcd33e', 178, 'assignsubmission_file', 'submission_files', 11, '/', '.', 10, 0, NULL, 0, NULL, NULL, NULL, 1446670407, 1446670418, 0, NULL);
+(125, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '1988e98066b42d9ac93abcfb2dd8685122fcd33e', 178, 'assignsubmission_file', 'submission_files', 11, '/', '.', 10, 0, NULL, 0, NULL, NULL, NULL, 1446670407, 1446670418, 0, NULL),
+(126, 'a30cc2a3aabdcc11bd8f6417a7f96589b79d96ef', '8e4a0cfc403d34433aff1b21a89df436daf00a08', 83, 'user', 'draft', 347991944, '/', 'TareaDeJannetArchivo.jpeg', 10, 1089, 'image/jpeg', 0, 'O:8:"stdClass":1:{s:6:"source";s:11:"cuadro.jpeg";}', 'jannet orozco', 'allrightsreserved', 1447859426, 1447859426, 0, NULL),
+(127, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '564513b1f9dafd64781d2743294b10cfb5b024d5', 83, 'user', 'draft', 347991944, '/', '.', 10, 0, NULL, 0, NULL, NULL, NULL, 1447859426, 1447859426, 0, NULL),
+(128, 'a79d90161108d5bd1b901a7dbc5c0a2c9f7900b7', 'b01cbe25bb1ac4126deb05c703ab0b4607b28463', 1, 'core', 'preview', 0, '/thumb/', 'a30cc2a3aabdcc11bd8f6417a7f96589b79d96ef', NULL, 3360, 'image/png', 0, NULL, NULL, NULL, 1447859427, 1447859427, 0, NULL),
+(129, 'a30cc2a3aabdcc11bd8f6417a7f96589b79d96ef', '6594ebd2e236cae8c84b5b3738d8483739826184', 179, 'assignsubmission_file', 'submission_files', 12, '/', 'TareaDeJannetArchivo.jpeg', 10, 1089, 'image/jpeg', 0, 'cuadro.jpeg', 'jannet orozco', 'allrightsreserved', 1447859426, 1447859430, 0, NULL),
+(130, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'a3ea71805be5dd17b81c748487275a88c88272b7', 179, 'assignsubmission_file', 'submission_files', 12, '/', '.', 10, 0, NULL, 0, NULL, NULL, NULL, 1447859426, 1447859430, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -1861,6 +1837,64 @@ CREATE TABLE IF NOT EXISTS `mdl_filter_config` (
   `name` varchar(255) NOT NULL DEFAULT '',
   `value` longtext
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Stores per-context configuration settings for filters which ';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mdl_grade_grades`
+--
+
+CREATE TABLE IF NOT EXISTS `mdl_grade_grades` (
+  `id` bigint(10) NOT NULL,
+  `itemid` bigint(10) NOT NULL,
+  `userid` bigint(10) NOT NULL,
+  `rawgrade` decimal(10,5) DEFAULT NULL,
+  `rawgrademax` decimal(10,5) NOT NULL DEFAULT '100.00000',
+  `rawgrademin` decimal(10,5) NOT NULL DEFAULT '0.00000',
+  `rawscaleid` bigint(10) DEFAULT NULL,
+  `usermodified` bigint(10) DEFAULT NULL,
+  `finalgrade` decimal(10,5) DEFAULT NULL,
+  `hidden` bigint(10) NOT NULL DEFAULT '0',
+  `locked` bigint(10) NOT NULL DEFAULT '0',
+  `locktime` bigint(10) NOT NULL DEFAULT '0',
+  `exported` bigint(10) NOT NULL DEFAULT '0',
+  `overridden` bigint(10) NOT NULL DEFAULT '0',
+  `excluded` bigint(10) NOT NULL DEFAULT '0',
+  `feedback` longtext,
+  `feedbackformat` bigint(10) NOT NULL DEFAULT '0',
+  `information` longtext,
+  `informationformat` bigint(10) NOT NULL DEFAULT '0',
+  `timecreated` bigint(10) DEFAULT NULL,
+  `timemodified` bigint(10) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='grade_grades  This table keeps individual grades for each us';
+
+--
+-- Volcado de datos para la tabla `mdl_grade_grades`
+--
+
+INSERT INTO `mdl_grade_grades` (`id`, `itemid`, `userid`, `rawgrade`, `rawgrademax`, `rawgrademin`, `rawscaleid`, `usermodified`, `finalgrade`, `hidden`, `locked`, `locktime`, `exported`, `overridden`, `excluded`, `feedback`, `feedbackformat`, `information`, `informationformat`, `timecreated`, `timemodified`) VALUES
+(1, 6, 3, '88.00000', '100.00000', '0.00000', NULL, 3, '88.00000', 0, 0, 0, 0, 0, 0, NULL, 1, NULL, 0, NULL, 1443469344),
+(2, 5, 3, NULL, '100.00000', '0.00000', NULL, NULL, '88.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, NULL),
+(3, 6, 9, '100.00000', '100.00000', '0.00000', NULL, 3, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 1, NULL, 0, NULL, 1443469175),
+(4, 5, 9, NULL, '100.00000', '0.00000', NULL, NULL, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, NULL),
+(5, 11, 9, '59.00000', '100.00000', '0.00000', NULL, 3, '59.00000', 0, 0, 0, 0, 0, 0, 'esta muy mal', 0, NULL, 0, NULL, 1443547220),
+(6, 7, 9, NULL, '100.00000', '0.00000', NULL, NULL, '59.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 1446563742),
+(11, 12, 11, '100.00000', '100.00000', '0.00000', NULL, 3, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 1443468718),
+(7, 12, 10, '100.00000', '100.00000', '0.00000', NULL, 10, '100.00000', 0, 0, 0, 0, 0, 0, 'Muy bien', 0, NULL, 0, 1446480120, 1444148241),
+(8, 7, 10, NULL, '100.00000', '0.00000', NULL, NULL, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, NULL),
+(9, 12, 12, '100.00000', '100.00000', '0.00000', NULL, 3, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 1446599134),
+(10, 7, 12, NULL, '100.00000', '0.00000', NULL, NULL, '100.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 1446599078),
+(12, 7, 11, NULL, '100.00000', '0.00000', NULL, NULL, '80.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 1446563742),
+(13, 17, 3, '60.00000', '100.00000', '0.00000', NULL, 3, '60.00000', 0, 0, 0, 0, 0, 0, 'NO Se Envia', 0, NULL, 0, NULL, 1443800578),
+(14, 7, 3, NULL, '100.00000', '0.00000', NULL, NULL, '60.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, NULL),
+(15, 12, 9, '87.00000', '100.00000', '0.00000', NULL, 3, '87.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 1447086510),
+(16, 12, 14, '94.00000', '100.00000', '0.00000', NULL, 3, '94.00000', 0, 0, 0, 0, 0, 0, '<p>este es mi comentario 08/10/15</p>', 1, NULL, 0, NULL, 1444319459),
+(17, 7, 14, NULL, '100.00000', '0.00000', NULL, NULL, '94.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, NULL),
+(18, 39, 10, '100.00000', '100.00000', '0.00000', NULL, 3, '100.00000', 0, 0, 0, 0, 0, 0, '<p>Muy pero Muy bien JAnnet<br></p>', 1, NULL, 0, NULL, 1445454988),
+(19, 39, 11, '80.00000', '100.00000', '0.00000', NULL, 3, '80.00000', 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 1445528799),
+(20, 41, 10, NULL, '100.00000', '0.00000', NULL, 10, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, 1446670418, NULL),
+(21, 42, 10, NULL, '100.00000', '0.00000', NULL, 10, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, 1447859430, NULL),
+(22, 5, 10, NULL, '100.00000', '0.00000', NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1937,126 +1971,6 @@ CREATE TABLE IF NOT EXISTS `mdl_lti_types` (
   `timemodified` bigint(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Basic LTI pre-configured activities';
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_lti_types_config`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_lti_types_config` (
-  `id` bigint(10) NOT NULL,
-  `typeid` bigint(10) NOT NULL,
-  `name` varchar(100) NOT NULL DEFAULT '',
-  `value` varchar(255) NOT NULL DEFAULT ''
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Basic LTI types configuration';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_role_allow_assign`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_role_allow_assign` (
-  `id` bigint(10) NOT NULL,
-  `roleid` bigint(10) NOT NULL DEFAULT '0',
-  `allowassign` bigint(10) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='this defines what role can assign what role';
-
---
--- Volcado de datos para la tabla `mdl_role_allow_assign`
---
-
-INSERT INTO `mdl_role_allow_assign` (`id`, `roleid`, `allowassign`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 3),
-(4, 1, 4),
-(5, 1, 5),
-(6, 3, 4),
-(7, 3, 5),
-(9, 9, 9);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mdl_user`
---
-
-CREATE TABLE IF NOT EXISTS `mdl_user` (
-  `id` bigint(10) NOT NULL,
-  `auth` varchar(20) NOT NULL DEFAULT 'manual',
-  `confirmed` tinyint(1) NOT NULL DEFAULT '0',
-  `policyagreed` tinyint(1) NOT NULL DEFAULT '0',
-  `deleted` tinyint(1) NOT NULL DEFAULT '0',
-  `suspended` tinyint(1) NOT NULL DEFAULT '0',
-  `mnethostid` bigint(10) NOT NULL DEFAULT '0',
-  `username` varchar(100) NOT NULL DEFAULT '',
-  `password` varchar(255) NOT NULL DEFAULT '',
-  `idnumber` varchar(255) NOT NULL DEFAULT '',
-  `firstname` varchar(100) NOT NULL DEFAULT '',
-  `lastname` varchar(100) NOT NULL DEFAULT '',
-  `email` varchar(100) NOT NULL DEFAULT '',
-  `emailstop` tinyint(1) NOT NULL DEFAULT '0',
-  `icq` varchar(15) NOT NULL DEFAULT '',
-  `skype` varchar(50) NOT NULL DEFAULT '',
-  `yahoo` varchar(50) NOT NULL DEFAULT '',
-  `aim` varchar(50) NOT NULL DEFAULT '',
-  `msn` varchar(50) NOT NULL DEFAULT '',
-  `phone1` varchar(20) NOT NULL DEFAULT '',
-  `phone2` varchar(20) NOT NULL DEFAULT '',
-  `institution` varchar(255) NOT NULL DEFAULT '',
-  `department` varchar(255) NOT NULL DEFAULT '',
-  `address` varchar(255) NOT NULL DEFAULT '',
-  `city` varchar(120) NOT NULL DEFAULT '',
-  `country` varchar(2) NOT NULL DEFAULT '',
-  `lang` varchar(30) NOT NULL DEFAULT 'en',
-  `calendartype` varchar(30) NOT NULL DEFAULT 'gregorian',
-  `theme` varchar(50) NOT NULL DEFAULT '',
-  `timezone` varchar(100) NOT NULL DEFAULT '99',
-  `firstaccess` bigint(10) NOT NULL DEFAULT '0',
-  `lastaccess` bigint(10) NOT NULL DEFAULT '0',
-  `lastlogin` bigint(10) NOT NULL DEFAULT '0',
-  `currentlogin` bigint(10) NOT NULL DEFAULT '0',
-  `lastip` varchar(45) NOT NULL DEFAULT '',
-  `secret` varchar(15) NOT NULL DEFAULT '',
-  `picture` bigint(10) NOT NULL DEFAULT '0',
-  `url` varchar(255) NOT NULL DEFAULT '',
-  `description` longtext,
-  `descriptionformat` tinyint(2) NOT NULL DEFAULT '1',
-  `mailformat` tinyint(1) NOT NULL DEFAULT '1',
-  `maildigest` tinyint(1) NOT NULL DEFAULT '0',
-  `maildisplay` tinyint(2) NOT NULL DEFAULT '2',
-  `autosubscribe` tinyint(1) NOT NULL DEFAULT '1',
-  `trackforums` tinyint(1) NOT NULL DEFAULT '0',
-  `timecreated` bigint(10) NOT NULL DEFAULT '0',
-  `timemodified` bigint(10) NOT NULL DEFAULT '0',
-  `trustbitmask` bigint(10) NOT NULL DEFAULT '0',
-  `imagealt` varchar(255) DEFAULT NULL,
-  `lastnamephonetic` varchar(255) DEFAULT NULL,
-  `firstnamephonetic` varchar(255) DEFAULT NULL,
-  `middlename` varchar(255) DEFAULT NULL,
-  `alternatename` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='One record for each person';
-
---
--- Volcado de datos para la tabla `mdl_user`
---
-
-INSERT INTO `mdl_user` (`id`, `auth`, `confirmed`, `policyagreed`, `deleted`, `suspended`, `mnethostid`, `username`, `password`, `idnumber`, `firstname`, `lastname`, `email`, `emailstop`, `icq`, `skype`, `yahoo`, `aim`, `msn`, `phone1`, `phone2`, `institution`, `department`, `address`, `city`, `country`, `lang`, `calendartype`, `theme`, `timezone`, `firstaccess`, `lastaccess`, `lastlogin`, `currentlogin`, `lastip`, `secret`, `picture`, `url`, `description`, `descriptionformat`, `mailformat`, `maildigest`, `maildisplay`, `autosubscribe`, `trackforums`, `timecreated`, `timemodified`, `trustbitmask`, `imagealt`, `lastnamephonetic`, `firstnamephonetic`, `middlename`, `alternatename`) VALUES
-(1, 'manual', 1, 0, 0, 0, 1, 'guest', '1234', '', 'Guest user', ' ', 'root@localhost', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'en', 'gregorian', '', '99', 0, 0, 0, 0, '', '', 0, '', 'This user is a special user that allows read-only access to some courses.', 1, 1, 0, 2, 1, 0, 0, 1422298882, 0, NULL, NULL, NULL, NULL, NULL),
-(2, 'manual', 1, 0, 0, 0, 1, 'admin', '$2y$10$I1LdwDB/Q1hpLeQfFwBguOJmc/nflldGiiBO1KL5r9hg4pokOv8AK', '', 'Admin', 'User', 'admin_count@gmail.com', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 1422299536, 1447857728, 1446563771, 1447857728, '0:0:0:0:0:0:0:1', '', 17, '', '', 1, 1, 0, 1, 1, 0, 0, 1429210825, 0, '', '', '', '', ''),
-(3, 'manual', 1, 0, 0, 0, 1, 'nayn', '$2y$10$IRy3e4UXEsoGOckH7nSyf.x4SAz4gF6cq.jbYYbw/kVt3/ibZl4C2', '', 'Nayn', 'Ek', 'naynkc15@gmail.com', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 1422465641, 1447857668, 1446769347, 1447857061, '0:0:0:0:0:0:0:1', '', 63, '', '', 1, 1, 0, 2, 1, 0, 1422385183, 1432644375, 0, '', '', '', '', ''),
-(4, 'manual', 1, 0, 1, 0, 1, 'franciscosalas@gmail.com.1428941698', '$2y$10$nULHxauoK.y2OqWX0JE.j.hPku4JipqAegUT67tGcsbCUEEzT8Zg2', '', 'Francisco', 'Salas', '746b1028212d8961bff8c38fa384a67f', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 1425926392, 1425926392, 0, 1425926392, '0:0:0:0:0:0:0:1', '', 0, '', '', 1, 1, 0, 2, 1, 0, 1425925869, 1428941698, 0, '', '', '', '', ''),
-(5, 'manual', 1, 0, 1, 0, 1, 'julian@gmail.com.1428941706', '$2y$10$NGscFLqJoFtsCtkARhY41OpRvqFXqD8rY6mXnvnkZd6xmS3GRiBu6', '', 'Julian', 'Martinez', '92477f4079129413d9ff9aec6ade6c5e', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 0, 0, 0, 0, '', '', 0, '', '', 1, 1, 0, 2, 1, 0, 1425926774, 1428941706, 0, '', '', '', '', ''),
-(6, 'manual', 1, 0, 1, 0, 1, 'franciscosalas@aol.com.1443111600', '$2y$10$858GXb6sa10m2DxR4f4Te.Z4KxsXu6mIlFMsdqoe7lU/rQHMVNvTW', '', 'Francisco', 'Salas', '117735823fadae51db091c7d63e60eb0', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 1428941982, 1431455233, 1429813903, 1431455233, '187.185.155.234', '', 0, '', '', 1, 1, 0, 2, 1, 0, 1428941794, 1443111600, 0, '', '', '', '', ''),
-(7, 'manual', 1, 0, 1, 0, 1, 'fernandop@aol.com.1443111614', '$2y$10$VZINc/aVtGxCXE.vYnyAc.leRS/Uw8ux8CRYqNOzgiW87LCSFnt2m', '', 'Fernando', 'PerÃ©z', 'cebdd715d4ecaafee8f147c2e85e0754', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 1428941926, 1431453688, 1429290188, 1429290520, '5.152.208.245', '', 0, '', '', 1, 1, 0, 2, 1, 0, 1428941849, 1443111614, 0, '', '', '', '', ''),
-(14, 'manual', 1, 0, 0, 0, 1, 'josue', '$2y$10$qj9kGkHyV9rK91KGkFN1bejYiDPe5F9hRZSXIfe5twCRGegTg5Rqm', '', 'Josue', 'Canul', 'josue@gmail.com', 0, '', '', '', '', '', '', '', '', '', '', '', 'MX', 'es_mx', 'gregorian', '', '99', 1444243544, 1444266185, 0, 1444243544, '189.221.34.249', '', 0, '', '', 1, 1, 0, 2, 1, 0, 1444243322, 1444243322, 0, '', '', '', '', ''),
-(9, 'manual', 1, 0, 0, 0, 1, 'alan', '$2y$10$4c/kkK75UA0KmKaOOkVWj.AE9E.PSVfDHa3gjhUoGGjmF1jNIvKFK', '', 'Alan', 'Blanco', 'alanblanco@gmail.com', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 1429897360, 1444320193, 1444142008, 1444320193, '189.221.34.249', '', 90, '', '', 1, 1, 0, 2, 1, 0, 1429210744, 1441990070, 0, '', '', '', '', ''),
-(10, 'manual', 1, 0, 0, 0, 1, 'jannet', '$2y$10$gJqFmta2rd2eng2m3zvFJe9sTTBu4Ul8l1tKQqUTc/hsbSgWNEHsW', '', 'jannet', 'orozco', 'letty_217@hotmail.com', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 1443112037, 1447858875, 1446670314, 1447857803, '0:0:0:0:0:0:0:1', '', 0, '', '', 1, 1, 0, 2, 1, 0, 1430156894, 1443112010, 0, '', '', '', '', ''),
-(11, 'manual', 1, 0, 0, 0, 1, 'rubi', '$2y$10$XbCiMfi5VIwAE1vl26jX0uHos6cwgwmiAeyXLT3piwBtiOyvZLs22', '', 'Rubi', 'Chan', 'rubi_hearty@hotmail.com', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'es_mx', 'gregorian', '', '99', 1431444933, 1445531694, 1443197117, 1445461519, '0:0:0:0:0:0:0:1', '', 0, '', '', 1, 1, 0, 2, 1, 0, 1431444502, 1443111726, 0, '', '', '', '', ''),
-(12, 'email', 1, 0, 0, 0, 1, 'josemanuel', '$2y$10$f/BHaebmBbH2166BtMIVb.TT87Q4Y7MtFfYDXAY0zeglBLDSHmpsu', '', 'JosÃ© Manuel', 'CortÃ©s Aguilar', 'jmanuel_1407@hotmail.com', 0, '', '', '', '', '', '', '', '', '', '', 'Chetumal', 'MX', 'es_mx', 'gregorian', '', '99', 1442597329, 1443469835, 1443197228, 1443468785, '189.221.34.249', '', 99, '', '<p>Mi nombre es JosÃ© Manuel y soy un estudiante que imparte cursos :)<br /></p>', 1, 1, 0, 2, 1, 0, 1442596682, 1442596682, 0, '', '', '', '', ''),
-(13, 'manual', 1, 0, 1, 0, 1, 'eduardo@gmail.com.1443721676', '$2y$10$C1Go6yC85P1PT73PQZ1w3eZQcppf8UD0sSqQ4Qhhc6tfuHrsyo21q', '', 'Eduardo', 'Carel', '6d6354ece40846bf7fca65dfabd5d9d4', 0, '', '', '', '', '', '', '', '', '', '', '', 'MX', 'es_mx', 'gregorian', '', '99', 0, 0, 0, 0, '', '', 0, '', '', 1, 1, 0, 2, 1, 0, 1443721582, 1443721676, 0, '', '', '', '', '');
-
 --
 -- Índices para tablas volcadas
 --
@@ -2129,6 +2043,16 @@ ALTER TABLE `mdl_assign_grades`
   ADD KEY `mdl_assigrad_ass_ix` (`assignment`);
 
 --
+-- Indices de la tabla `mdl_assign_plugin_config`
+--
+ALTER TABLE `mdl_assign_plugin_config`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `mdl_assiplugconf_plu_ix` (`plugin`),
+  ADD KEY `mdl_assiplugconf_sub_ix` (`subtype`),
+  ADD KEY `mdl_assiplugconf_nam_ix` (`name`),
+  ADD KEY `mdl_assiplugconf_ass_ix` (`assignment`);
+
+--
 -- Indices de la tabla `mdl_assign_submission`
 --
 ALTER TABLE `mdl_assign_submission`
@@ -2160,46 +2084,6 @@ ALTER TABLE `mdl_context`
   ADD UNIQUE KEY `mdl_cont_conins_uix` (`contextlevel`,`instanceid`),
   ADD KEY `mdl_cont_ins_ix` (`instanceid`),
   ADD KEY `mdl_cont_pat_ix` (`path`);
-
---
--- Indices de la tabla `mdl_course`
---
-ALTER TABLE `mdl_course`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `mdl_cour_cat_ix` (`category`),
-  ADD KEY `mdl_cour_idn_ix` (`idnumber`),
-  ADD KEY `mdl_cour_sho_ix` (`shortname`),
-  ADD KEY `mdl_cour_sor_ix` (`sortorder`);
-
---
--- Indices de la tabla `mdl_course_categories`
---
-ALTER TABLE `mdl_course_categories`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `mdl_courcate_par_ix` (`parent`);
-
---
--- Indices de la tabla `mdl_course_modules`
---
-ALTER TABLE `mdl_course_modules`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `mdl_courmodu_vis_ix` (`visible`),
-  ADD KEY `mdl_courmodu_cou_ix` (`course`),
-  ADD KEY `mdl_courmodu_mod_ix` (`module`),
-  ADD KEY `mdl_courmodu_ins_ix` (`instance`),
-  ADD KEY `mdl_courmodu_idncou_ix` (`idnumber`,`course`),
-  ADD KEY `mdl_courmodu_gro_ix` (`groupingid`);
-
---
--- Indices de la tabla `mdl_event`
---
-ALTER TABLE `mdl_event`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `mdl_even_cou_ix` (`courseid`),
-  ADD KEY `mdl_even_use_ix` (`userid`),
-  ADD KEY `mdl_even_tim_ix` (`timestart`),
-  ADD KEY `mdl_even_tim2_ix` (`timeduration`),
-  ADD KEY `mdl_even_grocouvisuse_ix` (`groupid`,`courseid`,`visible`,`userid`);
 
 --
 -- Indices de la tabla `mdl_files`
@@ -2238,6 +2122,18 @@ ALTER TABLE `mdl_filter_config`
   ADD KEY `mdl_filtconf_con_ix` (`contextid`);
 
 --
+-- Indices de la tabla `mdl_grade_grades`
+--
+ALTER TABLE `mdl_grade_grades`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `mdl_gradgrad_useite_uix` (`userid`,`itemid`),
+  ADD KEY `mdl_gradgrad_locloc_ix` (`locked`,`locktime`),
+  ADD KEY `mdl_gradgrad_ite_ix` (`itemid`),
+  ADD KEY `mdl_gradgrad_use_ix` (`userid`),
+  ADD KEY `mdl_gradgrad_raw_ix` (`rawscaleid`),
+  ADD KEY `mdl_gradgrad_use2_ix` (`usermodified`);
+
+--
 -- Indices de la tabla `mdl_grading_areas`
 --
 ALTER TABLE `mdl_grading_areas`
@@ -2259,43 +2155,6 @@ ALTER TABLE `mdl_lti_types`
   ADD PRIMARY KEY (`id`),
   ADD KEY `mdl_ltitype_cou_ix` (`course`),
   ADD KEY `mdl_ltitype_too_ix` (`tooldomain`);
-
---
--- Indices de la tabla `mdl_lti_types_config`
---
-ALTER TABLE `mdl_lti_types_config`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `mdl_ltitypeconf_typ_ix` (`typeid`);
-
---
--- Indices de la tabla `mdl_role_allow_assign`
---
-ALTER TABLE `mdl_role_allow_assign`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `mdl_rolealloassi_rolall_uix` (`roleid`,`allowassign`),
-  ADD KEY `mdl_rolealloassi_rol_ix` (`roleid`),
-  ADD KEY `mdl_rolealloassi_all_ix` (`allowassign`);
-
---
--- Indices de la tabla `mdl_user`
---
-ALTER TABLE `mdl_user`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `mdl_user_mneuse_uix` (`mnethostid`,`username`),
-  ADD KEY `mdl_user_del_ix` (`deleted`),
-  ADD KEY `mdl_user_con_ix` (`confirmed`),
-  ADD KEY `mdl_user_fir_ix` (`firstname`),
-  ADD KEY `mdl_user_las_ix` (`lastname`),
-  ADD KEY `mdl_user_cit_ix` (`city`),
-  ADD KEY `mdl_user_cou_ix` (`country`),
-  ADD KEY `mdl_user_las2_ix` (`lastaccess`),
-  ADD KEY `mdl_user_ema_ix` (`email`),
-  ADD KEY `mdl_user_aut_ix` (`auth`),
-  ADD KEY `mdl_user_idn_ix` (`idnumber`),
-  ADD KEY `mdl_user_fir2_ix` (`firstnamephonetic`),
-  ADD KEY `mdl_user_las3_ix` (`lastnamephonetic`),
-  ADD KEY `mdl_user_mid_ix` (`middlename`),
-  ADD KEY `mdl_user_alt_ix` (`alternatename`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -2330,7 +2189,7 @@ ALTER TABLE `mdl_assignment_upgrade`
 -- AUTO_INCREMENT de la tabla `mdl_assignsubmission_file`
 --
 ALTER TABLE `mdl_assignsubmission_file`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `mdl_assignsubmission_onlinetext`
 --
@@ -2342,10 +2201,15 @@ ALTER TABLE `mdl_assignsubmission_onlinetext`
 ALTER TABLE `mdl_assign_grades`
   MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
+-- AUTO_INCREMENT de la tabla `mdl_assign_plugin_config`
+--
+ALTER TABLE `mdl_assign_plugin_config`
+  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=234;
+--
 -- AUTO_INCREMENT de la tabla `mdl_assign_submission`
 --
 ALTER TABLE `mdl_assign_submission`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `mdl_capabilities`
 --
@@ -2362,30 +2226,10 @@ ALTER TABLE `mdl_config`
 ALTER TABLE `mdl_context`
   MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=180;
 --
--- AUTO_INCREMENT de la tabla `mdl_course`
---
-ALTER TABLE `mdl_course`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT de la tabla `mdl_course_categories`
---
-ALTER TABLE `mdl_course_categories`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `mdl_course_modules`
---
-ALTER TABLE `mdl_course_modules`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=75;
---
--- AUTO_INCREMENT de la tabla `mdl_event`
---
-ALTER TABLE `mdl_event`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
---
 -- AUTO_INCREMENT de la tabla `mdl_files`
 --
 ALTER TABLE `mdl_files`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=126;
+  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=131;
 --
 -- AUTO_INCREMENT de la tabla `mdl_files_reference`
 --
@@ -2402,6 +2246,11 @@ ALTER TABLE `mdl_filter_active`
 ALTER TABLE `mdl_filter_config`
   MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de la tabla `mdl_grade_grades`
+--
+ALTER TABLE `mdl_grade_grades`
+  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+--
 -- AUTO_INCREMENT de la tabla `mdl_grading_areas`
 --
 ALTER TABLE `mdl_grading_areas`
@@ -2416,21 +2265,6 @@ ALTER TABLE `mdl_lti_submission`
 --
 ALTER TABLE `mdl_lti_types`
   MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `mdl_lti_types_config`
---
-ALTER TABLE `mdl_lti_types_config`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `mdl_role_allow_assign`
---
-ALTER TABLE `mdl_role_allow_assign`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT de la tabla `mdl_user`
---
-ALTER TABLE `mdl_user`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
